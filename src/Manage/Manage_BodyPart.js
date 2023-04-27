@@ -47,7 +47,7 @@ const Manage_BodyPart = () => {
 	 */
 	//Batch가 아닌 Batch의 object 하나만 받음.
 	const makeTableHead = (bodyParts) => {
-		const keys = object.keys();
+		const keys = bodyParts.keys();
 		const tablehead = keys.map((key) => {
 			<th>{key}</th>
 		});
@@ -118,17 +118,20 @@ const Manage_BodyPart = () => {
 				return bPartArray.slice(getPageFirstIndex,)
 			}
 		}
-		bPartBatchFromTotal = getbPartBatchFromTotal(bPartArray, currentPage);
+		//getbPartFromTotal : bPartArray로부터 batch를 만드는 함수
+		//bPartBatchFromTotal = getbPartBatchFromTotal(bPartArray, currentPage);
 	}, [currentPage]);
 
 	return (
 		//table render
 		//navigateButton
 		<React.Fragment>
-			{/*makeTableHead();
-			makeTableBodyElements();*/}
-			<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
-			<button id="nextPage" onClick={handleNavigatePage}>Next</button>
+			{/*{makeTableHead()}*/}
+			{/*{makeTableBodyElements()}*/}
+			<footer>
+				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
+				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
+			</footer>
 		</React.Fragment>
 	);
 };

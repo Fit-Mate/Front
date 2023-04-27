@@ -13,10 +13,15 @@ const getPageLastIndex = (currentPage) => {
 
 
 const Manage_BodyPart = () => {
+
+	/**
+	 * Data for Testing
+	 */
+
 	/**
 	 * Non State
 	 */
-	const bPartBatch = [];
+	const bPartBatchFromTotal = [];
 
 
 	/**
@@ -26,14 +31,15 @@ const Manage_BodyPart = () => {
 	 */
 	const [bPartArray, setbPartArray] = React.useState([]);
 	const [currentPage, setCurrentPage] = React.useState(1);
+	const [bPartBatch, setbPartBatch] = React.useState([]);
 
 	/**
 	 * Functions
 	 * getAllbPart : 운동정보 데이터 모두 fetch
 	 */
 	const getAllbPart = async () => {
-		const movies = await axios.get(allbPartURI);
-		setbPartArray(movies);
+		const bPartTotal = await axios.get(allbPartURI);
+		setbPartArray(bPartTotal);
 	}
 
 	/**
@@ -52,8 +58,8 @@ const Manage_BodyPart = () => {
 		);
 	};
 
-	const makeTableBodyElements = (bPartBatch) => {
-		const columns = bPartBatch.map((bPart) => {
+	const makeTableBodyElements = (bPartBatchFromTotal) => {
+		const columns = bPartBatchFromTotal.map((bPart) => {
 			return (
 				<tr>
 					<td>{bPart.englishName}</td>
@@ -73,10 +79,17 @@ const Manage_BodyPart = () => {
 		console.log(event.target.id);
 	}
 
-	const handleNavigatePage = (event) => {
-		if (event.target.id === "prev"){
-			if (currentPage === )
+	const handleNavigatePage = async (event) => {
+		const page = (event.target.id === 'prev' ? currentPage - 1 : currentPage + 1);
+		const data = await axios.get(`admin/machines/list/${page}?cookie={}`);
+		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
+		if (data === null){
+			console.log("couldn't read from database");
+			return ;
 		}
+		//axios로부터 return 받았을때
+		setbPartBatch(data);
+		setCurrentPage(page);
 	}
 
 
@@ -95,9 +108,9 @@ const Manage_BodyPart = () => {
 	//React.useEffect(() => {
 	//}, [bPartArray]);
 
-	//bPartBatch를 currentPage에 대해서 반환.
+	//모든 bPartBatch를 currentPage에 대해서 반환.
 	React.useEffect(() => {
-		const getbPartBatch = (bPartArray, currentPageNum) => {
+		const getbPartBatchFromTotal = (bPartArray, currentPageNum) => {
 			if (bPartArray.length < getPageLastIndex(currentPageNum)) {
 				return bPartArray.slice(getPageFirstIndex(currentPageNum), -1);
 			}
@@ -105,20 +118,19 @@ const Manage_BodyPart = () => {
 				return bPartArray.slice(getPageFirstIndex,)
 			}
 		}
-		bPartBatch = getbPartBatch(bPartArray, currentPage);
+		bPartBatchFromTotal = getbPartBatchFromTotal(bPartArray, currentPage);
 	}, [currentPage]);
 
 	return (
 		//table render
 		//navigateButton
-		<React.fragemnt>
-			<makeTableHead />
-			<makeTableBodyElements />
+		<React.Fragment>
+			{/*makeTableHead();
+			makeTableBodyElements();*/}
 			<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
 			<button id="nextPage" onClick={handleNavigatePage}>Next</button>
-		</React.fragemnt>
+		</React.Fragment>
 	);
 };
 
-
-
+export default Manage_BodyPart;

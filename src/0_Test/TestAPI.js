@@ -12,7 +12,7 @@ const getPageLastIndex = (currentPage) => {
 }
 
 
-const Manage_BodyPart = () => {
+const TestAPI = () => {
 
 	/**
 	 * Data for Testing
@@ -38,8 +38,10 @@ const Manage_BodyPart = () => {
 	 * getAllbPart : 운동정보 데이터 모두 fetch
 	 */
 	const getAllbPart = async () => {
-		const bPartTotal = await axios.get(allbPartURI);
+		const bPartTotal = await axios.get("/admin/bodyParts/list");
 		setbPartArray(bPartTotal);
+		//
+		console.log(bPartTotal);
 	}
 
 	/**
@@ -58,8 +60,8 @@ const Manage_BodyPart = () => {
 		);
 	};
 
-	const makeTableBodyElements = (bPartBatchFromTotal) => {
-		const columns = bPartBatchFromTotal.map((bPart) => {
+	const makeTableBodyElements = (bPartBatch) => {
+		const columns = bPartBatch.map((bPart) => {
 			return (
 				<tr>
 					<td>{bPart.englishName}</td>
@@ -80,8 +82,9 @@ const Manage_BodyPart = () => {
 	}
 
 	const handleNavigatePage = async (event) => {
+		event.preventDefault();
 		const page = (event.target.id === 'prev' ? currentPage - 1 : currentPage + 1);
-		const data = await axios.get(`/admin/machines/list/${page}?cookie={}`);
+		const data = await axios.get(`admin/machines/list/${page}?cookie={}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (data === null){
 			console.log("couldn't read from database");
@@ -126,8 +129,10 @@ const Manage_BodyPart = () => {
 		//table render
 		//navigateButton
 		<React.Fragment>
-			{/*{makeTableHead()}*/}
-			{/*{makeTableBodyElements()}*/}
+			<table>
+				{/*{makeTableHead(bPartBatch[0])}
+				{makeTableBodyElements()}*/}
+			</table>
 			<footer>
 				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
 				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
@@ -136,4 +141,4 @@ const Manage_BodyPart = () => {
 	);
 };
 
-export default Manage_BodyPart;
+export default TestAPI;

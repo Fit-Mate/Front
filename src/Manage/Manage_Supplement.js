@@ -4,8 +4,11 @@ import axios from "axios";
 import deepCopy, { supplement_type } from "../DataTypes/data-types";
 import { supplementAPI } from "../API/API";
 import classes from "./css/Manage_Supplement.module.css";
+
 import SupplementInquiry from "./SupplementInquiry";
 import SupplementModify from "./SupplementModify";
+import SupplementDelete from "./SupplementDelete";
+
 import Modal from "../UI/Modal";
 
 const Manage_Supplement = () => {
@@ -14,6 +17,7 @@ const Manage_Supplement = () => {
 	 * Non State
 	 */
 	const dummy_supplement_type = deepCopy(supplement_type);
+	let supplement_id;
 	/**
 	 * State
 	 *
@@ -99,9 +103,10 @@ const Manage_Supplement = () => {
 	/**
 	 * Handler : Modal
 	 */
-	const handleModalClose= () => {
+	const handleModalClose = () => {
 		setIsModifyClicked(false);
 		setIsInquiryClicked(false);
+		setIsDeleteClicked(false);
 	}
 
 	const handleInquiryClicked = async (event) => {
@@ -109,18 +114,18 @@ const Manage_Supplement = () => {
 		console.log(id);
 		//axios로부터 단건조회API사용.
 		const response = await supplementAPI.get(`/${id}`);
-		const fitData = {...supplement_type, ...response.data};
+		const fitData = { ...supplement_type, ...response.data };
 		setSupplement(fitData);
 		setIsInquiryClicked(true);
 	}
 
-	const handleModifyClicked= (event) => {
+	const handleModifyClicked = (event) => {
 		console.log(event.target.id);
 		setIsModifyClicked(true);
 	}
 
 	const handleDeleteClicked = (event) => {
-		console.log(event.target.id);
+		supplement_id = event.target.id;
 		setIsDeleteClicked(true);
 	}
 
@@ -130,7 +135,7 @@ const Manage_Supplement = () => {
 	const handleNavigatePage = async (event) => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
-			return ;
+			return;
 		const response = await supplementAPI.get(`/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (response.data.length === 0) {
@@ -157,9 +162,17 @@ const Manage_Supplement = () => {
 
 	return (
 		<React.Fragment>
-			{isInquiryClicked && <Modal><SupplementInquiry supplement={supplement} onClose={handleModalClose} /></Modal>}
+			{isInquiryClicked &&
+				<Modal>
+					<SupplementInquiry supplement={supplement} onClose={handleModalClose} />
+				</Modal>
+			}
 			{/*{isModifyClicked && <Modal><SupplementModify /></Modal>}*/}
-			{/*{isDeleteClicked && <Modal><SupplementDelete /></Modal>}*/}
+			{isDeleteClicked &&
+				<Modal>
+					<SupplementDelete id={supplement_id} onClose={handleModalClose} />
+				</Modal>
+			}
 
 			{/*이미지 상단에 띄우기*/}
 			{/*{isModifyClicked && <SupplementInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}*/}

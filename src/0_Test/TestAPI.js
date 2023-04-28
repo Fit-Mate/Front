@@ -38,9 +38,9 @@ const TestAPI = () => {
 	 * getAllbPart : 운동정보 데이터 모두 fetch
 	 */
 	const getAllbPart = async () => {
-		const bPartTotal = await axios.get("/admin/bodyParts/list");
+		const response = await axios.get("/admin/supplements/list/1");
+		const bPartTotal = response.data;
 		setbPartArray(bPartTotal);
-		//
 		console.log(bPartTotal);
 	}
 
@@ -84,7 +84,7 @@ const TestAPI = () => {
 	const handleNavigatePage = async (event) => {
 		event.preventDefault();
 		const page = (event.target.id === 'prev' ? currentPage - 1 : currentPage + 1);
-		const data = await axios.get(`admin/machines/list/${page}?cookie={}`);
+		const data = await axios.get(`/admin/machines/list/${page}?cookie={}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (data === null){
 			console.log("couldn't read from database");

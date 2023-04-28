@@ -32,6 +32,8 @@ const Manage_BodyPart = () => {
 	const [bPartArray, setbPartArray] = React.useState([]);
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [bPartBatch, setbPartBatch] = React.useState([]);
+	const [modifyClicked, setModifyClicked] = React.useState(false);
+	const [bPart, setbPart] = React.useState({englishName:'', koreanName:''});
 
 	/**
 	 * Functions
@@ -58,14 +60,14 @@ const Manage_BodyPart = () => {
 		);
 	};
 
-	const makeTableBodyElements = (bPartBatchFromTotal) => {
-		const columns = bPartBatchFromTotal.map((bPart) => {
+	const makeTableBodyElements = (bPartBatch) => {
+		const columns = bPartBatch.map((bPart) => {
 			return (
 				<tr>
 					<td>{bPart.englishName}</td>
 					<td>{bPart.koreanName}</td>
 					<td>
-						<button id={bPart.id} onClick={handleModifybPart}></button>
+						<button id={bPart.id} onClick={handleShowbPartForm}></button>
 					</td>
 				</tr>
 			);
@@ -75,17 +77,26 @@ const Manage_BodyPart = () => {
 	/**
 	 * Handler
 	 */
-	const handleModifybPart = (event) => {
+	const handleClosebPartForm = () => {
+		setModifyClicked(false);
+	}
+
+	const handleBodyPartForm = (bPart) => {
+
+	}
+
+	const handleShowbPartForm= (event) => {
 		console.log(event.target.id);
+		setModifyClicked(true);
 	}
 
 	const handleNavigatePage = async (event) => {
 		const page = (event.target.id === 'prev' ? currentPage - 1 : currentPage + 1);
 		const data = await axios.get(`/admin/machines/list/${page}?cookie={}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
-		if (data === null){
+		if (data === null) {
 			console.log("couldn't read from database");
-			return ;
+			return;
 		}
 		//axios로부터 return 받았을때
 		setbPartBatch(data);
@@ -126,8 +137,11 @@ const Manage_BodyPart = () => {
 		//table render
 		//navigateButton
 		<React.Fragment>
-			{/*{makeTableHead()}*/}
-			{/*{makeTableBodyElements()}*/}
+			{modifyClicked && <BodyPartInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}
+			<table>
+				{/*{makeTableHead(bPartBatch[0])}*/}
+				{/*{makeTableBodyElements(bPartBatch)}*/}
+			</table>
 			<footer>
 				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
 				<button id="nextPage" onClick={handleNavigatePage}>Next</button>

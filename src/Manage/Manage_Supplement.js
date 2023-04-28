@@ -17,7 +17,6 @@ const Manage_Supplement = () => {
 	 * Non State
 	 */
 	const dummy_supplement_type = deepCopy(supplement_type);
-	let supplement_id;
 	/**
 	 * State
 	 *
@@ -26,10 +25,12 @@ const Manage_Supplement = () => {
 
 	const [supplementBatch, setSupplementBatch] = React.useState([]);
 	const [supplement, setSupplement] = React.useState(supplement_type);
+	const [supplementId, setSupplementId] = React.useState('');
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
-	const [isModifyClicked, setIsModifyClicked] = React.useState(false);
 	const [isDeleteClicked, setIsDeleteClicked] = React.useState(false);
+	const [isModifyClicked, setIsModifyClicked] = React.useState(false);
+	const [isAddClicked, setIsAddClicked] = React.useState(false);
 
 
 	/**
@@ -64,6 +65,7 @@ const Manage_Supplement = () => {
 					<th>description</th>
 					<th>supplementType</th>
 					<th>조회</th>
+					<th>추가</th>
 					<th>수정</th>
 					<th>삭제</th>
 				</tr>
@@ -83,6 +85,9 @@ const Manage_Supplement = () => {
 					<td>{supplement.supplementType}</td>
 					<td>
 						<button id={supplement.id} onClick={handleInquiryClicked}>조회</button>
+					</td>
+					<td>
+						<button id={supplement.id} onClick={handleAddClicked}>추가</button>
 					</td>
 					<td>
 						<button id={supplement.id} onClick={handleModifyClicked}>수정</button>
@@ -115,8 +120,13 @@ const Manage_Supplement = () => {
 		//axios로부터 단건조회API사용.
 		const response = await supplementAPI.get(`/${id}`);
 		const fitData = { ...supplement_type, ...response.data };
-		setSupplement(fitData);
+		setSupplement(()=>fitData);
 		setIsInquiryClicked(true);
+	}
+
+	const handleDeleteClicked = (event) => {
+		setSupplementId(()=>event.target.id);
+		setIsDeleteClicked(true);
 	}
 
 	const handleModifyClicked = (event) => {
@@ -124,10 +134,11 @@ const Manage_Supplement = () => {
 		setIsModifyClicked(true);
 	}
 
-	const handleDeleteClicked = (event) => {
-		supplement_id = event.target.id;
-		setIsDeleteClicked(true);
+	const handleAddClicked = (event) => {
+		setIsAddClicked(true);
 	}
+
+
 
 	/**
 	 *	Handler : Navigating page
@@ -170,7 +181,7 @@ const Manage_Supplement = () => {
 			{/*{isModifyClicked && <Modal><SupplementModify /></Modal>}*/}
 			{isDeleteClicked &&
 				<Modal>
-					<SupplementDelete id={supplement_id} onClose={handleModalClose} />
+					<SupplementDelete id={supplementId} onClose={handleModalClose} />
 				</Modal>
 			}
 

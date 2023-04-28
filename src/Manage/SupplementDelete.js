@@ -16,7 +16,9 @@ const SupplementDelete = (props) => {
 	}
 
 	const handleDeleteID = async (event) => {
-		const response = await supplementAPI.delete(`/${props.supplement_id}`)
+		console.log(props.id);
+		const response = await supplementAPI.delete(`/${props.id}`);
+		props.onClose();
 	}
 
 	return (

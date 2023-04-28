@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const basicSupplementAPI = axios.create({
-	baseURL: 'http://localhost:8080/admin/supplement'
+export const supplementCategoryAPI = axios.create({
+	baseURL: '/admin/supplement'
 });
 
 

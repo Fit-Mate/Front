@@ -3,7 +3,10 @@ import axios from "axios";
 
 import deepCopy, { supplement_type } from "../DataTypes/data-types";
 import { supplementAPI } from "../API/API";
-import "./css/Manage_Supplement.css";
+import classes from "./css/Manage_Supplement.module.css";
+import SupplementInquiry from "./SupplementInquiry";
+import SupplementModify from "./SupplementModify";
+import Modal from "../UI/Modal";
 
 const Manage_Supplement = () => {
 
@@ -20,7 +23,10 @@ const Manage_Supplement = () => {
 	const [supplementBatch, setSupplementBatch] = React.useState([]);
 	const [supplement, setSupplement] = React.useState(supplement_type);
 	const [currentPage, setCurrentPage] = React.useState(1);
-	const [modifyClicked, setModifyClicked] = React.useState(false);
+	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
+	const [isModifyClicked, setIsModifyClicked] = React.useState(false);
+	const [isDeleteClicked, setIsDeleteClicked] = React.useState(false);
+
 
 	/**
 	 * Functions
@@ -72,13 +78,13 @@ const Manage_Supplement = () => {
 					<td>{supplement.description}</td>
 					<td>{supplement.supplementType}</td>
 					<td>
-						<button id={supplementBatch.id} onClick={handleShowbPartForm}>조회</button>
+						<button id={supplement.id} onClick={handleInquiryClicked}>조회</button>
 					</td>
 					<td>
-						<button id={supplementBatch.id} onClick={handleShowbPartForm}>수정</button>
+						<button id={supplement.id} onClick={handleModifyClicked}>수정</button>
 					</td>
 					<td>
-						<button id={supplementBatch.id} onClick={handleShowbPartForm}>삭제</button>
+						<button id={supplement.id} onClick={handleDeleteClicked}>삭제</button>
 					</td>
 				</tr>
 			);
@@ -91,36 +97,49 @@ const Manage_Supplement = () => {
 	};
 
 	/**
-	 * Handler
+	 * Handler : Modal
 	 */
-	const handleClosebPartForm = () => {
-		setModifyClicked(false);
+	const handleModalClose= () => {
+		setIsModifyClicked(false);
+		setIsInquiryClicked(false);
 	}
 
-	const handleBodyPartForm = (bPart) => {
-
+	const handleInquiryClicked = async (event) => {
+		const id = event.target.id;
+		console.log(id);
+		//axios로부터 단건조회API사용.
+		const response = await supplementAPI.get(`/${id}`);
+		const fitData = {...supplement_type, ...response.data};
+		setSupplement(fitData);
+		setIsInquiryClicked(true);
 	}
 
-	const handleShowbPartForm = (event) => {
+	const handleModifyClicked= (event) => {
 		console.log(event.target.id);
-		setModifyClicked(true);
+		setIsModifyClicked(true);
 	}
 
+	const handleDeleteClicked = (event) => {
+		console.log(event.target.id);
+		setIsDeleteClicked(true);
+	}
+
+	/**
+	 *	Handler : Navigating page
+	 */
 	const handleNavigatePage = async (event) => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
 			return ;
 		const response = await supplementAPI.get(`/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
-		if (response.data === null) {
-			console.log("couldn't read from database");
+		if (response.data.length === 0) {
 			return;
 		}
 		//axios로부터 return 받았을때
 		setSupplementBatch(response.data);
 		setCurrentPage(page);
 	}
-
 
 	/**
 	 * UseEffect When Rendering.
@@ -137,10 +156,13 @@ const Manage_Supplement = () => {
 
 
 	return (
-		//table render
-		//navigateButton
 		<React.Fragment>
-			{/*{modifyClicked && <SupplementInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}*/}
+			{isInquiryClicked && <Modal><SupplementInquiry supplement={supplement} onClose={handleModalClose} /></Modal>}
+			{/*{isModifyClicked && <Modal><SupplementModify /></Modal>}*/}
+			{/*{isDeleteClicked && <Modal><SupplementDelete /></Modal>}*/}
+
+			{/*이미지 상단에 띄우기*/}
+			{/*{isModifyClicked && <SupplementInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}*/}
 			<table>
 				{makeTableHead(supplement_type)}
 				{makeTableBodyElements()}

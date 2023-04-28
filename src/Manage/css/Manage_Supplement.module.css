@@ -84,7 +84,7 @@ tbody th {
   position: sticky;
   left: 0;
 }
-thead th,
+/*thead th,*/
 tbody th {
   background-color: #f8f8f8;
 }

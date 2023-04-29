@@ -56,8 +56,8 @@ const SupplementAdd = (props) => {
 		servingsRef.current.value = 1.0;
 		if (carbohydratePerServingRef.current !== null)
 			carbohydratePerServingRef.current.value = 1.0;
-		if (protienPerServingRef.current !== null)
-			protienPerServingRef.current.value = 1.0;
+		if (proteinPerServingRef.current !== null)
+			proteinPerServingRef.current.value = 1.0;
 		if (fatPerServingRef.current !== null)
 			fatPerServingRef.current.value = 1.0;
 		if (sourceRef.current !== null)
@@ -104,7 +104,7 @@ const SupplementAdd = (props) => {
 			servings: servingsRef.current.value *= 1,
 			source: sourceRef.current !== null ? sourceRef.current.value : "",
 			carbohydratePerServing: carbohydratePerServingRef.current !== null ? carbohydratePerServingRef.current.value *= 1.0 : 1.0,
-			protienPerServing: protienPerServingRef.current != null ? protienPerServingRef.current.value *= 1.0 : 1.0,
+			proteinPerServing: proteinPerServingRef.current != null ? proteinPerServingRef.current.value *= 1.0 : 1.0,
 			fatPerServing: fatPerServingRef.current != null ? fatPerServingRef.current.value *= 1.0 : 1.0,
 			source: sourceRef.current !== null ? sourceRef.current.value : "",
 			carbohydratePerServing: carbohydratePerServingRef.current !== null ? carbohydratePerServingRef.current.value *= 1.0 : 1.0,
@@ -145,7 +145,7 @@ const SupplementAdd = (props) => {
 					<input type="number" id="carbohydratePerServing" step="0.01" placeholder="0.01" ref={carbohydratePerServingRef}></input>
 				</div>
 				<div className={classes.control}>
-					<label htmlFor="proteinPerServing">protienPerServing</label>
+					<label htmlFor="proteinPerServing">proteinPerServing</label>
 					<input type="number" id="proteinPerServing" step="0.01" placeholder="0.01" ref={proteinPerServingRef}></input>
 				</div>
 				<div className={classes.control}>

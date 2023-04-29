@@ -43,6 +43,10 @@ const SupplementAdd = (props) => {
 	 * Functions
 	 */
 	const initAllInputRefs = () => {
+		console.log(carbohydratePerServingRef);
+		console.log(eNameRef);
+		console.log(priceRef);
+		console.log(submitSupplementType);
 		eNameRef.current.value = "";
 		kNameRef.current.value = "";
 		descriptionRef.current.value = "";
@@ -50,10 +54,14 @@ const SupplementAdd = (props) => {
 		flavorRef.current.value = "";
 		priceRef.current.value = 1;
 		servingsRef.current.value = 1.0;
-		carbohydratePerServingRef.current.value = 1.0;
-		protienPerServingRef.current.value = 1.0;
-		fatPerServingRef.current.value = 1.0;
-		sourceRef.current.value = "";
+		if (carbohydratePerServingRef.current !== null)
+			carbohydratePerServingRef.current.value = 1.0;
+		if (protienPerServingRef.current !== null)
+			protienPerServingRef.current.value = 1.0;
+		if (fatPerServingRef.current !== null)
+			fatPerServingRef.current.value = 1.0;
+		if (sourceRef.current !== null)
+			sourceRef.current.value = "";
 	}
 
 	const appendFormData = (formData, supplementObj) => {
@@ -77,6 +85,7 @@ const SupplementAdd = (props) => {
 	const handleSupplementSubmit = async (event) => {
 		event.preventDefault();
 		initAllInputRefs();
+
 		const sup = {
 			...supplement_type,
 			englishName: eNameRef.current.value,
@@ -87,10 +96,10 @@ const SupplementAdd = (props) => {
 			flavor: flavorRef.current.value,
 			price: priceRef.current.value *= 1,
 			servings: servingsRef.current.value *= 1,
-			source: sourceRef.current.value,
-			carbohydratePerServing: carbohydratePerServingRef.current.value *= 1.0,
-			protienPerServing: protienPerServingRef.current.value *= 1.0,
-			fatPerServing: fatPerServingRef.current.value *= 1.0,
+			source: sourceRef.current !== null ? sourceRef.current.value : "",
+			carbohydratePerServing: carbohydratePerServingRef.current !== null ? carbohydratePerServingRef.current.value *= 1.0 : 1.0,
+			protienPerServing: protienPerServingRef.current != null ? protienPerServingRef.current.value *= 1.0 : 1.0,
+			fatPerServing: fatPerServingRef.current != null ? fatPerServingRef.current.value *= 1.0 : 1.0,
 		};
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
@@ -100,7 +109,7 @@ const SupplementAdd = (props) => {
 		appendFormData(formData, sup);
 		const response = await supplementPostAPI.post("", formData);
 		//정보 초기화
-		//initAllInputRefs();
+		initAllInputRefs();
 		setImageFile();
 	}
 
@@ -136,13 +145,13 @@ const SupplementAdd = (props) => {
 	}
 
 
-
+	//protien을 protein 으로 적었음..
 	return (
 		<div>
 			<header>
 				<label htmlFor="supplement-select">Select Supplement Type</label>
 				<select id="supplement-select" onChange={handleSupplementDropdown}>
-					<option value="Protien">Protien</option>
+					<option value="Protein">Protien</option>
 					<option value="Gainer">Gainer</option>
 					<option value="BCAA">BCAA</option>
 				</select>

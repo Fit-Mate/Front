@@ -16,3 +16,8 @@ export const supplementPostAPI = axios.create({
 		"Content-Type": "multipart/form-data",
 	},
 });
+
+export const supplementPutAPI = axios.create({
+	method: 'put',
+	baseURL: '/admin/supplements',
+});

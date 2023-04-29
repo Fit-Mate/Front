@@ -114,11 +114,10 @@ const Manage_Supplement = () => {
 
 	const handleInquiryClicked = async (event) => {
 		const id = event.target.id;
-		console.log(id);
 		//axios로부터 단건조회API사용.
 		const response = await supplementAPI.get(`/${id}`);
 		const fitData = { ...supplement_type, ...response.data };
-		setSupplement(() => fitData);
+		setSupplement(fitData);
 		setIsInquiryClicked(true);
 	}
 
@@ -127,8 +126,11 @@ const Manage_Supplement = () => {
 		setIsDeleteClicked(true);
 	}
 
-	const handleModifyClicked = (event) => {
-		console.log(event.target.id);
+	const handleModifyClicked = async (event) => {
+		const id = event.target.id;
+		const response = await supplementAPI.get(`/${id}`);
+		const fitData = { ...supplement_type, ...response.data };
+		setSupplement(fitData);
 		setIsModifyClicked(true);
 	}
 
@@ -164,11 +166,12 @@ const Manage_Supplement = () => {
 		loadSupplementBatch(1);
 	}, [])
 
-	//setCurrentPage for table
-	//React.useEffect(() => {
-	//}, [bPartArray]);
+	/*	CHECKING SUPPLEMENT */
+	//React.useEffect(()=>{
+	//	console.log(supplement);
+	//}, [supplement])
 
-
+	//이미지상단에띄우는기능..?
 	return (
 		<React.Fragment>
 			{isInquiryClicked &&
@@ -184,12 +187,14 @@ const Manage_Supplement = () => {
 			}
 			{isAddClicked &&
 				<Modal>
-					<SupplementAdd onClose={handleModalClose}/>
+					<SupplementAdd onClose={handleModalClose} />
 				</Modal>
 			}
-
 			{/*이미지 상단에 띄우기*/}
-			{/*{isModifyClicked && <SupplementInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}*/}
+			{isModifyClicked &&
+				<Modal>
+					<SupplementModify supplement={supplement} onClose={handleModalClose} />
+				</Modal>}
 			<table>
 				{makeTableHead(supplement_type)}
 				{makeTableBodyElements()}

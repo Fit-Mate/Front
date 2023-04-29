@@ -28,7 +28,7 @@ const SupplementAdd = (props) => {
 	const servingsRef = React.useRef(0.1);
 	const sourceRef = React.useRef("");
 	const carbohydratePerServingRef = React.useRef(0.1);
-	const protienPerServingRef = React.useRef(0.1);
+	const proteinPerServingRef = React.useRef(0.1);
 	const fatPerServingRef = React.useRef(0.1);
 
 	/**
@@ -36,8 +36,8 @@ const SupplementAdd = (props) => {
 	 */
 
 	//handleSupplementAdd
-	const [submitSupplementType, setSubmitSupplementType] = React.useState("");
-	const [imageFile, setImageFile] = React.useState();
+	const [submitSupplementType, setSubmitSupplementType] = React.useState("Protein");
+	const [imageFile, setImageFile] = React.useState([]);
 
 	/**
 	 * Functions
@@ -50,10 +50,14 @@ const SupplementAdd = (props) => {
 		flavorRef.current.value = "";
 		priceRef.current.value = 1;
 		servingsRef.current.value = 1.0;
-		carbohydratePerServingRef.current.value = 1.0;
-		protienPerServingRef.current.value = 1.0;
-		fatPerServingRef.current.value = 1.0;
-		sourceRef.current.value = "";
+		if (carbohydratePerServingRef.current !== null)
+			carbohydratePerServingRef.current.value = 1.0;
+		if (proteinPerServingRef.current !== null)
+			proteinPerServingRef.current.value = 1.0;
+		if (fatPerServingRef.current !== null)
+			fatPerServingRef.current.value = 1.0;
+		if (sourceRef.current !== null)
+			sourceRef.current.value = "";
 	}
 
 	const appendFormData = (formData, supplementObj) => {
@@ -71,14 +75,11 @@ const SupplementAdd = (props) => {
 
 	const handleSupplementFile = (event) => {
 		setImageFile(event.target.files[0]);
-		console.log(event.target.files[0]);
 	}
 
 	const handleSupplementSubmit = async (event) => {
 		event.preventDefault();
-		initAllInputRefs();
 		const sup = {
-			...supplement_type,
 			englishName: eNameRef.current.value,
 			koreanName: kNameRef.current.value,
 			description: descriptionRef.current.value,
@@ -87,26 +88,26 @@ const SupplementAdd = (props) => {
 			flavor: flavorRef.current.value,
 			price: priceRef.current.value *= 1,
 			servings: servingsRef.current.value *= 1,
-			source: sourceRef.current.value,
-			carbohydratePerServing: carbohydratePerServingRef.current.value *= 1.0,
-			protienPerServing: protienPerServingRef.current.value *= 1.0,
-			fatPerServing: fatPerServingRef.current.value *= 1.0,
+			source: sourceRef.current !== null ? sourceRef.current.value : "",
+			carbohydratePerServing: carbohydratePerServingRef.current !== null ? carbohydratePerServingRef.current.value *= 1.0 : 1.0,
+			proteinPerServing: proteinPerServingRef.current != null ? proteinPerServingRef.current.value *= 1.0 : 1.0,
+			fatPerServing: fatPerServingRef.current != null ? fatPerServingRef.current.value *= 1.0 : 1.0,
 		};
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
-		console.log(sup);
 		const formData = new FormData();
-		formData.append("file", imageFile);
+		formData.append("image", imageFile);
+		console.log(imageFile);
 		appendFormData(formData, sup);
+
 		const response = await supplementPostAPI.post("", formData);
 		//정보 초기화
-		//initAllInputRefs();
-		setImageFile();
+		initAllInputRefs();
+		setImageFile([]);
 	}
 
 	const handleSupplementDropdown = (event) => {
-		console.log(submitSupplementType);
-		setSubmitSupplementType(() => event.target.value);
+		setSubmitSupplementType(event.target.value);
 	}
 
 	/**
@@ -124,8 +125,8 @@ const SupplementAdd = (props) => {
 					<input type="number" id="carbohydratePerServing" step="0.01" placeholder="0.01" ref={carbohydratePerServingRef}></input>
 				</div>
 				<div className={classes.control}>
-					<label htmlFor="protienPerServing">protienPerServing</label>
-					<input type="number" id="protienPerServing" step="0.01" placeholder="0.01" ref={protienPerServingRef}></input>
+					<label htmlFor="proteinPerServing">protienPerServing</label>
+					<input type="number" id="proteinPerServing" step="0.01" placeholder="0.01" ref={proteinPerServingRef}></input>
 				</div>
 				<div className={classes.control}>
 					<label htmlFor="fatPerServing">fatPerServing</label>
@@ -136,13 +137,13 @@ const SupplementAdd = (props) => {
 	}
 
 
-
+	//protien을 protein 으로 적었음..
 	return (
 		<div>
 			<header>
 				<label htmlFor="supplement-select">Select Supplement Type</label>
 				<select id="supplement-select" onChange={handleSupplementDropdown}>
-					<option value="Protien">Protien</option>
+					<option value="Protein">Protein</option>
 					<option value="Gainer">Gainer</option>
 					<option value="BCAA">BCAA</option>
 				</select>

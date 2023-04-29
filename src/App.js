@@ -1,5 +1,5 @@
 import './App.css';
-import Manage_Supplement from './Manage/Manage_Supplement';
+import Manage_Supplement from './Manage/Supplement/Manage_Supplement';
 
 function App() {
   return (

@@ -1,16 +1,16 @@
 import React from "react";
 import axios from "axios";
 
-import deepCopy, { supplement_type } from "../DataTypes/data-types";
-import { supplementAPI } from "../API/API";
-import classes from "./css/Manage_Supplement.module.css";
+import deepCopy, { supplement_type } from "../../DataTypes/data-types";
+import { supplementAPI } from "../../API/API";
+import classes from "../css/Manage_Supplement.module.css";
 
 import SupplementInquiry from "./SupplementInquiry";
 import SupplementModify from "./SupplementModify";
 import SupplementDelete from "./SupplementDelete";
 import SupplementAdd from "./SupplementAdd";
 
-import Modal from "../UI/Modal";
+import Modal from "../../UI/Modal";
 
 const Manage_Supplement = () => {
 

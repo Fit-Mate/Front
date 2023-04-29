@@ -1,5 +1,5 @@
 import React from "react";
-import { supplementAPI } from "../API/API";
+import { supplementAPI } from "../../API/API";
 
 /**
  *

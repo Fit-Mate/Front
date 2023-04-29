@@ -8,6 +8,7 @@ import classes from "./css/Manage_Supplement.module.css";
 import SupplementInquiry from "./SupplementInquiry";
 import SupplementModify from "./SupplementModify";
 import SupplementDelete from "./SupplementDelete";
+import SupplementAdd from "./SupplementAdd";
 
 import Modal from "../UI/Modal";
 
@@ -65,7 +66,6 @@ const Manage_Supplement = () => {
 					<th>description</th>
 					<th>supplementType</th>
 					<th>조회</th>
-					<th>추가</th>
 					<th>수정</th>
 					<th>삭제</th>
 				</tr>
@@ -85,9 +85,6 @@ const Manage_Supplement = () => {
 					<td>{supplement.supplementType}</td>
 					<td>
 						<button id={supplement.id} onClick={handleInquiryClicked}>조회</button>
-					</td>
-					<td>
-						<button id={supplement.id} onClick={handleAddClicked}>추가</button>
 					</td>
 					<td>
 						<button id={supplement.id} onClick={handleModifyClicked}>수정</button>
@@ -112,6 +109,7 @@ const Manage_Supplement = () => {
 		setIsModifyClicked(false);
 		setIsInquiryClicked(false);
 		setIsDeleteClicked(false);
+		setIsAddClicked(false);
 	}
 
 	const handleInquiryClicked = async (event) => {
@@ -120,12 +118,12 @@ const Manage_Supplement = () => {
 		//axios로부터 단건조회API사용.
 		const response = await supplementAPI.get(`/${id}`);
 		const fitData = { ...supplement_type, ...response.data };
-		setSupplement(()=>fitData);
+		setSupplement(() => fitData);
 		setIsInquiryClicked(true);
 	}
 
 	const handleDeleteClicked = (event) => {
-		setSupplementId(()=>event.target.id);
+		setSupplementId(() => event.target.id);
 		setIsDeleteClicked(true);
 	}
 
@@ -184,6 +182,11 @@ const Manage_Supplement = () => {
 					<SupplementDelete id={supplementId} onClose={handleModalClose} />
 				</Modal>
 			}
+			{isAddClicked &&
+				<Modal>
+					<SupplementAdd onClose={handleModalClose}/>
+				</Modal>
+			}
 
 			{/*이미지 상단에 띄우기*/}
 			{/*{isModifyClicked && <SupplementInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}*/}
@@ -194,6 +197,7 @@ const Manage_Supplement = () => {
 			<footer>
 				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
 				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
+				<button id="add" onClick={handleAddClicked}>추가</button>
 			</footer>
 		</React.Fragment>
 	);

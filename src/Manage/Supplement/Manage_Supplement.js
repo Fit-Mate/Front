@@ -11,8 +11,10 @@ import SupplementDelete from "./SupplementDelete";
 import SupplementAdd from "./SupplementAdd";
 
 import Modal from "../../UI/Modal";
+import Card, {HeaderCard} from "../../UI/Card";
 
-const Manage_Supplement = () => {
+
+const Manage_Supplement = (props) => {
 
 	/**
 	 * Non State
@@ -173,13 +175,13 @@ const Manage_Supplement = () => {
 
 	//이미지상단에띄우는기능..?
 	return (
-		<React.Fragment>
+		<Card>
+			<HeaderCard title={props.title}/>
 			{isInquiryClicked &&
 				<Modal>
 					<SupplementInquiry supplement={supplement} onClose={handleModalClose} />
 				</Modal>
 			}
-			{/*{isModifyClicked && <Modal><SupplementModify /></Modal>}*/}
 			{isDeleteClicked &&
 				<Modal>
 					<SupplementDelete id={supplementId} onClose={handleModalClose} />
@@ -204,7 +206,7 @@ const Manage_Supplement = () => {
 				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
 				<button id="add" onClick={handleAddClicked}>추가</button>
 			</footer>
-		</React.Fragment>
+		</Card>
 	);
 };
 

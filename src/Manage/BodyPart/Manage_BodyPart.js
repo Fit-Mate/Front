@@ -3,21 +3,22 @@ import axios from "axios";
 
 import deepCopy, { bodyPart_data } from "../../DataTypes/data-types";
 import { bodyPartAPI } from "../../API/API";
-import classes from "../css/Manage_bodyPart.module.css";
+import classes from "../css/Manage_Supplement.module.css";
 
-import BodypartInquiry from "./BodyPartInquiry";
+import BodyPartInquiry from "./BodyPartInquiry";
 //import BodyPartModify from "./BodyPartModify";
 //import BodyPartDelete from "./BodyPartDelete";
 //import BodyPartAdd from "./BodyPartAdd";
 
 import Modal from "../../UI/Modal";
+import Card, {HeaderCard} from "../../UI/Card";
 
-const Manage_BodyPart = () => {
+const Manage_BodyPart = (props) => {
 
 	/**
 	 * Non State
 	 */
-	const dummy_bodyPart_type = deepCopy(bodyPartId);
+	const dummy_bodyPart_type = deepCopy(bodyPart_data);
 	/**
 	 * State
 	 *
@@ -111,15 +112,15 @@ const Manage_BodyPart = () => {
 	}
 
 	const handleDeleteClicked = (event) => {
-		setbodyPartId(() => event.target.id);
+		setBodyPartId(() => event.target.id);
 		setIsDeleteClicked(true);
 	}
 
 	const handleModifyClicked = async (event) => {
 		const id = event.target.id;
-		const response = await BodypartAPI.get(`/${id}`);
+		const response = await bodyPartAPI.get(`/${id}`);
 		const fitData = { ...bodyPart_data, ...response.data };
-		setbodyPart(fitData);
+		setBodyPart(fitData);
 		setIsModifyClicked(true);
 	}
 
@@ -160,26 +161,11 @@ const Manage_BodyPart = () => {
 
 	//이미지상단에띄우는기능..?
 	return (
-		<React.Fragment>
+		<Card>
+			<HeaderCard title={props.title} />
 			{isInquiryClicked &&
 				<Modal>
 					<BodyPartInquiry bodyPart={bodyPart} onClose={handleModalClose} />
-				</Modal>
-			}
-			{isDeleteClicked &&
-				<Modal>
-					<BodyPartDelete id={bodyPartId} onClose={handleModalClose} />
-				</Modal>
-			}
-			{isAddClicked &&
-				<Modal>
-					<BodyPartAdd onClose={handleModalClose} />
-				</Modal>
-			}
-			{/*이미지 상단에 띄우기*/}
-			{isModifyClicked &&
-				<Modal>
-					<BodyPartModify bodyPart={bodyPart} onClose={handleModalClose} />
 				</Modal>
 			}
 			<table>
@@ -191,7 +177,7 @@ const Manage_BodyPart = () => {
 				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
 				<button id="add" onClick={handleAddClicked}>추가</button>
 			</footer>
-		</React.Fragment>
+		</Card>
 	);
 };
 

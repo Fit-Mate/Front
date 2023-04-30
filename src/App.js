@@ -1,10 +1,10 @@
 import './App.css';
-import Manage_Supplement from './Manage/Supplement/Manage_Supplement';
+import Manage_Main from './Manage/Manage_Main';
 
 function App() {
   return (
     <div className="App">
-      <Manage_Supplement />
+      <Manage_Main/>
     </div>
   );
 }

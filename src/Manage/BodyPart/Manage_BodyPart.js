@@ -62,6 +62,9 @@ const Manage_BodyPart = (props) => {
 				<tr>
 					<th>englishName</th>
 					<th>koreanName</th>
+					<th>조회</th>
+					<th>수정</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 		);

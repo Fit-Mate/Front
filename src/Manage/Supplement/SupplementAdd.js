@@ -37,16 +37,12 @@ const SupplementAdd = (props) => {
 
 	//handleSupplementAdd
 	const [submitSupplementType, setSubmitSupplementType] = React.useState("Protein");
-	const [imageFile, setImageFile] = React.useState([]);
+	const [imageFile, setImageFile] = React.useState(null);
 
 	/**
 	 * Functions
 	 */
 	const initAllInputRefs = () => {
-		console.log(carbohydratePerServingRef);
-		console.log(eNameRef);
-		console.log(priceRef);
-		console.log(submitSupplementType);
 		eNameRef.current.value = "";
 		kNameRef.current.value = "";
 		descriptionRef.current.value = "";
@@ -79,6 +75,13 @@ const SupplementAdd = (props) => {
 	}
 
 	/**
+	 * useEffect
+	 */
+	React.useEffect(()=>{
+		console.log(imageFile);
+	},[imageFile] );
+
+	/**
 	 * Handler
 	*/
 	const handleModalClose = (event) => {
@@ -91,7 +94,6 @@ const SupplementAdd = (props) => {
 
 	const handleSupplementSubmit = async (event) => {
 		event.preventDefault();
-		initAllInputRefs();
 
 		const sup = {
 			englishName: eNameRef.current.value,
@@ -114,11 +116,15 @@ const SupplementAdd = (props) => {
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
 		const formData = new FormData();
-		if (imageFile.length !== 0)
-			formData.append("image", imageFile);
+		formData.append("image", imageFile);
 
 		console.log(imageFile);
+
 		appendFormData(formData, sup);
+
+		for (let [key, val] of formData) {
+			console.log(`key: ${key} + val ${val}`);
+		}
 
 		const response = await supplementPostAPI.post("", formData);
 		//정보 초기화

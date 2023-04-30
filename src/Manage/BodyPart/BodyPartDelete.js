@@ -3,7 +3,7 @@ import { bodyPartAPI } from "../../API/API";
 
 /**
  *
- * @param {*} props : props.BodyPart_id;
+ * @param {*} props : props.bodyPart_id;
  * @returns
  */
 const BodyPartDelete = (props) => {
@@ -17,7 +17,7 @@ const BodyPartDelete = (props) => {
 
 	const handleDeleteID = async (event) => {
 		console.log(props.id);
-		const response = await BodyPartAPI.delete(`/${props.id}`);
+		const response = await bodyPartAPI.delete(`/${props.id}`);
 		props.onClose();
 	}
 

@@ -114,7 +114,7 @@ const SupplementAdd = (props) => {
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
 		const formData = new FormData();
-		if (imageFile.length() !== 0)
+		if (imageFile.length !== 0)
 			formData.append("image", imageFile);
 
 		console.log(imageFile);

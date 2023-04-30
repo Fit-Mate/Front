@@ -7,11 +7,11 @@ import classes from "../css/Manage_Supplement.module.css";
 
 import BodyPartInquiry from "./BodyPartInquiry";
 //import BodyPartModify from "./BodyPartModify";
-//import BodyPartDelete from "./BodyPartDelete";
-//import BodyPartAdd from "./BodyPartAdd";
+import BodyPartDelete from "./BodyPartDelete";
+import BodyPartAdd from "./BodyPartAdd";
 
 import Modal from "../../UI/Modal";
-import Card, {HeaderCard} from "../../UI/Card";
+import Card, { HeaderCard } from "../../UI/Card";
 
 const Manage_BodyPart = (props) => {
 
@@ -168,6 +168,17 @@ const Manage_BodyPart = (props) => {
 					<BodyPartInquiry bodyPart={bodyPart} onClose={handleModalClose} />
 				</Modal>
 			}
+			{isDeleteClicked &&
+				<Modal>
+					<BodyPartDelete id={bodyPartId} onClose={handleModalClose} />
+				</Modal>
+			}
+			{isAddClicked &&
+				<Modal>
+					<BodyPartAdd onClose={handleModalClose} />
+				</Modal>
+			}
+
 			<table>
 				{makeTableHead(bodyPart_data)}
 				{makeTableBodyElements()}

@@ -1,153 +1,212 @@
 import React from "react";
 import axios from "axios";
 
-const allbPartURI = "admin/bodyParts/list?cookie={}";
+import deepCopy, { supplement_type } from "../../DataTypes/data-types";
+import { supplementAPI } from "../../API/API";
+import classes from "../css/Manage_Supplement.module.css";
 
-const getPageFirstIndex = (currentPage) => {
-	return ((currentPage - 1) * 10);
-}
+import BodypartInquiry from "./BodyPartInquiry";
+//import SupplementModify from "./SupplementModify";
+//import SupplementDelete from "./SupplementDelete";
+//import SupplementAdd from "./SupplementAdd";
 
-const getPageLastIndex = (currentPage) => {
-	return (currentPage * 10 - 1);
-}
+import Modal from "../../UI/Modal";
 
-
-const Manage_BodyPart = () => {
-
-	/**
-	 * Data for Testing
-	 */
+const Manage_BodyPart= () => {
 
 	/**
 	 * Non State
 	 */
-	const bPartBatchFromTotal = [];
-
-
+	const dummy_supplement_type = deepCopy(supplement_type);
 	/**
 	 * State
 	 *
 	 * naviageButtonClicked===1:next, === -1:prev ===0:notClicked
 	 */
-	const [bPartArray, setbPartArray] = React.useState([]);
+
+	const [supplementBatch, setSupplementBatch] = React.useState([]);
+	const [supplement, setSupplement] = React.useState(supplement_type);
+	const [supplementId, setSupplementId] = React.useState('');
 	const [currentPage, setCurrentPage] = React.useState(1);
-	const [bPartBatch, setbPartBatch] = React.useState([]);
-	const [modifyClicked, setModifyClicked] = React.useState(false);
-	const [bPart, setbPart] = React.useState({englishName:'', koreanName:''});
+	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
+	const [isDeleteClicked, setIsDeleteClicked] = React.useState(false);
+	const [isModifyClicked, setIsModifyClicked] = React.useState(false);
+	const [isAddClicked, setIsAddClicked] = React.useState(false);
+
 
 	/**
 	 * Functions
-	 * getAllbPart : 운동정보 데이터 모두 fetch
 	 */
-	const getAllbPart = async () => {
-		const bPartTotal = await axios.get(allbPartURI);
-		setbPartArray(bPartTotal);
+
+	//list가 없을 경우에는...?
+	//value가 없다면 default value로 초기화
+	const loadSupplementBatch = async () => {
+		const supplementResponse = await supplementAPI.get(`/list/${currentPage}`);
+		const fitData = supplementResponse.data.map((obj) => {
+			return {
+				...supplement_type,
+				...obj,
+			}
+		})
+		setSupplementBatch(fitData);
 	}
 
 	/**
 	 * Rendering Function
 	 */
 	//Batch가 아닌 Batch의 object 하나만 받음.
-	const makeTableHead = (bodyParts) => {
-		const keys = bodyParts.keys();
-		const tablehead = keys.map((key) => {
-			<th>{key}</th>
-		});
+	const makeTableHead = () => {
 		return (
-			<tr>
-				{tablehead}
-			</tr>
-		);
-	};
-
-	const makeTableBodyElements = (bPartBatch) => {
-		const columns = bPartBatch.map((bPart) => {
-			return (
+			<thead>
 				<tr>
-					<td>{bPart.englishName}</td>
-					<td>{bPart.koreanName}</td>
+					<th>englishName</th>
+					<th>koreanName</th>
+					<th>price</th>
+					<th>servings</th>
+					<th>description</th>
+					<th>supplementType</th>
+					<th>조회</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+		);
+	}
+
+	const makeTableBodyElements = () => {
+		const columns = supplementBatch.map((supplement) => {
+			return (
+				<tr key={supplement.id}>
+					<td>{supplement.englishName}</td>
+					<td>{supplement.koreanName}</td>
+					<td>{supplement.price}</td>
+					<td>{supplement.servings}</td>
+					<td>{supplement.description}</td>
+					<td>{supplement.supplementType}</td>
 					<td>
-						<button id={bPart.id} onClick={handleShowbPartForm}></button>
+						<button id={supplement.id} onClick={handleInquiryClicked}>조회</button>
+					</td>
+					<td>
+						<button id={supplement.id} onClick={handleModifyClicked}>수정</button>
+					</td>
+					<td>
+						<button id={supplement.id} onClick={handleDeleteClicked}>삭제</button>
 					</td>
 				</tr>
 			);
-		})
+		});
+		return (
+			<tbody>
+				{columns}
+			</tbody>
+		)
 	};
 
 	/**
-	 * Handler
+	 * Handler : Modal
 	 */
-	const handleClosebPartForm = () => {
-		setModifyClicked(false);
+	const handleModalClose = () => {
+		setIsModifyClicked(false);
+		setIsInquiryClicked(false);
+		setIsDeleteClicked(false);
+		setIsAddClicked(false);
 	}
 
-	const handleBodyPartForm = (bPart) => {
-
+	const handleInquiryClicked = async (event) => {
+		const id = event.target.id;
+		//axios로부터 단건조회API사용.
+		const response = await supplementAPI.get(`/${id}`);
+		const fitData = { ...supplement_type, ...response.data };
+		setSupplement(fitData);
+		setIsInquiryClicked(true);
 	}
 
-	const handleShowbPartForm= (event) => {
-		console.log(event.target.id);
-		setModifyClicked(true);
+	const handleDeleteClicked = (event) => {
+		setSupplementId(() => event.target.id);
+		setIsDeleteClicked(true);
 	}
 
-	const handleNavigatePage = async (event) => {
-		const page = (event.target.id === 'prev' ? currentPage - 1 : currentPage + 1);
-		const data = await axios.get(`/admin/machines/list/${page}?cookie={}`);
-		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
-		if (data === null) {
-			console.log("couldn't read from database");
-			return;
-		}
-		//axios로부터 return 받았을때
-		setbPartBatch(data);
-		setCurrentPage(page);
+	const handleModifyClicked = async (event) => {
+		const id = event.target.id;
+		const response = await supplementAPI.get(`/${id}`);
+		const fitData = { ...supplement_type, ...response.data };
+		setSupplement(fitData);
+		setIsModifyClicked(true);
 	}
+
+	const handleAddClicked = (event) => {
+		setIsAddClicked(true);
+	}
+
 
 
 	/**
+	 *	Handler : Navigating page
+	 */
+	const handleNavigatePage = async (event) => {
+		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
+		if (page === 0)
+			return;
+		const response = await supplementAPI.get(`/list/${page}`);
+		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
+		if (response.data.length === 0) {
+			return;
+		}
+		//axios로부터 return 받았을때
+		setSupplementBatch(response.data);
+		setCurrentPage(page);
+	}
+
+	/**
 	 * UseEffect When Rendering.
-	 * fetch data from backend
-	 * setbPartBatch
+	 * fetch SUPPLEMENT BATCH from backend
 	 */
 
 	React.useEffect(() => {
-		getAllbPart();
-		//
+		loadSupplementBatch(1);
 	}, [])
 
-	//setCurrentPage for table
-	//React.useEffect(() => {
-	//}, [bPartArray]);
+	/*	CHECKING SUPPLEMENT */
+	//React.useEffect(()=>{
+	//	console.log(supplement);
+	//}, [supplement])
 
-	//모든 bPartBatch를 currentPage에 대해서 반환.
-	React.useEffect(() => {
-		const getbPartBatchFromTotal = (bPartArray, currentPageNum) => {
-			if (bPartArray.length < getPageLastIndex(currentPageNum)) {
-				return bPartArray.slice(getPageFirstIndex(currentPageNum), -1);
-			}
-			else {
-				return bPartArray.slice(getPageFirstIndex,)
-			}
-		}
-		//getbPartFromTotal : bPartArray로부터 batch를 만드는 함수
-		//bPartBatchFromTotal = getbPartBatchFromTotal(bPartArray, currentPage);
-	}, [currentPage]);
-
+	//이미지상단에띄우는기능..?
 	return (
-		//table render
-		//navigateButton
 		<React.Fragment>
-			{modifyClicked && <BodyPartInputForm onClick={handleClosebPartForm} onSubmit={handleBodyPart}/>}
+			{isInquiryClicked &&
+				<Modal>
+					<SupplementInquiry supplement={supplement} onClose={handleModalClose} />
+				</Modal>
+			}
+			{/*{isModifyClicked && <Modal><SupplementModify /></Modal>}*/}
+			{isDeleteClicked &&
+				<Modal>
+					<SupplementDelete id={supplementId} onClose={handleModalClose} />
+				</Modal>
+			}
+			{isAddClicked &&
+				<Modal>
+					<SupplementAdd onClose={handleModalClose} />
+				</Modal>
+			}
+			{/*이미지 상단에 띄우기*/}
+			{isModifyClicked &&
+				<Modal>
+					<SupplementModify supplement={supplement} onClose={handleModalClose} />
+				</Modal>}
 			<table>
-				{/*{makeTableHead(bPartBatch[0])}*/}
-				{/*{makeTableBodyElements(bPartBatch)}*/}
+				{makeTableHead(supplement_type)}
+				{makeTableBodyElements()}
 			</table>
 			<footer>
 				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
 				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
+				<button id="add" onClick={handleAddClicked}>추가</button>
 			</footer>
 		</React.Fragment>
 	);
 };
 
 export default Manage_BodyPart;
+

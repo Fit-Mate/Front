@@ -1,13 +1,13 @@
 import React from "react";
 
-const BodyPartInputForm = (props) => {
+const BodyPartAdd= (props) => {
 
 	const englishNameRef = React.useRef();
 	const koreanNameRef = React.useRef();
 
 	return (
 		<div>
-			<form onSubmit={props.handleBodyPartManageForm}>
+			<form >
 				<div>
 					<label htmlFor="englishName">englishName</label>
 					<input type='text' id='englishName' ref={englishNameRef} />
@@ -22,4 +22,4 @@ const BodyPartInputForm = (props) => {
 
 };
 
-export default BodyPartInputForm;
+export default BodyPartAdd;

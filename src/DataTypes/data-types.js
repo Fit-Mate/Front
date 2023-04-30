@@ -1,12 +1,12 @@
 
 export const supplement_type = {
 	id: 0,
+	supplementType: "",
 	englishName: "",
 	koreanName: "",
 	price: 0,
 	servings: 0.0,
 	description: "",
-	supplementType: "",
 	marketURL: "",
 	flavor: "",
 
@@ -14,6 +14,11 @@ export const supplement_type = {
 	protienPerServing: 0.0,
 	fatPerServing: 0.0,
 	carbohydratePerServing: 0.0,
+}
+
+export const bodyPart_data = {
+	englishName: "",
+	koreanName: "",
 }
 
 const deepCopy = (obj) => {

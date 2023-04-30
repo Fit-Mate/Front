@@ -37,9 +37,6 @@ export const bodyPartAPI = axios.create({
 export const bodyPartPostAPI = axios.create({
 	method: 'post',
 	baseURL: '/admin/bodyParts',
-	headers: {
-		"Content-Type": "multipart/form-data",
-	},
 });
 
 export const bodyPartPutAPI = axios.create({

@@ -11,7 +11,7 @@ import SupplementDelete from "./SupplementDelete";
 import SupplementAdd from "./SupplementAdd";
 
 import Modal from "../../UI/Modal";
-import Card, {HeaderCard} from "../../UI/Card";
+import Card, { HeaderCard } from "../../UI/Card";
 
 
 const Manage_Supplement = (props) => {
@@ -134,6 +134,7 @@ const Manage_Supplement = (props) => {
 		const fitData = { ...supplement_type, ...response.data };
 		setSupplement(fitData);
 		setIsModifyClicked(true);
+		setSupplementId(id);
 	}
 
 	const handleAddClicked = (event) => {
@@ -176,7 +177,7 @@ const Manage_Supplement = (props) => {
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
-			<HeaderCard title={props.title}/>
+			<HeaderCard title={props.title} />
 			{isInquiryClicked &&
 				<Modal>
 					<SupplementInquiry supplement={supplement} onClose={handleModalClose} />
@@ -195,8 +196,9 @@ const Manage_Supplement = (props) => {
 			{/*이미지 상단에 띄우기*/}
 			{isModifyClicked &&
 				<Modal>
-					<SupplementModify supplement={supplement} onClose={handleModalClose} />
-				</Modal>}
+					<SupplementModify supplement={supplement} id={supplementId} onClose={handleModalClose} />
+				</Modal>
+			}
 			<table>
 				{makeTableHead(supplement_type)}
 				{makeTableBodyElements()}

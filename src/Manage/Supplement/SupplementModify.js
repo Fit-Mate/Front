@@ -77,7 +77,6 @@ const SupplementModify = (props) => {
 
 	const handleSupplementSubmit = async (event) => {
 		event.preventDefault();
-		initAllInputRefs();
 
 		const sup = {
 			englishName: eNameRef.current.value,
@@ -102,10 +101,8 @@ const SupplementModify = (props) => {
 
 		const response = await supplementPutAPI.put(`/${props.supplement.id}`, formData);
 		//정보 초기화
-		initAllInputRefs();
 		setImageFile();
 		initAllInputRefs();
-		setImageFile([]);
 	}
 
 	const handleSupplementDropdown = (event) => {

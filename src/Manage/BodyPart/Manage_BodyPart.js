@@ -6,7 +6,7 @@ import { bodyPartAPI } from "../../API/API";
 import classes from "../css/Manage_Supplement.module.css";
 
 import BodyPartInquiry from "./BodyPartInquiry";
-//import BodyPartModify from "./BodyPartModify";
+import BodyPartModify from "./BodyPartModify";
 import BodyPartDelete from "./BodyPartDelete";
 import BodyPartAdd from "./BodyPartAdd";
 
@@ -122,6 +122,7 @@ const Manage_BodyPart = (props) => {
 		const fitData = { ...bodyPart_data, ...response.data };
 		setBodyPart(fitData);
 		setIsModifyClicked(true);
+		setBodyPartId(id);
 	}
 
 	const handleAddClicked = (event) => {
@@ -154,6 +155,11 @@ const Manage_BodyPart = (props) => {
 		loadBodyPartBatch(1);
 	}, [])
 
+	React.useEffect(()=>{
+		loadBodyPartBatch(1);
+	}, [isAddClicked, isDeleteClicked, isInquiryClicked, isModifyClicked]);
+
+
 	/*	CHECKING bodyPart */
 	//React.useEffect(()=>{
 	//	console.log(bodyPart);
@@ -176,6 +182,11 @@ const Manage_BodyPart = (props) => {
 			{isAddClicked &&
 				<Modal>
 					<BodyPartAdd onClose={handleModalClose} />
+				</Modal>
+			}
+			{isModifyClicked &&
+				<Modal>
+					<BodyPartModify bodyPart={bodyPart} id={bodyPartId} onClose={handleModalClose} />
 				</Modal>
 			}
 

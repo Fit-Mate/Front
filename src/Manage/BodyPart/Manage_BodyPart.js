@@ -1,32 +1,32 @@
 import React from "react";
 import axios from "axios";
 
-import deepCopy, { supplement_type } from "../../DataTypes/data-types";
-import { supplementAPI } from "../../API/API";
-import classes from "../css/Manage_Supplement.module.css";
+import deepCopy, { bodyPart_data } from "../../DataTypes/data-types";
+import { bodyPartAPI } from "../../API/API";
+import classes from "../css/Manage_bodyPart.module.css";
 
 import BodypartInquiry from "./BodyPartInquiry";
-//import SupplementModify from "./SupplementModify";
-//import SupplementDelete from "./SupplementDelete";
-//import SupplementAdd from "./SupplementAdd";
+//import BodyPartModify from "./BodyPartModify";
+//import BodyPartDelete from "./BodyPartDelete";
+//import BodyPartAdd from "./BodyPartAdd";
 
 import Modal from "../../UI/Modal";
 
-const Manage_BodyPart= () => {
+const Manage_BodyPart = () => {
 
 	/**
 	 * Non State
 	 */
-	const dummy_supplement_type = deepCopy(supplement_type);
+	const dummy_bodyPart_type = deepCopy(bodyPartId);
 	/**
 	 * State
 	 *
 	 * naviageButtonClicked===1:next, === -1:prev ===0:notClicked
 	 */
 
-	const [supplementBatch, setSupplementBatch] = React.useState([]);
-	const [supplement, setSupplement] = React.useState(supplement_type);
-	const [supplementId, setSupplementId] = React.useState('');
+	const [bodyPartBatch, setBodyPartBatch] = React.useState([]);
+	const [bodyPart, setBodyPart] = React.useState(bodyPart_data);
+	const [bodyPartId, setBodyPartId] = React.useState('');
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 	const [isDeleteClicked, setIsDeleteClicked] = React.useState(false);
@@ -40,15 +40,15 @@ const Manage_BodyPart= () => {
 
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
-	const loadSupplementBatch = async () => {
-		const supplementResponse = await supplementAPI.get(`/list/${currentPage}`);
-		const fitData = supplementResponse.data.map((obj) => {
+	const loadBodyPartBatch = async () => {
+		const bodyPartResponse = await bodyPartAPI.get(`/list/${currentPage}`);
+		const fitData = bodyPartResponse.data.map((obj) => {
 			return {
-				...supplement_type,
+				...bodyPart_data,
 				...obj,
 			}
 		})
-		setSupplementBatch(fitData);
+		setBodyPartBatch(fitData);
 	}
 
 	/**
@@ -61,36 +61,25 @@ const Manage_BodyPart= () => {
 				<tr>
 					<th>englishName</th>
 					<th>koreanName</th>
-					<th>price</th>
-					<th>servings</th>
-					<th>description</th>
-					<th>supplementType</th>
-					<th>조회</th>
-					<th>수정</th>
-					<th>삭제</th>
 				</tr>
 			</thead>
 		);
 	}
 
 	const makeTableBodyElements = () => {
-		const columns = supplementBatch.map((supplement) => {
+		const columns = bodyPartBatch.map((bodyPart) => {
 			return (
-				<tr key={supplement.id}>
-					<td>{supplement.englishName}</td>
-					<td>{supplement.koreanName}</td>
-					<td>{supplement.price}</td>
-					<td>{supplement.servings}</td>
-					<td>{supplement.description}</td>
-					<td>{supplement.supplementType}</td>
+				<tr key={bodyPart.id}>
+					<td>{bodyPart.englishName}</td>
+					<td>{bodyPart.koreanName}</td>
 					<td>
-						<button id={supplement.id} onClick={handleInquiryClicked}>조회</button>
+						<button id={bodyPart.id} onClick={handleInquiryClicked}>조회</button>
 					</td>
 					<td>
-						<button id={supplement.id} onClick={handleModifyClicked}>수정</button>
+						<button id={bodyPart.id} onClick={handleModifyClicked}>수정</button>
 					</td>
 					<td>
-						<button id={supplement.id} onClick={handleDeleteClicked}>삭제</button>
+						<button id={bodyPart.id} onClick={handleDeleteClicked}>삭제</button>
 					</td>
 				</tr>
 			);
@@ -115,30 +104,28 @@ const Manage_BodyPart= () => {
 	const handleInquiryClicked = async (event) => {
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
-		const response = await supplementAPI.get(`/${id}`);
-		const fitData = { ...supplement_type, ...response.data };
-		setSupplement(fitData);
+		const response = await bodyPartAPI.get(`/${id}`);
+		const fitData = { ...bodyPart_data, ...response.data };
+		setBodyPart(fitData);
 		setIsInquiryClicked(true);
 	}
 
 	const handleDeleteClicked = (event) => {
-		setSupplementId(() => event.target.id);
+		setbodyPartId(() => event.target.id);
 		setIsDeleteClicked(true);
 	}
 
 	const handleModifyClicked = async (event) => {
 		const id = event.target.id;
-		const response = await supplementAPI.get(`/${id}`);
-		const fitData = { ...supplement_type, ...response.data };
-		setSupplement(fitData);
+		const response = await BodypartAPI.get(`/${id}`);
+		const fitData = { ...bodyPart_data, ...response.data };
+		setbodyPart(fitData);
 		setIsModifyClicked(true);
 	}
 
 	const handleAddClicked = (event) => {
 		setIsAddClicked(true);
 	}
-
-
 
 	/**
 	 *	Handler : Navigating page
@@ -147,56 +134,56 @@ const Manage_BodyPart= () => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
 			return;
-		const response = await supplementAPI.get(`/list/${page}`);
+		const response = await bodyPartAPI.get(`/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (response.data.length === 0) {
 			return;
 		}
 		//axios로부터 return 받았을때
-		setSupplementBatch(response.data);
+		setBodyPartBatch(response.data);
 		setCurrentPage(page);
 	}
 
 	/**
 	 * UseEffect When Rendering.
-	 * fetch SUPPLEMENT BATCH from backend
+	 * fetch bodyPart BATCH from backend
 	 */
 
 	React.useEffect(() => {
-		loadSupplementBatch(1);
+		loadBodyPartBatch(1);
 	}, [])
 
-	/*	CHECKING SUPPLEMENT */
+	/*	CHECKING bodyPart */
 	//React.useEffect(()=>{
-	//	console.log(supplement);
-	//}, [supplement])
+	//	console.log(bodyPart);
+	//}, [bodyPart])
 
 	//이미지상단에띄우는기능..?
 	return (
 		<React.Fragment>
 			{isInquiryClicked &&
 				<Modal>
-					<SupplementInquiry supplement={supplement} onClose={handleModalClose} />
+					<BodyPartInquiry bodyPart={bodyPart} onClose={handleModalClose} />
 				</Modal>
 			}
-			{/*{isModifyClicked && <Modal><SupplementModify /></Modal>}*/}
 			{isDeleteClicked &&
 				<Modal>
-					<SupplementDelete id={supplementId} onClose={handleModalClose} />
+					<BodyPartDelete id={bodyPartId} onClose={handleModalClose} />
 				</Modal>
 			}
 			{isAddClicked &&
 				<Modal>
-					<SupplementAdd onClose={handleModalClose} />
+					<BodyPartAdd onClose={handleModalClose} />
 				</Modal>
 			}
 			{/*이미지 상단에 띄우기*/}
 			{isModifyClicked &&
 				<Modal>
-					<SupplementModify supplement={supplement} onClose={handleModalClose} />
-				</Modal>}
+					<BodyPartModify bodyPart={bodyPart} onClose={handleModalClose} />
+				</Modal>
+			}
 			<table>
-				{makeTableHead(supplement_type)}
+				{makeTableHead(bodyPart_data)}
 				{makeTableBodyElements()}
 			</table>
 			<footer>

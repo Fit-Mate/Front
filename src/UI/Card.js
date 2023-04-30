@@ -13,7 +13,7 @@ export const HeaderCard = (props) => {
 	return (
 		<header>
 			<Card>
-				<p>{props.title}</p>
+				<h2>{props.title}</h2>
 			</Card>
 		</header>
 	);

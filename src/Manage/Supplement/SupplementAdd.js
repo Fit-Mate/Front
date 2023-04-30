@@ -114,14 +114,14 @@ const SupplementAdd = (props) => {
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
 		const formData = new FormData();
-		formData.append("image", imageFile);
+		if (imageFile.length() !== 0)
+			formData.append("image", imageFile);
+
 		console.log(imageFile);
 		appendFormData(formData, sup);
 
 		const response = await supplementPostAPI.post("", formData);
 		//정보 초기화
-		initAllInputRefs();
-		setImageFile();
 		initAllInputRefs();
 		setImageFile([]);
 	}

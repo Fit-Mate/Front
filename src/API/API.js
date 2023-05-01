@@ -26,6 +26,31 @@ export const supplementPutAPI = axios.create({
 	baseURL: '/admin/supplements',
 });
 
+/**
+ * Manage_Workout API
+ */
+export const workoutCategoryAPI = axios.create({
+	baseURL: '/admin/workout'
+});
+
+
+export const workoutAPI = axios.create({
+	baseURL: '/admin/workouts'
+});
+
+export const workoutPostAPI = axios.create({
+	method: 'post',
+	baseURL: '/admin/workouts',
+	headers: {
+		"Content-Type": "multipart/form-data",
+	},
+});
+
+export const workoutPutAPI = axios.create({
+	method: 'put',
+	baseURL: '/admin/workouts',
+});
+
 
 /**
  * Manage_BodyPart API

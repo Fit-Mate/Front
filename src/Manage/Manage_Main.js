@@ -1,6 +1,7 @@
 import React from "react";
 import Manage_Supplement from "./Supplement/Manage_Supplement";
 import Manage_BodyPart from "./BodyPart/Manage_BodyPart";
+import Manage_Workout from "./Workout/Manage_Workout";
 
 const br4 = () => {
 	return (
@@ -18,11 +19,15 @@ const Manage_Main = (props) => {
 	return (
 		<div>
 			<article>
-				<Manage_Supplement title="Supplement"/>
+				<Manage_Supplement title="Supplement" />
 			</ article>
-				{br4()}
+			{br4()}
 			<article>
-				<Manage_BodyPart title="BodyPart"/>
+				<Manage_BodyPart title="BodyPart" />
+			</article>
+			{br4()}
+			<article>
+				<Manage_Workout title="Workout" />
 			</article>
 		</div>
 	);

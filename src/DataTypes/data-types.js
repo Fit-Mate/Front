@@ -21,6 +21,15 @@ export const bodyPart_data = {
 	koreanName: "",
 }
 
+export const workout_data = {
+	englishName: "",
+	koreanName: "",
+	videoLink: "",
+	description: "",
+	bodyPartKoreanName: "",
+	image: new File([""], "instantiateFile"),
+}
+
 const deepCopy = (obj) => {
 	JSON.parse(JSON.stringify(obj));
 }

@@ -5,7 +5,7 @@ import deepCopy, { workout_data } from "../../DataTypes/data-types";
 import { workoutAPI } from "../../API/API";
 import classes from "../css/Manage_Supplement.module.css";
 
-//import WorkoutInquiry from "./WorkoutInquiry";
+import WorkoutInquiry from "./WorkoutInquiry";
 //import WorkoutModify from "./WorkoutModify";
 //import WorkoutDelete from "./WorkoutDelete";
 //import WorkoutAdd from "./WorkoutAdd";
@@ -43,9 +43,9 @@ const Manage_Workout = (props) => {
 	const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
 		if (bodyPartKoreanName.length === 0)
 			return "";
-		const bodyPartParagraph = bodyPartKoreanName.reduce( (accumulator, currentValue) =>
+		const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue) =>
 			`${accumulator}\n${currentValue}`
-		, [])
+			, [])
 	}
 
 	//list가 없을 경우에는...?
@@ -185,11 +185,6 @@ const Manage_Workout = (props) => {
 	 * For memo
 	 */
 
-	//	{isInquiryClicked &&
-	//	<Modal>
-	//		<WorkoutInquiry workout={workout} onClose={handleModalClose} />
-	//	</Modal>
-	//}
 	//{isDeleteClicked &&
 	//	<Modal>
 	//		<WorkoutDelete id={workoutId} onClose={handleModalClose} />
@@ -205,12 +200,17 @@ const Manage_Workout = (props) => {
 	//	<Modal>
 	//		<WorkoutModify workout={workout} id={workoutId} onClose={handleModalClose} />
 	//	</Modal>
-		//}
+	//}
 
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
 			<HeaderCard title={props.title} />
+			{isInquiryClicked &&
+				<Modal>
+					<WorkoutInquiry workout={workout} onClose={handleModalClose} />
+				</Modal>
+			}
 			<table>
 				{makeTableHead(workout_data)}
 				{makeTableBodyElements()}

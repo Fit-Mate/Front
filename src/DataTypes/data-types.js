@@ -26,8 +26,14 @@ export const workout_data = {
 	koreanName: "",
 	videoLink: "",
 	description: "",
-	bodyPartKoreanName: "",
+	bodyPartKoreanName: [],
 	image: new File([""], "instantiateFile"),
+}
+
+export const machine_data = {
+	englishName: "",
+	koreanNamm: "",
+	bodyPartKoreanName: [],
 }
 
 const deepCopy = (obj) => {

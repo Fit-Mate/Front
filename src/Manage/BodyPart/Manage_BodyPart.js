@@ -165,7 +165,7 @@ const Manage_BodyPart = (props) => {
 		loadBodyPartBatch(1);
 	}, [])
 
-	React.useEffect(()=>{
+	React.useEffect(() => {
 		loadBodyPartBatch(1);
 	}, [isAddClicked, isDeleteClicked, isInquiryClicked, isModifyClicked]);
 
@@ -200,10 +200,12 @@ const Manage_BodyPart = (props) => {
 				</Modal>
 			}
 
-			<table>
-				{makeTableHead(bodyPart_data)}
-				{makeTableBodyElements()}
-			</table>
+			<div className={classes["table-align"]}>
+				<table>
+					{makeTableHead(bodyPart_data)}
+					{makeTableBodyElements()}
+				</table>
+			</div>
 			<footer>
 				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
 				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>

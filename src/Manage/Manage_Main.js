@@ -29,6 +29,10 @@ const Manage_Main = (props) => {
 			<article>
 				<Manage_Workout title="Workout" />
 			</article>
+			{br4()}
+			<article>
+				<Manage_Workout title="Machine" />
+			</article>
 		</div>
 	);
 };

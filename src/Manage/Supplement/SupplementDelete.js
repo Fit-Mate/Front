@@ -25,7 +25,6 @@ const SupplementDelete = (props) => {
 	return (
 		<React.Fragment>
 			<Button type="button" onClick={handleDeleteID}>삭제</Button>
-			<br/>
 			<Button type="button" onClick={handleModalClose}>취소</Button>
 		</React.Fragment>
 	)

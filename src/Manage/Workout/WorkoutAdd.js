@@ -24,14 +24,7 @@ const SupplementAdd = (props) => {
 	const eNameRef = React.useRef("");
 	const kNameRef = React.useRef("");
 	const descriptionRef = React.useRef("");
-	const marketURLRef = React.useRef("");
-	const flavorRef = React.useRef("");
-	const priceRef = React.useRef(0);
-	const servingsRef = React.useRef(0.1);
-	const sourceRef = React.useRef("");
-	const carbohydratePerServingRef = React.useRef(0.1);
-	const proteinPerServingRef = React.useRef(0.1);
-	const fatPerServingRef = React.useRef(0.1);
+	//const videoLinkRef
 
 	/**
 	 * Non-state var

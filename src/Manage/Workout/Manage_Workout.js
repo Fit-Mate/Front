@@ -12,6 +12,7 @@ import WorkoutInquiry from "./WorkoutInquiry";
 
 import Modal from "../../UI/Modal";
 import Card, { HeaderCard } from "../../UI/Card";
+import Button from "../../UI/Button";
 
 
 const Manage_Workout = (props) => {
@@ -216,9 +217,9 @@ const Manage_Workout = (props) => {
 				{makeTableBodyElements()}
 			</table>
 			<footer>
-				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
-				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
-				<button id="add" onClick={handleAddClicked}>추가</button>
+				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
+				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
+				<Button id="add" onClick={handleAddClicked}>추가</Button>
 			</footer>
 		</Card>
 	);

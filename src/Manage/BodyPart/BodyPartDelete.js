@@ -1,6 +1,8 @@
 import React from "react";
 import { bodyPartAPI } from "../../API/API";
 
+import Button from "../../UI/Button";
+
 /**
  *
  * @param {*} props : props.bodyPart_id;
@@ -23,9 +25,8 @@ const BodyPartDelete = (props) => {
 
 	return (
 		<React.Fragment>
-			<button type="button" onClick={handleDeleteID}>삭제</button>
-			<br/>
-			<button type="button" onClick={handleModalClose}>취소</button>
+			<Button type="button" onClick={handleDeleteID}>삭제</Button>
+			<Button type="button" onClick={handleModalClose}>취소</Button>
 		</React.Fragment>
 	)
 };

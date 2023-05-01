@@ -1,5 +1,6 @@
 import React from "react";
 
+import Button from "../../UI/Button";
 /**
  * @param {*} props : supplement, handleModalClose
  */
@@ -25,7 +26,7 @@ const SupplementInquiry = (props) => {
 				{description}
 			</ul>
 
-			<button onClick={handleModalClose}>닫기</button>
+			<Button onClick={handleModalClose}>닫기</Button>
 		</div >
 
 	);

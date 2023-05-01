@@ -5,6 +5,8 @@ import { supplementPostAPI } from "../../API/API";
 import classes from "../css/FormInput.module.css";
 import { supplement_type } from "../../DataTypes/data-types";
 
+import Button from "../../UI/Button";
+
 
 /**
  * Basic elements : englishName, koreanName, description, marketURL, price, servings, id, flavor
@@ -211,8 +213,8 @@ const SupplementAdd = (props) => {
 					<input type="file" id="fileUpload" onChange={handleSupplementFile}></input>
 				</div>
 				<div>
-					<button type="button" onClick={handleModalClose}>닫기</button>
-					<button type="submit">추가</button>
+					<Button type="button" onClick={handleModalClose}>닫기</Button>
+					<Button type="submit">추가</Button>
 				</div>
 			</form>
 		</div>

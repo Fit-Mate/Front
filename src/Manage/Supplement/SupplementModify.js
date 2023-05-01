@@ -4,6 +4,7 @@ import { supplementPutAPI, supplementPostAPI } from "../../API/API";
 
 import classes from "../css/FormInput.module.css";
 import { supplement_type } from "../../DataTypes/data-types";
+import Button from "../../UI/Button";
 
 
 /**
@@ -196,8 +197,8 @@ const SupplementModify = (props) => {
 					<input type="file" id="fileUpload" onChange={handleSupplementFile}></input>
 				</div>
 				<div>
-					<button type="button" onClick={handleModalClose}>닫기</button>
-					<button type="submit">수정</button>
+					<Button type="button" onClick={handleModalClose}>닫기</Button>
+					<Button type="submit">수정</Button>
 				</div>
 			</form>
 		</div>

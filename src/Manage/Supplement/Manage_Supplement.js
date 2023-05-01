@@ -1,17 +1,25 @@
 import React from "react";
 import axios from "axios";
 
+/** data structure */
 import deepCopy, { supplement_type } from "../../DataTypes/data-types";
+
+/**API */
 import { supplementAPI } from "../../API/API";
+
+/**css */
 import classes from "../css/Manage_Supplement.module.css";
 
+/**Components */
 import SupplementInquiry from "./SupplementInquiry";
 import SupplementModify from "./SupplementModify";
 import SupplementDelete from "./SupplementDelete";
 import SupplementAdd from "./SupplementAdd";
 
+/**UI */
 import Modal from "../../UI/Modal";
 import Card, { HeaderCard } from "../../UI/Card";
+import Button from "../../UI/Button";
 
 
 const Manage_Supplement = (props) => {
@@ -86,13 +94,13 @@ const Manage_Supplement = (props) => {
 					<td>{supplement.description}</td>
 					<td>{supplement.supplementType}</td>
 					<td>
-						<button id={supplement.id} onClick={handleInquiryClicked}>조회</button>
+						<Button id={supplement.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>
 					<td>
-						<button id={supplement.id} onClick={handleModifyClicked}>수정</button>
+						<Button id={supplement.id} onClick={handleModifyClicked}>수정</Button>
 					</td>
 					<td>
-						<button id={supplement.id} onClick={handleDeleteClicked}>삭제</button>
+						<Button id={supplement.id} onClick={handleDeleteClicked}>삭제</Button>
 					</td>
 				</tr>
 			);
@@ -204,9 +212,9 @@ const Manage_Supplement = (props) => {
 				{makeTableBodyElements()}
 			</table>
 			<footer>
-				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
-				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
-				<button id="add" onClick={handleAddClicked}>추가</button>
+				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
+				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
+				<Button id="add" onClick={handleAddClicked}>추가</Button>
 			</footer>
 		</Card>
 	);

@@ -1,9 +1,16 @@
 import React from "react";
 
+/** API */
 import { bodyPartPutAPI, bodyPartPostAPI } from "../../API/API";
 
+/** css */
 import classes from "../css/FormInput.module.css";
+
+/** datatype */
 import { bodyPart_data } from "../../DataTypes/data-types";
+
+/** UI */
+import Button from "../../UI/Button";
 
 
 /**
@@ -83,8 +90,8 @@ const BodyPartModify = (props) => {
 					<input type="text" id="koreanName" placeholder="koreanName" ref={kNameRef}></input>
 				</div>
 				<div>
-					<button type="button" onClick={handleModalClose}>닫기</button>
-					<button type="submit">수정</button>
+					<Button type="button" onClick={handleModalClose}>닫기</Button>
+					<Button type="submit" onClick={handleModalClose}>수정</Button>
 				</div>
 			</form>
 		</div>

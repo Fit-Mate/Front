@@ -1,5 +1,8 @@
 import React from "react";
 
+/** UI */
+import Button from "../../UI/Button";
+
 /**
  * @param {*} props : bodyPart, handleModalClose
  */
@@ -25,7 +28,7 @@ const bodyPartInquiry = (props) => {
 				{description}
 			</ul>
 
-			<button onClick={handleModalClose}>닫기</button>
+			<Button onClick={handleModalClose}>닫기</Button>
 		</div >
 
 	);

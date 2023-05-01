@@ -1,17 +1,25 @@
 import React from "react";
 import axios from "axios";
 
+/** datatype */
 import deepCopy, { bodyPart_data } from "../../DataTypes/data-types";
+
+/** API */
 import { bodyPartAPI } from "../../API/API";
+
+/** css */
 import classes from "../css/Manage_Supplement.module.css";
 
+/** Component */
 import BodyPartInquiry from "./BodyPartInquiry";
 import BodyPartModify from "./BodyPartModify";
 import BodyPartDelete from "./BodyPartDelete";
 import BodyPartAdd from "./BodyPartAdd";
 
+/** UI */
 import Modal from "../../UI/Modal";
 import Card, { HeaderCard } from "../../UI/Card";
+import Button from "../../UI/Button";
 
 const Manage_BodyPart = (props) => {
 
@@ -21,7 +29,6 @@ const Manage_BodyPart = (props) => {
 	const dummy_bodyPart_type = deepCopy(bodyPart_data);
 	/**
 	 * State
-	 *
 	 * naviageButtonClicked===1:next, === -1:prev ===0:notClicked
 	 */
 
@@ -77,13 +84,13 @@ const Manage_BodyPart = (props) => {
 					<td>{bodyPart.englishName}</td>
 					<td>{bodyPart.koreanName}</td>
 					<td>
-						<button id={bodyPart.id} onClick={handleInquiryClicked}>조회</button>
+						<Button id={bodyPart.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>
 					<td>
-						<button id={bodyPart.id} onClick={handleModifyClicked}>수정</button>
+						<Button id={bodyPart.id} onClick={handleModifyClicked}>수정</Button>
 					</td>
 					<td>
-						<button id={bodyPart.id} onClick={handleDeleteClicked}>삭제</button>
+						<Button id={bodyPart.id} onClick={handleDeleteClicked}>삭제</Button>
 					</td>
 				</tr>
 			);
@@ -198,9 +205,9 @@ const Manage_BodyPart = (props) => {
 				{makeTableBodyElements()}
 			</table>
 			<footer>
-				<button id="prevPage" onClick={handleNavigatePage}>Prev</button>
-				<button id="nextPage" onClick={handleNavigatePage}>Next</button>
-				<button id="add" onClick={handleAddClicked}>추가</button>
+				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
+				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
+				<Button id="add" onClick={handleAddClicked}>추가</Button>
 			</footer>
 		</Card>
 	);

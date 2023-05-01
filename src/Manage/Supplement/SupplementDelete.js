@@ -1,5 +1,6 @@
 import React from "react";
 import { supplementAPI } from "../../API/API";
+import Button from "../../UI/Button";
 
 /**
  *
@@ -23,9 +24,9 @@ const SupplementDelete = (props) => {
 
 	return (
 		<React.Fragment>
-			<button type="button" onClick={handleDeleteID}>삭제</button>
+			<Button type="button" onClick={handleDeleteID}>삭제</Button>
 			<br/>
-			<button type="button" onClick={handleModalClose}>취소</button>
+			<Button type="button" onClick={handleModalClose}>취소</Button>
 		</React.Fragment>
 	)
 };

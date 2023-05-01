@@ -29,10 +29,6 @@ export const supplementPutAPI = axios.create({
 /**
  * Manage_Workout API
  */
-export const workoutCategoryAPI = axios.create({
-	baseURL: '/admin/workout'
-});
-
 
 export const workoutAPI = axios.create({
 	baseURL: '/admin/workouts'

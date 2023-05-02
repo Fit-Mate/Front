@@ -3,16 +3,16 @@ import React from "react";
 import { machinePostAPI } from "../../API/API";
 
 import classes from "../css/FormInput.module.css";
-import { machine_data } from "../../DataTypes/data-types";
-import { machineAPI, workoutPostAPI, bodyPartAPI } from "../../API/API";
+import { machine_data} from "../../DataTypes/data-types";
+import { machineAPI, machinePostAPI, bodyPartAPI } from "../../API/API";
 
 /**css */
 import Button from "../../UI/Button";
 
 /**
- * @param {*} props : onClose
+ * @param {*} props : onClose,
  */
-const MachineAdd = (props) => {
+const MachineModify = (props) => {
 
 	/**Refs */
 	const eNameRef = React.useRef("");
@@ -52,7 +52,14 @@ const MachineAdd = (props) => {
 		setBodyPartKoreanName(bodyPartList);
 	}
 
-	//checkbox 선택된 bodyPart들을 String으로 반환하기.
+	const loadAndSetRef = async () => {
+		const id = props.id;
+		const response = await machineAPI(`/${id}`);
+		const machineData = response.data;
+		eNameRef.current.value = machineData.englishName;
+		kNameRef.current.value = machineData.koreanName;
+	}
+
 	const getBodyPartKoreanNameList = () => {
 		const checkedBodyPartKoreanNameList = bodyPartKoreanName.filter((bodyPart, index) => {
 			checkedBodyPart[index] === true;
@@ -67,6 +74,7 @@ const MachineAdd = (props) => {
 	//first render: bodyPartKoreanName 가져오기
 	React.useEffect(() => {
 		loadBodyPartKoreanName();
+		loadAndSetRef();
 	}, [])
 
 	/**
@@ -74,6 +82,10 @@ const MachineAdd = (props) => {
 	*/
 	const handleModalClose = (event) => {
 		props.onClose();
+	}
+
+	const handleMachineFile = (event) => {
+		setImageFile(event.target.files[0]);
 	}
 
 	const handleBodyPartCheckBox = (position) => {
@@ -87,6 +99,7 @@ const MachineAdd = (props) => {
 		event.preventDefault();
 
 		const checkedBodyPartKoreanNameList = getBodyPartKoreanNameList();
+
 		const machineData = {
 			englishName: eNameRef.current.value,
 			koreanName: kNameRef.current.value,
@@ -160,5 +173,5 @@ const MachineAdd = (props) => {
 	);
 };
 
-export default MachineAdd;
+export default MachineModify;
 

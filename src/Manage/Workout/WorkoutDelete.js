@@ -1,13 +1,14 @@
 import React from "react";
 import { workoutAPI } from "../../API/API";
 
+import Button from "../../UI/Button";
+
 /**
  *
  * @param {*} props : props.workout_id;
  * @returns
  */
 const WorkoutDelete = (props) => {
-
 	/**
 	 * Handler
 	 */
@@ -23,9 +24,8 @@ const WorkoutDelete = (props) => {
 
 	return (
 		<React.Fragment>
-			<button type="button" onClick={handleDeleteID}>삭제</button>
-			<br/>
-			<button type="button" onClick={handleModalClose}>취소</button>
+			<Button type="button" onClick={handleDeleteID}>삭제</Button>
+			<Button type="button" onClick={handleModalClose}>취소</Button>
 		</React.Fragment>
 	)
 };

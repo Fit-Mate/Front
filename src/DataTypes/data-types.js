@@ -32,7 +32,7 @@ export const workout_data = {
 
 export const machine_data = {
 	englishName: "",
-	koreanNamm: "",
+	koreanName: "",
 	bodyPartKoreanName: [],
 }
 

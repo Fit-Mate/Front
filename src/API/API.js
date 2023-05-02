@@ -49,6 +49,26 @@ export const workoutPutAPI = axios.create({
 
 
 /**
+ * Manage_Machine API
+ */
+export const machineAPI = axios.create({
+	baseURL: '/admin/machines'
+});
+
+export const machinePostAPI = axios.create({
+	method: 'post',
+	baseURL: '/admin/machines',
+	headers: {
+	},
+});
+
+export const machinePutAPI = axios.create({
+	method: 'put',
+	baseURL: '/admin/machines',
+});
+
+
+/**
  * Manage_BodyPart API
  */
 export const bodyPartAPI = axios.create({

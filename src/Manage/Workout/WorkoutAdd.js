@@ -58,6 +58,7 @@ const WorkoutAdd = (props) => {
 		setBodyPartKoreanName(bodyPartList);
 	}
 
+	//checkbox 선택된 bodyPart들을 String으로 반환하기.
 	const getBodyPartKoreanNameList = () => {
 		const checkedBodyPartKoreanNameList = bodyPartKoreanName.filter((bodyPart, index) => {
 			checkedBodyPart[index] === true;

@@ -2,16 +2,24 @@ import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import LoginContext from "../Contexts/login-context";
 
-const showIfLoggedIn = () => {
+
+//isAdmin이면 로그아웃만 할수있도록
+const ShowIfLoggedIn = (props) => {
+	const loginCtx = props.loginCtx;
+	const handleSignOut = (event) => {
+		loginCtx.setIsAdmin(false);
+		loginCtx.setIsLoggedIn(false);
+	}
+
 	return (
 		<div>
-			<NavLink index>로그아웃</NavLink>
-			<NavLink to="profile">회원 프로필 관리</NavLink>
+			<NavLink to="/" onClick={handleSignOut}>로그아웃</NavLink>
+			{!loginCtx.isAdmin && <NavLink to="profile">회원 프로필 관리</NavLink>}
 		</div>
 	);
 }
 
-const showIfNonMember= () => {
+const ShowIfNonMember = () => {
 	return (
 		<div>
 			<NavLink to="signIn">로그인</NavLink>
@@ -26,7 +34,9 @@ const RootLayout = (props) => {
 
 	return (
 		<div>
-			{loginCtx.isLoggedIn ? showIfLoggedIn() : showIfNonMember()}
+			{/*{loginCtx.isLoggedIn || loginCtx.isAdmin ? showIfLoggedIn(loginCtx.isAdmin) : showIfNonMember()}*/}
+			{(loginCtx.isLoggedIn || loginCtx.isAdmin) ?
+				<ShowIfLoggedIn loginCtx={loginCtx}/> : <ShowIfNonMember />}
 			<Outlet />
 		</div>
 	);

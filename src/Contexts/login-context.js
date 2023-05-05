@@ -1,13 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const LoginContext = createContext({
 	isLoggedIn: false,
-	setIsLoggedIn: () => { }
+	isAdmin: false,
+	setIsLoggedIn: () => { },
+	setIsAdmin: () => { }
 })
 
 export const LoginContextProvider = (props) => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const loginValue = { isLoggedIn: isLoggedIn, setIsLoggedIn: setIsLoggedIn };
+	const [isAdmin, setIsAdmin] = useState(true);
+	const loginValue = { isLoggedIn: isLoggedIn, setIsLoggedIn: setIsLoggedIn, isAdmin: isAdmin, setIsAdmin: setIsAdmin };
+
+	useEffect(()=>{console.log(isLoggedIn, isAdmin)}, [isLoggedIn, isAdmin]);
 
 	return (
 		<LoginContext.Provider value={loginValue}>

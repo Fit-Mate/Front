@@ -12,6 +12,7 @@ export const LoginContextProvider = (props) => {
 	const [isAdmin, setIsAdmin] = useState(true);
 	const loginValue = { isLoggedIn: isLoggedIn, setIsLoggedIn: setIsLoggedIn, isAdmin: isAdmin, setIsAdmin: setIsAdmin };
 
+	//root
 	useEffect(()=>{console.log(isLoggedIn, isAdmin)}, [isLoggedIn, isAdmin]);
 
 	return (

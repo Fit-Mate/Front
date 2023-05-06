@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "../UI/Modal";
 import { Form, redirect, NavLink, useActionData } from "react-router-dom";
 import { loginPostAPI } from "../API/API";
-import { responseInterceptor } from "http-proxy-middleware";
 import LoginContext from "../Contexts/login-context";
 
 const SignIn = (props) => {
@@ -56,8 +55,8 @@ export const signInAction = async ({ request }) => {
 		//cookie와 관련된 logic
 
 		//loginContext의 id에 저장.
-		const loginCtx = React.useContext(LoginContext);
-		loginCtx.setLoginId(submission.id);
+		//const loginCtx = React.useContext(LoginContext);
+		//loginCtx.setLoginId(submission.id);
 		return redirect('/');
 	}
 	else {

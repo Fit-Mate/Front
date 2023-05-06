@@ -84,3 +84,16 @@ export const bodyPartPutAPI = axios.create({
 	method: 'put',
 	baseURL: '/admin/bodyParts',
 });
+
+
+/**LoginInfo */
+export const loginPostAPI = axios.create({
+	method: 'post',
+	baseURL: '/login',
+});
+
+export const logoutPuuAPI= axios.create({
+	method: 'put',
+	baseURL: '/logout',
+});
+

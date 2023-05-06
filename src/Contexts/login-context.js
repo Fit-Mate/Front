@@ -10,7 +10,7 @@ const LoginContext = createContext({
 })
 
 export const LoginContextProvider = (props) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(true);
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [loginId, setLoginId] = useState("nonMember");
 	const loginValue = {

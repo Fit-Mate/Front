@@ -84,10 +84,10 @@ const SignUp = (props) => {
 							<label htmlFor="female">여성</label>
 						</fieldset>
 					</div>
-					<div >
+					{/*<div >
 						<label htmlFor="date">Date</label>
 						<input type='date' id="date" name="date" />
-					</div>
+					</div>*/}
 					<div >
 						<label htmlFor="height">height</label>
 						<input type='number' id="height" name="height" placeholder="height" />
@@ -96,7 +96,7 @@ const SignUp = (props) => {
 						<label htmlFor="weight">weight</label>
 						<input type='number' id="weight" name="weight" placeholder="weight" />
 					</div>
-					<div >
+					{/*<div >
 						<label htmlFor="upperBodyFat">upperBodyFat</label>
 						<input type='number' id="upperBodyFat" name="upperBodyFat" placeholder="upperBodyFat" />
 					</div>
@@ -111,7 +111,7 @@ const SignUp = (props) => {
 					<div >
 						<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
 						<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" placeholder="lowerMuscleMass" />
-					</div>
+					</div>*/}
 					<button>회원가입</button>
 					{data && data.error && <p>{data.error}</p>}
 				</Form>

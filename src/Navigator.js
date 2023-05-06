@@ -10,23 +10,25 @@ import {
 
 import Home from "./Pages/Home";
 import RootLayout from "./Layout/RootLayout";
-import NonMemberExerciseForm from "./Pages/NonMemberExerciseForm";
-import NonMemberSupplementForm from "./Pages/NonMemberSupplementForm";
+import NonMemberForm, { nonMemberFormAction } from "./Pages/NonMemberForm";
 import MemberProfile from "./Pages/MemberProfile";
 import SignIn, {signInAction} from "./Pages/SignIn";
 import SignUp, {signUpAction} from "./Pages/SignUp";
 import Manage_Main from "./Manage/Manage_Main";
+import ExerciseRecommendForm from "./Pages/Recommend/ExerciseRecommendForm";
+import SupplementRecommendForm from "./Pages/Recommend/SupplementRecommendForm";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
 		<Route path="/" element={<RootLayout />}>
 			<Route index element={<Home />} />
-			<Route path="nonMemberEform" element={<NonMemberExerciseForm/>} />
-			<Route path="nonMemberSform" element={<NonMemberSupplementForm />} />
+			<Route path="nonMemberform" element={<NonMemberForm/>} action={nonMemberFormAction} />
 			<Route path="profile" element={<MemberProfile />} />
 			<Route path="admin" element={<Manage_Main />} />
 			<Route path="signIn" element={<SignIn />} action={signInAction}/>
 			<Route path="signUp" element={<SignUp />} action={signUpAction}/>
+			<Route path="exerciseRecommend" element={<ExerciseRecommendForm />} />
+			<Route path="supplementRecommend" element={<SupplementRecommendForm />} />
 		</Route>
 	)
 );

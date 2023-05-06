@@ -36,6 +36,16 @@ export const machine_data = {
 	bodyPartKoreanName: [],
 }
 
+export const bodyData_data = {
+	date:"",
+	height: 0.0,
+	weight: 0.0,
+	upperBodyFat: 0.0,
+	lowerBodyFat: 0.0,
+	upperMuscleMass: 0.0,
+	lowerMuscleMass: 0.0
+}
+
 const deepCopy = (obj) => {
 	JSON.parse(JSON.stringify(obj));
 }

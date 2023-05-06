@@ -14,7 +14,7 @@ import NonMemberExerciseForm from "./Pages/NonMemberExerciseForm";
 import NonMemberSupplementForm from "./Pages/NonMemberSupplementForm";
 import MemberProfile from "./Pages/MemberProfile";
 import SignIn, {signInAction} from "./Pages/SignIn";
-import SignUp from "./Pages/SignUp";
+import SignUp, {signUpAction} from "./Pages/SignUp";
 import Manage_Main from "./Manage/Manage_Main";
 
 const router = createBrowserRouter(
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
 			<Route path="profile" element={<MemberProfile />} />
 			<Route path="admin" element={<Manage_Main />} />
 			<Route path="signIn" element={<SignIn />} action={signInAction}/>
-			<Route path="signUp" element={<SignUp />} />
+			<Route path="signUp" element={<SignUp />} action={signUpAction}/>
 		</Route>
 	)
 );

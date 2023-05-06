@@ -54,15 +54,12 @@ export const signInAction = async ({ request }) => {
 	if (responseStatus === "ok") {
 		//cookie와 관련된 logic
 
-		//loginContext의 id에 저장.
-		//const loginCtx = React.useContext(LoginContext);
-		//loginCtx.setLoginId(submission.id);
+		localStorage.setItem("loginId", submission.id);
 		return redirect('/');
 	}
 	else {
 		return { error: "Wrong login Info" };
 	}
-
 }
 
 export default SignIn;

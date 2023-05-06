@@ -7,7 +7,7 @@ import LoginContext from "../Contexts/login-context";
 
 const SignIn = (props) => {
 
-	//const data = useActionData();
+	const data = useActionData();
 	return (
 		<Modal>
 			<header>
@@ -25,7 +25,7 @@ const SignIn = (props) => {
 					</label>
 					<button>로그인</button>
 
-					{/*{data && data.error && <p>{data.error}</p>}*/}
+					{data && data.error && <p>{data.error}</p>}
 				</Form>
 			</main>
 			<footer>
@@ -49,20 +49,20 @@ export const signInAction = async ({ request }) => {
 	//없다면 없다고 띄워주기.
 
 	//post요청
-	//const response = await loginPostAPI.post("", submission);
+	const response = await loginPostAPI.post("", submission);
 	//ok / fail check
-	//const responseStatus = response.data;
-	//if (responseStatus === "ok") {
+	const responseStatus = response.data;
+	if (responseStatus === "ok") {
 		//cookie와 관련된 logic
 
 		//loginContext의 id에 저장.
-	//	const loginCtx = React.useContext(LoginContext);
-	//	loginCtx.setLoginId(submission.id);
-	//	return redirect('/');
-	//}
-	//else {
-	//	return { error: "Wrong login Info" };
-	//}
+		const loginCtx = React.useContext(LoginContext);
+		loginCtx.setLoginId(submission.id);
+		return redirect('/');
+	}
+	else {
+		return { error: "Wrong login Info" };
+	}
 
 }
 

@@ -25,7 +25,7 @@ const router = createBrowserRouter(
 			<Route path="nonMemberSform" element={<NonMemberSupplementForm />} />
 			<Route path="profile" element={<MemberProfile />} />
 			<Route path="admin" element={<Manage_Main />} />
-			{/*<Route path="signIn" element={<SignIn />} action={signInAction}/>*/}
+			<Route path="signIn" element={<SignIn />} action={signInAction}/>
 			<Route path="signUp" element={<SignUp />} />
 		</Route>
 	)

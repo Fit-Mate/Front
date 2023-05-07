@@ -11,9 +11,7 @@ import { bodyDataAPI } from "../../API/API";
 import classes from "../../Manage/css/Manage_Supplement.module.css"
 
 /** Component */
-import BodyDataModify from "./MemberBodyDataTable/BodyDataModify";
 import BodyDataDelete from "./MemberBodyDataTable/BodyDataDelete";
-import BodyDataAdd from "./MemberBodyDataTable/BodyDataAdd";
 
 /** UI */
 import Modal from "../../UI/Modal";
@@ -37,8 +35,6 @@ const MemberBodyDataTable = (props) => {
 	const [bodyDataId, setBodyDataId] = React.useState('');
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isDeleteClicked, setIsDeleteClicked] = React.useState(false);
-	const [isModifyClicked, setIsModifyClicked] = React.useState(false);
-	const [isAddClicked, setIsAddClicked] = React.useState(false);
 
 
 	/**
@@ -73,6 +69,7 @@ const MemberBodyDataTable = (props) => {
 					<th>lowerBodyFat</th>
 					<th>upperMuscleMass</th>
 					<th>lowerMuscleMass</th>
+					<th>삭제</th>
 				</tr>
 			</thead>
 		);
@@ -88,9 +85,6 @@ const MemberBodyDataTable = (props) => {
 					<td>{bodyData.lowerBodyFat}</td>
 					<td>{bodyData.upperMuscleMass}</td>
 					<td>{bodyData.lowerMuscleMass}</td>
-					<td>
-						<Button id={bodyData.id} onClick={handleModifyClicked}>수정</Button>
-					</td>
 					<td>
 						<Button id={bodyData.id} onClick={handleDeleteClicked}>삭제</Button>
 					</td>
@@ -108,27 +102,12 @@ const MemberBodyDataTable = (props) => {
 	 * Handler : Modal
 	 */
 	const handleModalClose = () => {
-		setIsModifyClicked(false);
 		setIsDeleteClicked(false);
-		setIsAddClicked(false);
 	}
 
 	const handleDeleteClicked = (event) => {
 		setBodyDataId(() => event.target.id);
 		setIsDeleteClicked(true);
-	}
-
-	const handleModifyClicked = async (event) => {
-		const id = event.target.id;
-		const response = await bodyDataAPI.get(`/${id}?cookie={${tempCookie}}`);
-		const fitData = { ...bodyData_data, ...response.data };
-		setBodyData(fitData);
-		setIsModifyClicked(true);
-		setBodyDataId(id);
-	}
-
-	const handleAddClicked = (event) => {
-		setIsAddClicked(true);
 	}
 
 	/**
@@ -159,7 +138,7 @@ const MemberBodyDataTable = (props) => {
 
 	React.useEffect(() => {
 		loadBodyDataBatch(1);
-	}, [isAddClicked, isDeleteClicked, isModifyClicked]);
+	}, [isDeleteClicked]);
 
 
 	/*	CHECKING bodyData */
@@ -171,22 +150,11 @@ const MemberBodyDataTable = (props) => {
 	return (
 		<Card>
 			<HeaderCard title="bodyData" />
-			{/*{isDeleteClicked &&
+			{isDeleteClicked &&
 				<Modal>
 					<BodyDataDelete id={bodyDataId} onClose={handleModalClose} />
 				</Modal>
 			}
-			{isAddClicked &&
-				<Modal>
-					<BodyDataAdd onClose={handleModalClose} />
-				</Modal>
-			}
-			{isModifyClicked &&
-				<Modal>
-					<BodyDataModify bodyData={bodyData} id={bodyDataId} onClose={handleModalClose} />
-				</Modal>
-			}*/}
-
 			<div className={classes["table-align"]}>
 				<table>
 					{makeTableHead(bodyData_data)}
@@ -196,7 +164,6 @@ const MemberBodyDataTable = (props) => {
 			<footer>
 				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
 				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
-				<Button id="add" onClick={handleAddClicked}>추가</Button>
 			</footer>
 		</Card>
 	);

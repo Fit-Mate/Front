@@ -141,12 +141,12 @@ export const bodyDataAPI = axios.create({
 
 export const bodyDataPostAPI= axios.create({
 	method: 'post',
-	baseURL: '/user',
+	baseURL: '/bodyData',
 });
 
 export const bodyDataDeleteAPI = axios.create({
 	method: 'post',
-	baseURL: '/user/delete',
+	baseURL: '/bodData/delete',
 });
 
 

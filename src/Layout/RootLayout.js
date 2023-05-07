@@ -6,9 +6,11 @@ import LoginContext from "../Contexts/login-context";
 //isAdmin이면 로그아웃만 할수있도록
 const ShowIfLoggedIn = (props) => {
 	const loginCtx = props.loginCtx;
+
 	const handleSignOut = (event) => {
 		loginCtx.setIsAdmin(false);
 		loginCtx.setIsLoggedIn(false);
+		localStorage.setItem("loginId", "");
 	}
 
 	return (

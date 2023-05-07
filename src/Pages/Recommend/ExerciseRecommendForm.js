@@ -205,7 +205,6 @@ const ExerciseRecommendForm = (props) => {
 					handleCheckedListOnChange={handleCheckedListOnChange}
 				/>
 				<button type='button' onClick={handleExercisePost}>제출</button>
-				<ExerciseRecommendCheckBox />
 			</main>
 		</div>
 	);

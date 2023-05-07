@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import LoginContext from "../Contexts/login-context";
 import MemberBodyDataSummary from "./MemberProfile/MemberBodyDataSummary";
@@ -48,6 +48,13 @@ const MemberHome = (props) => {
 
 const Home = (props) => {
 	const loginCtx = useContext(LoginContext);
+
+	useEffect(() => {
+		if (localStorage.getItem("loginId") !== ""){
+			loginCtx.setIsLoggedIn(true);
+			loginCtx.setLoginId(localStorage.getItem("loginId"));
+		}
+	}, [])
 
 	return (
 		<div>

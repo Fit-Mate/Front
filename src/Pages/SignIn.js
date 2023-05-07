@@ -39,7 +39,7 @@ export const signInAction = async ({ request }) => {
 	const data = await request.formData();
 
 	const submission = {
-		id: data.get('id'),
+		loginId: data.get('id'),
 		password: data.get('password'),
 	}
 	console.log(submission);
@@ -51,6 +51,7 @@ export const signInAction = async ({ request }) => {
 	const response = await loginPostAPI.post("", submission);
 	//ok / fail check
 	const responseStatus = response.data;
+	console.log(responseStatus)
 	if (responseStatus === "ok") {
 		//cookie와 관련된 logic
 

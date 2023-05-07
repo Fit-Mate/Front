@@ -15,6 +15,7 @@ const ShowIfLoggedIn = (props) => {
 		<div>
 			<NavLink to="/" onClick={handleSignOut}>로그아웃</NavLink>
 			{!loginCtx.isAdmin && <NavLink to="profile">회원 프로필 관리</NavLink>}
+			{!loginCtx.isAdmin && <NavLink to="/">홈</NavLink>}
 		</div>
 	);
 }

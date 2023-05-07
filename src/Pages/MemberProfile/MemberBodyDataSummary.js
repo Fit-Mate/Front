@@ -72,6 +72,7 @@ const MemberBodyDataSummary = (props) => {
 		setRecentBodyBatch(data);
 	}
 
+
 	/**useEffect */
 	React.useEffect(() => {
 		getRecent10BodyDatas();
@@ -93,6 +94,7 @@ const MemberBodyDataSummary = (props) => {
 		setChartArgs(chartParam)
 	}, [selectedBodyDataType])
 
+
 	return (
 		<Card>
 			<header>
@@ -109,7 +111,8 @@ const MemberBodyDataSummary = (props) => {
 				<Line data={chartArgs} />
 			</main>
 			<footer>
-				{isShowBodyDataManage && <MemberBodyDataManage />}
+				<button type='button' onClick={e=>setIsShowBodyDataManage(true)}>체성분 관리</button>
+				{isShowBodyDataManage && <MemberBodyDataManage onClick={setIsShowBodyDataManage}/>}
 			</footer>
 		</Card>
 	);

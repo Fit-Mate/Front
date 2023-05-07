@@ -13,7 +13,6 @@ const MemberProfile = (props) => {
 			</main>
 			<footer>
 				<MemberBodyDataSummary />
-				{/* NavLnk to bodydataPage */}
 			</footer>
 		</div>
 

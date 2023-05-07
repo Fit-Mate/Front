@@ -102,7 +102,6 @@ export const logoutPuuAPI= axios.create({
 /**
  * User API
  */
-
 export const userAPI = axios.create({
 	baseURL: '/user'
 });
@@ -131,5 +130,24 @@ export const userIdVerifyAPI = axios.create({
 	method: 'post',
 	baseURL: '/user/verify/id',
 });
+
+
+/**
+ * User API
+ */
+export const bodyDataAPI = axios.create({
+	baseURL: '/bodyData'
+});
+
+export const bodyDataPostAPI= axios.create({
+	method: 'post',
+	baseURL: '/user',
+});
+
+export const bodyDataDeleteAPI = axios.create({
+	method: 'post',
+	baseURL: '/user/delete',
+});
+
 
 

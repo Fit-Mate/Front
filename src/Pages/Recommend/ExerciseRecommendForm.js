@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router";
 import LoginContext from "../../Contexts/login-context";
+import { bodyDataAPI } from "../../API/API";
+import { bodyData_data } from "../../DataTypes/data-types";
 
 
 /**
@@ -10,23 +12,44 @@ import LoginContext from "../../Contexts/login-context";
  */
 const ExerciseRecommendForm = (props) => {
 
-	const location = useLocation();
-	const data = location.state.submission;
-	let bodyData;
 
-	//비회원일 경우
+	const getRecentBodyData = async (loginId, isLoggedIn) => {
+		let bodyData;
+		if (!isLoggedIn) {
+			//default 운동정보 생성 w/ submission 정보
+			const data = location.state.submission;
+			//임시 default정보 생성 : ...bodyData_data
+			bodyData = {
+				...bodyData_data,
+				...data,
+			};
+		}
+		else {
+			const recentBodyData = getRecentBodyData(loginId);
+			//임시 cookie :
+			bodyData = recentBodyData;
+			const cookie = "123";
+			const bodyData = await bodyDataAPI.get(`/recent?cookie={${cookie}}`);
+		}
+		return bodyData;
+	}
+
 	const loginCtx = useContext(LoginContext);
-	if (!loginCtx.isLoggedIn) {
-		//default 운동정보 생성 w/ submission 정보
+	const location = useLocation();
+	let bodyData = getRecentBodyData(loginCtx.loginId, loginCtx.isLoggedIn);
 
-	}
-	else {
+	/** form 보낼 때 bodyData 설정. */
+	//비회원일 경우
 
-	}
 
 
 	return (
-		<p>ExerciseRecommendForm</p>
+		<div>
+			<header> ExerciseRecommendForm </header>
+			<main>
+				{/*<ExerciseRecommendCheckBox />*/}
+			</main>
+		</div>
 	);
 
 };

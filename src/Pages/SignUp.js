@@ -133,15 +133,22 @@ export const signUpAction = async ({ request }) => {
 		loginId: data.get('loginId'),
 		password: data.get('password'),
 		sex: data.get('sex'),
-		date: data.get('date'),
-		height: data.get('height'),
-		weight: data.get('weight'),
-		upperBodyFat: data.get('upperBodyFat'),
-		lowerBodyFat: data.get('lowerBodyFat'),
-		upperMuscleMass: data.get('upperMuscleMass'),
-		lowerMuscleMass: data.get('lowerMuscleMass'),
-	}
+		date: "2023-01-01",
+		height: 0.0,
+		weight: 0.0,
+		upperBodyFat: 0.0,
+		lowerBodyFat: 0.0,
+		upperMuscleMass: 0.0,
+		lowerMuscleMass: 0.0,
 
+		//date: data.get('date'),
+		//height: data.get('height'),
+		//weight: data.get('weight'),
+		//upperBodyFat: data.get('upperBodyFat'),
+		//lowerBodyFat: data.get('lowerBodyFat'),
+		//upperMuscleMass: data.get('upperMuscleMass'),
+		//lowerMuscleMass: data.get('lowerMuscleMass'),
+	}
 	console.log(submission);
 	//아이디 중복검사
 	const verifyResponse = await userIdVerifyAPI(`/${submission.loginId}`);

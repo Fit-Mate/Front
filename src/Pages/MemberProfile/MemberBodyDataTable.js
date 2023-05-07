@@ -50,6 +50,7 @@ const MemberBodyDataTable = (props) => {
 				...obj,
 			}
 		})
+		console.log(fitData);
 		setBodyDataBatch(fitData);
 	}
 
@@ -79,6 +80,7 @@ const MemberBodyDataTable = (props) => {
 			return (
 				<tr key={bodyData.id}>
 					<td>{bodyData.date}</td>
+					<td>{bodyData.height}</td>
 					<td>{bodyData.weight}</td>
 					<td>{bodyData.upperBodyFat}</td>
 					<td>{bodyData.lowerBodyFat}</td>
@@ -106,6 +108,7 @@ const MemberBodyDataTable = (props) => {
 
 	const handleDeleteClicked = (event) => {
 		setBodyDataId(() => event.target.id);
+		console.log(bodyDataId);
 		setIsDeleteClicked(true);
 	}
 

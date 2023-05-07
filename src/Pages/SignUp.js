@@ -78,9 +78,9 @@ const SignUp = (props) => {
 					<div >
 						<fieldset>
 							<legend>성별</legend>
-							<input type='radio' id='male' name='sex' value="male" />
+							<input type='radio' id='male' name='sex' value="남성" />
 							<label htmlFor="male">남성</label>
-							<input type='radio' id='female' name='sex' value="female" />
+							<input type='radio' id='female' name='sex' value="여성" />
 							<label htmlFor="female">여성</label>
 						</fieldset>
 					</div>

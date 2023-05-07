@@ -13,8 +13,8 @@ import { userData_data } from "../../DataTypes/data-types";
 const MemberNameChangeModal = (props) => {
 
 	const putNameChange = async () => {
-		console.log()
 		const response = await userPutAPI("", {userName:props.userName});
+		console.log(response);
 	}
 	const handleSubmit = (event) => {
 		putNameChange();
@@ -45,6 +45,7 @@ const MemberPasswordChangeModal = (props) => {
 
 	const putPasswordChange = async () => {
 		const response = await userPasswordAPI("", { oldPassword: oldPassword, newPassword: newPassword });
+		console.log(`${response.data} putPsswordChange`);
 		if (response.data !== "ok") {
 			setCanPasswordChange(false);
 		}

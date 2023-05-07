@@ -81,11 +81,11 @@ const MemberBodyDataSummary = (props) => {
 	React.useEffect(() => {
 		changeBodyDataSets();
 		const chartParam = {
-			labels: selectedBodyDataYear,
+			labels: selectedBodyDataYear.reverse(),
 			datasets: [
 				{
 					label: selectedBodyDataType,
-					data: selectedBodyDatasets,
+					data: selectedBodyDatasets.reverse(),
 					backgroundColor: ["red", "green"]
 				}
 			]

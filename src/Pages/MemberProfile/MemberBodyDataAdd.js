@@ -8,19 +8,19 @@ const MemberBodyDataAdd = (props) => {
 	const [bodyDataDate, setBodyDataDate] = useState("2023-01-01");
 	const [bodyDataHeight, setBodyDataHeight] = useState(60.0);
 	const [bodyDataWeight, setBodyDataWeight] = useState(60.0);
-	const [bodyDataUpperBodyFat, setBodyDataUpperBodyFat] = useState(0.0);
-	const [bodyDataLowerBodyFat, setBodyDataLowerBodyFat] = useState(0.0);
-	const [bodyDataUpperMuscleMass, setBodyDataUpperMuscleMass] = useState(0.0);
-	const [bodyDataLowerMuscleMass, setBodyDataLowerMuscleMass] = useState(0.0);
+	const [bodyDataUpperBodyFat, setBodyDataUpperBodyFat] = useState(18);
+	const [bodyDataLowerBodyFat, setBodyDataLowerBodyFat] = useState(18);
+	const [bodyDataUpperMuscleMass, setBodyDataUpperMuscleMass] = useState(18);
+	const [bodyDataLowerMuscleMass, setBodyDataLowerMuscleMass] = useState(18);
 
 	/**function */
 	const clearBodyDataForm = () => {
 		setBodyDataWeight(60.0);
 		setBodyDataHeight(60.0);
-		setBodyDataUpperBodyFat(0.0);
-		setBodyDataLowerBodyFat(0.0);
-		setBodyDataUpperMuscleMass(0.0);
-		setBodyDataLowerMuscleMass(0.0);
+		setBodyDataUpperBodyFat(18);
+		setBodyDataLowerBodyFat(18);
+		setBodyDataUpperMuscleMass(18);
+		setBodyDataLowerMuscleMass(18);
 	}
 
 	/**API */
@@ -35,6 +35,7 @@ const MemberBodyDataAdd = (props) => {
 			lowerMuscleMass:bodyDataLowerMuscleMass
 		};
 		const response = await bodyDataPostAPI.post("", postData);
+		console.log(response);
 	}
 
 	/**handler */

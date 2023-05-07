@@ -81,6 +81,7 @@ const ExerciseRecommendForm = (props) => {
 	/**non-state */
 
 	/**state */
+	const [recentBodyData, setRecentBodyData] = useState({});
 	const [bodyPartList, setBodyPartList] = useState([]);
 	const [checkedBodyPartState, setCheckedBodyPartState] = useState([]);
 	const [checkedBodyPartList, setCheckedBodyPartList] = useState([]);
@@ -89,6 +90,11 @@ const ExerciseRecommendForm = (props) => {
 	const [checkedMachineList, setCheckedMachineList] = useState([]);
 
 	/**API */
+	const getRecentBodyData = async() => {
+		const recentResponse = await bodyDataAPI.get("/recent");
+		setRecentBodyData(recentResponse.data);
+	}
+
 	const getBodyPartList = async () => {
 		const bodyPartResponse = await nonAdminBodyPartAPI.get("/all");
 		const bodyParts = bodyPartResponse.data;
@@ -103,15 +109,17 @@ const ExerciseRecommendForm = (props) => {
 
 	const sendExerciseRecommendForm = async () => {
 		const exerciseRecommendFormat = {
-			bodyPartKoreanName:checkedBodyPartList,
-			machineKoreanName:checkedMachineList
+			bodyPartKoreanName: checkedBodyPartList,
+			machineKoreanName: checkedMachineList
 		};
 		const postResponse = await recommendWorkoutPostAPI.post(`/workout`);
 	}
 
 	/**useEffect */
+
 	//First Render : getBodyPartList
 	useEffect(() => {
+		getRecentBodyData();
 		getBodyPartList();
 		setCheckedBodyPartState(
 			new Array(bodyPartList.length).fill(false)
@@ -120,7 +128,7 @@ const ExerciseRecommendForm = (props) => {
 
 	//when BodypartState Changes (checkbox checked) => 이에 따라 machineList가 바뀌므로, request를 보내기 위해.
 	useEffect(() => {
-		const filteredBodyPartList = bodyPartList.filter((bodyPart, index)=>
+		const filteredBodyPartList = bodyPartList.filter((bodyPart, index) =>
 			checkedBodyPartState[index]
 		);
 		setCheckedBodyPartList(filteredBodyPartList);
@@ -135,20 +143,20 @@ const ExerciseRecommendForm = (props) => {
 	}, [checkedBodyPartList]);
 
 	//when MachineList is Checked, request를 보내기 위해
-	useEffect(() => {
-		const filteredMachinePartList = machineList.filter((machine, index) =>
-			checkedMachineState[index]
-		);
-		setCheckedMachineList(filteredMachinePartList);
-	}, [checkedMachineState]);
+	//useEffect(() => {
+	//	const filteredMachinePartList = machineList.filter((machine, index) =>
+	//		checkedMachineState[index]
+	//	);
+	//	setCheckedMachineList(filteredMachinePartList);
+	//}, [checkedMachineState]);
 
 	// checkedArray = checekdBodyList, checkedMachineList
-	const handleCheckedListOnChange = (position, checkedArray) => {
-		const updatedCheckedState = checkedArray.map((item, index) =>
-			index === position ? !item : item
-		);
-		setCheckedBodyPartState(updatedCheckedState);
-	};
+	//const handleCheckedListOnChange = (position, checkedArray) => {
+	//	const updatedCheckedState = checkedArray.map((item, index) =>
+	//		index === position ? !item : item
+	//	);
+	//	setCheckedBodyPartState(updatedCheckedState);
+	//};
 
 	const handleExercisePost = (event) => {
 		event.preventDefault();
@@ -158,29 +166,33 @@ const ExerciseRecommendForm = (props) => {
 	/**rendering function */
 
 	/**function */
-	const getRecentBodyData = async (loginId, isLoggedIn) => {
-		let bodyData;
-		if (!isLoggedIn) {
-			//default 운동정보 생성 w/ submission 정보
-			const data = location.state.submission;
-			//임시 default정보 생성 : ...bodyData_data
-			bodyData = {
-				...bodyData_data,
-				...data,
-			};
-		}
-		else {
-			const recentBodyData = getRecentBodyData(loginId);
-			//임시 cookie :
-			bodyData = recentBodyData;
-			const bodyData = await bodyDataAPI.get(`/recent`);
-		}
-		return bodyData;
-	}
+	//const getRecentBodyData = async (loginId, isLoggedIn) => {
+		//let bodyData;
+		//if (!isLoggedIn) {
+		//default 운동정보 생성 w/ submission 정보
+		//const data = location.state.submission;
+		//임시 default정보 생성 : ...bodyData_data
+		//bodyData = {
+		//...bodyData_data,
+		//...data,
+		//};
+		//}
+		//else {
+		//const recentBodyData = getRecentBodyData(loginId);
+		//임시 cookie :
+		//bodyData = recentBodyData;
+		//const bodyData = await bodyDataAPI.get(`/recent`);
+		//}
 
-	const loginCtx = useContext(LoginContext);
-	const location = useLocation();
-	let bodyData = getRecentBodyData(loginCtx.loginId, loginCtx.isLoggedIn);
+	//	const recentBodyData = getRecentBodyData(loginId);
+	//	//임시 cookie :
+	//	bodyData = recentBodyData;
+	//	const bodyData = await bodyDataAPI.get(`/recent`);
+	//	console.log(bodyData);
+	//	return bodyData;
+	//}
+
+
 
 	/** form 보낼 때 bodyData 설정. */
 
@@ -191,17 +203,17 @@ const ExerciseRecommendForm = (props) => {
 			<header> <h1>ExerciseRecommendForm </h1></header>
 			<main>
 				{/* bodyPartCheckbox render */}
-				<ShowBodyPartCheckbox
+				{/*<ShowBodyPartCheckbox
 					bodyPartList={bodyPartList}
 					checkedBodyPartState={checkedBodyPartState}
-					handleCheckedListOnChange={handleCheckedListOnChange}
-				/>
+					handleCheckedListOnChange={handleCheckedListOnChange}*/}
+				{/*/>*/}
 				{/* MachineCheckbox render */}
-				<ShowMachineCheckbox
+				{/*<ShowMachineCheckbox
 					machineList={machineList}
 					checkedMachineState={checkedMachineState}
 					handleCheckedListOnChange={handleCheckedListOnChange}
-				/>
+				/>*/}
 				<button type='button' onClick={handleExercisePost}>제출</button>
 			</main>
 		</div>

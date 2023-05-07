@@ -13,7 +13,8 @@ import { userData_data } from "../../DataTypes/data-types";
 const MemberNameChangeModal = (props) => {
 
 	const putNameChange = async () => {
-		const response = await userPutAPI("", props.userName);
+		console.log()
+		const response = await userPutAPI("", {userName:props.userName});
 	}
 	const handleSubmit = (event) => {
 		putNameChange();
@@ -98,7 +99,7 @@ const MemberInfo = (props) => {
 			...userData_data,
 			...memberInfoResponse.data
 		};
-		setId(memberInfo.id);
+		setId(memberInfo.loginId);
 		setUserName(memberInfo.userName);
 		setSex(memberInfo.sex);
 	}

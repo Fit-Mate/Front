@@ -14,9 +14,7 @@ const LinkToRecommendation = (props) => {
 				state={{ submission: submission }}>
 				Goto exerciseRecommend
 			</NavLink>
-			<NavLink
-				to="/supplementRecommend"
-				state={{ submission: submission }}>
+			<NavLink to="/supplementRecommend" >
 				Goto supplementRecommend
 			</NavLink>
 		</div>

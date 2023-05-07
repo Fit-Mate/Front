@@ -146,8 +146,27 @@ export const bodyDataPostAPI= axios.create({
 
 export const bodyDataDeleteAPI = axios.create({
 	method: 'post',
-	baseURL: '/bodData/delete',
+	baseURL: '/bodyData/delete',
 });
 
 
+/**
+ * Non-adminAPIs
+ */
+export const nonAdminBodyPartAPI = axios.create({
+	method: 'get',
+	baseURL: '/bodyParts',
+});
 
+export const nonAdminMachineAPI = axios.create({
+	method: 'post',
+	baseURL: '/machines',
+});
+
+/**
+ * RecommendationAPIs
+ */
+export const recommendWorkoutPostAPI = axios.create({
+	method: 'post',
+	baseURL: '/recommendation',
+});

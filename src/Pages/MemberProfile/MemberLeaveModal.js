@@ -20,9 +20,14 @@ const MemberLeaveModal = (props) => {
 		props.onClick(false);
 	}
 
+	const handleClose = () => {
+		props.onClick(false);
+	}
+
 	return (
 		<Modal>
 			<button type="button" onClick={handleLeave}>탈퇴하시겠습니까?</button>
+			<button type="button" onClick={handleClose}>닫기</button>
 		</Modal>
 	);
 

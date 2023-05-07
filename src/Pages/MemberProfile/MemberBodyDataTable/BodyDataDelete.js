@@ -19,7 +19,6 @@ import { bodyData_data } from "../../../DataTypes/data-types";
 const BodyPartDelete = (props) => {
 
 	/**non State */
-	const tempCookie="";
 	/**
 	 * Handler
 	 */
@@ -29,7 +28,7 @@ const BodyPartDelete = (props) => {
 
 	const handleDeleteID = async (event) => {
 		console.log(props.id);
-		const response = await bodyDataDeleteAPI.delete(`/${props.id}?cookie={${tempCookie}}`);
+		const response = await bodyDataDeleteAPI.delete(`/${props.id}`);
 		props.onClose();
 	}
 

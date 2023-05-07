@@ -79,7 +79,6 @@ const ShowMachineCheckbox = (props) => {
 const ExerciseRecommendForm = (props) => {
 
 	/**non-state */
-	const tempCookie="";
 
 	/**state */
 	const [bodyPartList, setBodyPartList] = useState([]);
@@ -107,7 +106,7 @@ const ExerciseRecommendForm = (props) => {
 			bodyPartKoreanName:checkedBodyPartList,
 			machineKoreanName:checkedMachineList
 		};
-		const postResponse = await recommendWorkoutPostAPI.post(`/workout?cookie={${tempCookie}}`);
+		const postResponse = await recommendWorkoutPostAPI.post(`/workout`);
 	}
 
 	/**useEffect */
@@ -174,8 +173,7 @@ const ExerciseRecommendForm = (props) => {
 			const recentBodyData = getRecentBodyData(loginId);
 			//임시 cookie :
 			bodyData = recentBodyData;
-			const cookie = "123";
-			const bodyData = await bodyDataAPI.get(`/recent?cookie={${cookie}}`);
+			const bodyData = await bodyDataAPI.get(`/recent`);
 		}
 		return bodyData;
 	}

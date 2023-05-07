@@ -24,7 +24,6 @@ const MemberBodyDataTable = (props) => {
 	 * Non State
 	 */
 	const dummy_bodyData_type = deepCopy(bodyData_data);
-	const tempCookie="";
 	/**
 	 * State
 	 * naviageButtonClicked===1:next, === -1:prev ===0:notClicked
@@ -44,7 +43,7 @@ const MemberBodyDataTable = (props) => {
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
 	const loadBodyDataBatch = async () => {
-		const bodyDataResponse = await bodyDataAPI.get(`/list/${currentPage}?cookie={${tempCookie}}`);
+		const bodyDataResponse = await bodyDataAPI.get(`/list/${currentPage}`);
 		const fitData = bodyDataResponse.data.map((obj) => {
 			return {
 				...bodyData_data,
@@ -117,7 +116,7 @@ const MemberBodyDataTable = (props) => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
 			return;
-		const response = await bodyDataAPI.get(`/list/${page}?cookie={${tempCookie}}`);
+		const response = await bodyDataAPI.get(`/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (response.data.length === 0) {
 			return;

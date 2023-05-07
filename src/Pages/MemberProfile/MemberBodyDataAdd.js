@@ -25,7 +25,6 @@ const MemberBodyDataAdd = (props) => {
 
 	/**API */
 	const addBodyData = async () => {
-		const tempCookie ="";
 		const postData = {
 			date:bodyDataDate,
 			height:bodyDataHeight,
@@ -35,7 +34,7 @@ const MemberBodyDataAdd = (props) => {
 			upperMuscleMass:bodyDataUpperMuscleMass,
 			lowerMuscleMass:bodyDataLowerMuscleMass
 		};
-		const response = await bodyDataPostAPI.post(`?cookie={${tempCookie}}`, postData);
+		const response = await bodyDataPostAPI.post("", postData);
 	}
 
 	/**handler */

@@ -66,8 +66,7 @@ const MemberBodyDataSummary = (props) => {
 	/**API */
 	//최근 10개 BodyData를 가져오는 API인데, 지금은 그냥 아무 BODYDATA 10개를 가져오는 APi로 설정.
 	const getRecent10BodyDatas = async () => {
-		const tempCookie = "";
-		const response = await bodyDataAPI(`/list/1?cookie={${tempCookie}}`);
+		const response = await bodyDataAPI(`/list/1`);
 		const data = response.data;
 		setRecentBodyBatch(data);
 	}

@@ -11,8 +11,7 @@ const MemberLeaveModal = (props) => {
 
 	/**API */
 	const leave = async () => {
-		const tempCookie="";
-		const response = await userDeleteAPI.post(`?cookie={${tempCookie}}`);
+		const response = await userDeleteAPI.post("");
 	}
 
 	const handleLeave = () => {

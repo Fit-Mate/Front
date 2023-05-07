@@ -13,8 +13,7 @@ import { userData_data } from "../../DataTypes/data-types";
 const MemberNameChangeModal = (props) => {
 
 	const putNameChange = async () => {
-		const tempCookie = "";
-		const response = await userPutAPI(`?cookie={${tempCookie}}`, props.userName);
+		const response = await userPutAPI("", props.userName);
 	}
 	const handleSubmit = (event) => {
 		putNameChange();
@@ -44,8 +43,7 @@ const MemberPasswordChangeModal = (props) => {
 	const [canPasswordChange, setCanPasswordChange] = useState(true);
 
 	const putPasswordChange = async () => {
-		const tempCookie = "";
-		const response = await userPasswordAPI(`?cookie={${tempCookie}}`, { oldPassword: oldPassword, newPassword: newPassword });
+		const response = await userPasswordAPI("", { oldPassword: oldPassword, newPassword: newPassword });
 		if (response.data !== "ok") {
 			setCanPasswordChange(false);
 		}
@@ -93,10 +91,9 @@ const MemberInfo = (props) => {
 	const [isLeaveClicked, setIsLeaveClicked] = React.useState(false);
 
 	/**nonState */
-	const tempCookie = "";
 	/**function */
 	const getMemberInfo = async () => {
-		const memberInfoResponse = await userAPI.get(`?cookie={${tempCookie}}`);
+		const memberInfoResponse = await userAPI.get("");
 		const memberInfo = {
 			...userData_data,
 			...memberInfoResponse.data
@@ -126,9 +123,9 @@ const MemberInfo = (props) => {
 
 	return (
 		<div>
-			{isNameChangeClicked && <MemberNameChangeModal cookie={tempCookie} onClick={setIsNameChangeClicked} setUserName={setUserName} userName={userName} />}
-			{isPasswordChangeClicked && <MemberPasswordChangeModal cookie={tempCookie} onClick={setIsPasswordChangeClicked} />}
-			{isLeaveClicked && <MemberLeaveModal cookie={tempCookie} onClick={setIsLeaveClicked} />}
+			{isNameChangeClicked && <MemberNameChangeModal onClick={setIsNameChangeClicked} setUserName={setUserName} userName={userName} />}
+			{isPasswordChangeClicked && <MemberPasswordChangeModal onClick={setIsPasswordChangeClicked} />}
+			{isLeaveClicked && <MemberLeaveModal onClick={setIsLeaveClicked} />}
 			<Card>
 				<header>
 					<h2>회원정보</h2>

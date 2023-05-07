@@ -68,11 +68,11 @@ const MemberPasswordChangeModal = (props) => {
 			<form onSubmit={handleSubmit}>
 				<div>
 					<label htmlFor="oldPassword">oldPassword</label>
-					<input type='text' id='oldPassword' name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
+					<input type='password' id='oldPassword' name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
 				</div>
 				<div>
 					<label htmlFor="newPassword">newPassword</label>
-					<input type='text' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+					<input type='password' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
 				</div>
 				<button type='submit'>저장</button>
 			</form>
@@ -139,13 +139,13 @@ const MemberInfo = (props) => {
 					</div>
 					<div>
 						userName <span>{`${userName}`}</span>
-						<button type='button' onClick={setIsNameChangeClicked}>이름 수정</button>
+						<button type='button' onClick={handleNameChangeClicked}>이름 수정</button>
 					</div>
 					<div>
 						sex <span>{`${sex}`}</span>
 					</div>
 					<button type='button' onClick={onLeaveClicked}>탈퇴</button>
-					<button type='button' onClick={setIsPasswordChangeClicked}>비밀번호 변경</button>
+					<button type='button' onClick={handlePasswordChangeClicked}>비밀번호 변경</button>
 				</main>
 			</Card>
 		</div>

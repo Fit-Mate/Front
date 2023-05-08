@@ -26,6 +26,7 @@ const MemberBodyDataSummary = (props) => {
 
 	/**function */
 	const changeBodyDataSets = () => {
+		let data;
 		const datasetYear = recentBodyBatch.map((dataset) => {
 			return (dataset.date);
 		});
@@ -35,32 +36,33 @@ const MemberBodyDataSummary = (props) => {
 			const datasets = recentBodyBatch.map((bodyData) => {
 				return (bodyData.weight);
 			});
-			setSelectedBodyDataSets(datasets);
+			data = [...datasets];
 		}
 		if (selectedBodyDataType === "upperBodyFat") {
 			const datasets = recentBodyBatch.map((bodyData) => {
 				return (bodyData.upperBodyFat);
 			});
-			setSelectedBodyDataSets(datasets);
+			data = [...datasets];
 		}
 		if (selectedBodyDataType === "lowerBodyFat") {
 			const datasets = recentBodyBatch.map((bodyData) => {
 				return (bodyData.lowerBodyFat);
 			});
-			setSelectedBodyDataSets(datasets);
+			data = [...datasets];
 		}
 		if (selectedBodyDataType === "upperMuscleMass") {
 			const datasets = recentBodyBatch.map((bodyData) => {
 				return (bodyData.upperMuscleMass);
 			});
-			setSelectedBodyDataSets(datasets);
+			data = [...datasets];
 		}
 		if (selectedBodyDataType === "lowerMuscleMass") {
 			const datasets = recentBodyBatch.map((bodyData) => {
 				return (bodyData.lowerMuscleMass);
 			});
-			setSelectedBodyDataSets(datasets);
+			data = [...datasets];
 		}
+		setSelectedBodyDataSets(data);
 	}
 
 	/**API */
@@ -68,7 +70,7 @@ const MemberBodyDataSummary = (props) => {
 	const getRecent10BodyDatas = async () => {
 		const response = await bodyDataAPI(`/list/1`);
 		const data = response.data;
-		setRecentBodyBatch(data);
+		setRecentBodyBatch((prev) => data);
 	}
 
 
@@ -76,10 +78,18 @@ const MemberBodyDataSummary = (props) => {
 	React.useEffect(() => {
 		getRecent10BodyDatas();
 		changeBodyDataSets();
-	}, [])
+	}, []);
 
 	React.useEffect(() => {
 		changeBodyDataSets();
+	}, [recentBodyBatch])
+
+
+	React.useEffect(() => {
+		changeBodyDataSets();
+	}, [selectedBodyDataType])
+
+	React.useEffect(() => {
 		const chartParam = {
 			labels: selectedBodyDataYear.reverse(),
 			datasets: [
@@ -90,15 +100,15 @@ const MemberBodyDataSummary = (props) => {
 				}
 			]
 		};
-		setChartArgs(chartParam)
-	}, [selectedBodyDataType])
+		setChartArgs((prev) => chartParam);
+	}, [selectedBodyDatasets])
 
 
 	return (
 		<Card>
 			<header>
 				<h2>MemberBodyDataSummary</h2>
-				<select value={selectedBodyDataType} onChange={e => setSelectedBodyDataType(e.target.value)}>
+				<select onChange={e => setSelectedBodyDataType(e.target.value)}>
 					<option value="weight">weight</option>
 					<option value="upperBodyFat">upperBodyFat</option>
 					<option value="lowerBodyFat">lowerBodyFat</option>

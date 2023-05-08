@@ -19,6 +19,12 @@ import { bodyData_data } from "../../../DataTypes/data-types";
 const BodyPartDelete = (props) => {
 
 	/**non State */
+
+	/**useEffect */
+	//React.useEffect(()=>{
+	//	console.log(props.id);
+	//}, [])
+
 	/**
 	 * Handler
 	 */
@@ -28,7 +34,7 @@ const BodyPartDelete = (props) => {
 
 	const handleDeleteID = async (event) => {
 		console.log(props.id);
-		const response = await bodyDataDeleteAPI.delete(`/${props.id}`);
+		const response = await bodyDataDeleteAPI.post(`/${props.id}`);
 		props.onClose();
 	}
 

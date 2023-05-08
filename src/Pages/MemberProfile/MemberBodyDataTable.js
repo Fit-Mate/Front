@@ -50,7 +50,6 @@ const MemberBodyDataTable = (props) => {
 				...obj,
 			}
 		})
-		console.log(fitData);
 		setBodyDataBatch(fitData);
 	}
 
@@ -76,6 +75,7 @@ const MemberBodyDataTable = (props) => {
 	}
 
 	const makeTableBodyElements = () => {
+		console.log(bodyDataBatch);
 		const columns = bodyDataBatch.map((bodyData) => {
 			return (
 				<tr key={bodyData.bodyDataId}>
@@ -87,7 +87,7 @@ const MemberBodyDataTable = (props) => {
 					<td>{bodyData.upperMuscleMass}</td>
 					<td>{bodyData.lowerMuscleMass}</td>
 					<td>
-						<Button id={bodyData.id} onClick={handleDeleteClicked}>삭제</Button>
+						<Button id={bodyData.bodyDataId} onClick={handleDeleteClicked}>삭제</Button>
 					</td>
 				</tr>
 			);
@@ -107,9 +107,7 @@ const MemberBodyDataTable = (props) => {
 	}
 
 	const handleDeleteClicked = (event) => {
-		setBodyDataId(() => event.target.id);
-		console.log(bodyDataId);
-		setIsDeleteClicked(true);
+		setBodyDataId((prev) => {setIsDeleteClicked(true); return event.target.id});
 	}
 
 	/**

@@ -151,9 +151,9 @@ export const signUpAction = async ({ request }) => {
 	}
 	console.log(submission);
 	//아이디 중복검사
-	const verifyResponse = await userIdVerifyAPI(`/${submission.loginId}`);
+	const verifyResponse = await userIdVerifyAPI.post(`/${submission.loginId}`);
 	if (verifyResponse.data !== "ok")
-		return { error: "Duplicate LoginId" };
+		return { error: "Login Error. Try Again" };
 	else {
 		const response = await userPostAPI.post("/", submission);
 		if (response.data === "ok") {

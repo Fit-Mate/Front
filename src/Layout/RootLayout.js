@@ -10,6 +10,7 @@ const ShowIfLoggedIn = (props) => {
 	const handleSignOut = (event) => {
 		loginCtx.setIsAdmin(false);
 		loginCtx.setIsLoggedIn(false);
+		loginCtx.setLoginId("");
 		localStorage.setItem("loginId", "");
 	}
 

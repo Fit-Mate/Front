@@ -3,16 +3,16 @@ import { createContext, useState, useEffect } from "react";
 const LoginContext = createContext({
 	isLoggedIn: false,
 	isAdmin: false,
-	loginId: "nonMember",
+	loginId: "",
 	setIsLoggedIn: () => { },
 	setIsAdmin: () => { },
 	setLoginId: () => { },
 })
 
 export const LoginContextProvider = (props) => {
-	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
-	const [loginId, setLoginId] = useState("nonMember");
+	const [loginId, setLoginId] = useState("");
 	const loginValue = {
 		isLoggedIn: isLoggedIn,
 		setIsLoggedIn: setIsLoggedIn,

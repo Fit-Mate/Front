@@ -96,22 +96,22 @@ const SignUp = (props) => {
 						<label htmlFor="weight">weight</label>
 						<input type='number' id="weight" name="weight" placeholder="weight" />
 					</div>
-					{/*<div >
+					<div >
 						<label htmlFor="upperBodyFat">upperBodyFat</label>
-						<input type='number' id="upperBodyFat" name="upperBodyFat" placeholder="upperBodyFat" />
+						<input type='number' id="upperBodyFat" name="upperBodyFat" value="15" />
 					</div>
 					<div >
 						<label htmlFor="lowerBodyFat">lowerBodyFat</label>
-						<input type='number' id="lowerBodyFat" name="lowerBodyFat" placeholder="lowerBodyFat" />
+						<input type='number' id="lowerBodyFat" name="lowerBodyFat" value="15" />
 					</div>
 					<div >
 						<label htmlFor="upperMuscleMass">upperMuscleMass</label>
-						<input type='number' id="upperMuscleMass" name="upperMuscleMass" placeholder="upperMuscleMass" />
+						<input type='number' id="upperMuscleMass" name="upperMuscleMass" value="15" />
 					</div>
 					<div >
 						<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
-						<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" placeholder="lowerMuscleMass" />
-					</div>*/}
+						<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" value="15"/>
+					</div>
 					<button>회원가입</button>
 					{data && data.error && <p>{data.error}</p>}
 				</Form>
@@ -133,21 +133,13 @@ export const signUpAction = async ({ request }) => {
 		loginId: data.get('loginId'),
 		password: data.get('password'),
 		sex: data.get('sex'),
-		date: "2023-01-01",
-		height: 0.0,
-		weight: 0.0,
-		upperBodyFat: 0.0,
-		lowerBodyFat: 0.0,
-		upperMuscleMass: 0.0,
-		lowerMuscleMass: 0.0,
-
-		//date: data.get('date'),
-		//height: data.get('height'),
-		//weight: data.get('weight'),
-		//upperBodyFat: data.get('upperBodyFat'),
-		//lowerBodyFat: data.get('lowerBodyFat'),
-		//upperMuscleMass: data.get('upperMuscleMass'),
-		//lowerMuscleMass: data.get('lowerMuscleMass'),
+		date: new Date(),
+		height: data.get('height'),
+		weight: data.get('weight'),
+		upperBodyFat: data.get('upperBodyFat'),
+		lowerBodyFat: data.get('lowerBodyFat'),
+		upperMuscleMass: data.get('upperMuscleMass'),
+		lowerMuscleMass: data.get('lowerMuscleMass')
 	}
 	console.log(submission);
 	//아이디 중복검사
@@ -155,7 +147,7 @@ export const signUpAction = async ({ request }) => {
 	if (verifyResponse.data !== "ok")
 		return { error: "Login Error. Try Again" };
 	else {
-		const response = await userPostAPI.post("/", submission);
+		const response = await userPostAPI.post("", submission);
 		if (response.data === "ok") {
 			return redirect('/');
 		}

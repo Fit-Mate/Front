@@ -13,8 +13,7 @@ import { userData_data } from "../../DataTypes/data-types";
 const MemberNameChangeModal = (props) => {
 
 	const putNameChange = async () => {
-		const response = await userPutAPI("", {userName:props.userName});
-		console.log(response);
+		const response = await userPutAPI.put("", {userName:props.userName});
 	}
 	const handleSubmit = (event) => {
 		putNameChange();
@@ -44,7 +43,7 @@ const MemberPasswordChangeModal = (props) => {
 	const [canPasswordChange, setCanPasswordChange] = useState(true);
 
 	const putPasswordChange = async () => {
-		const response = await userPasswordAPI("", { oldPassword: oldPassword, newPassword: newPassword });
+		const response = await userPasswordAPI.post("", { oldPassword: oldPassword, newPassword: newPassword });
 		console.log(`${response.data} putPsswordChange`);
 		if (response.data !== "ok") {
 			setCanPasswordChange(false);
@@ -108,7 +107,7 @@ const MemberInfo = (props) => {
 	/**useEffect */
 	React.useEffect(() => {
 		getMemberInfo();
-	}, [])
+	}, []);
 
 	/**handler */
 	const handleNameChangeClicked = (props) => {

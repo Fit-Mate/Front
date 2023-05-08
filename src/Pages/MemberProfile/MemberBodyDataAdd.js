@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import Card from "../../UI/Card";
-import {bodyDataPostAPI} from "../../API/API";
+import { bodyDataPostAPI } from "../../API/API";
 
+/**
+ *
+ * @param {*} props : setIsAddClicked={setIsAddClicked}
+ * @returns
+ */
 const MemberBodyDataAdd = (props) => {
 
 	/**state */
@@ -15,6 +20,15 @@ const MemberBodyDataAdd = (props) => {
 
 	/**function */
 	const clearBodyDataForm = () => {
+		setBodyDataDate((prev) => {
+			const dateObj = new Date(prev);
+			dateObj.setDate(dateObj.getDate() + 1);
+			const year = dateObj.getFullYear();
+			const month = dateObj.getMonth() + 1;
+			const date = dateObj.getDate();
+
+			return (`${year}-${month >= 10 ? month : '0' + month}-${date >= 10 ? date : '0' + date}`);
+		})
 		setBodyDataWeight(60.0);
 		setBodyDataHeight(60.0);
 		setBodyDataUpperBodyFat(18);
@@ -26,21 +40,20 @@ const MemberBodyDataAdd = (props) => {
 	/**API */
 	const addBodyData = async () => {
 		const postData = {
-			date:bodyDataDate,
-			height:bodyDataHeight,
-			weight:bodyDataWeight,
-			upperBodyFat:bodyDataUpperBodyFat,
-			lowerBodyFat:bodyDataLowerBodyFat,
-			upperMuscleMass:bodyDataUpperMuscleMass,
-			lowerMuscleMass:bodyDataLowerMuscleMass
+			date: bodyDataDate,
+			height: bodyDataHeight,
+			weight: bodyDataWeight,
+			upperBodyFat: bodyDataUpperBodyFat,
+			lowerBodyFat: bodyDataLowerBodyFat,
+			upperMuscleMass: bodyDataUpperMuscleMass,
+			lowerMuscleMass: bodyDataLowerMuscleMass
 		};
 		const response = await bodyDataPostAPI.post("", postData);
-		console.log(response);
 	}
 
 	/**handler */
 	const handleBodyDataAdd = (event) => {
-		event.preventDefault();
+		props.setIsAddClicked((prev) => !prev);
 		addBodyData();
 		clearBodyDataForm();
 	}

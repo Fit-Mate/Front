@@ -75,7 +75,6 @@ const MemberBodyDataTable = (props) => {
 	}
 
 	const makeTableBodyElements = () => {
-		console.log(bodyDataBatch);
 		const columns = bodyDataBatch.map((bodyData) => {
 			return (
 				<tr key={bodyData.bodyDataId}>

@@ -9,6 +9,7 @@ import MemberBodyDataTable from "./MemberBodyDataTable";
  */
 const MemberBodyDataManage = (props) => {
 
+	const [isAddClicked, setIsAddClicked] = React.useState(false);
 	return (
 		<div>
 			<header>
@@ -16,7 +17,7 @@ const MemberBodyDataManage = (props) => {
 			</header>
 			<main>
 				{/* 정보 추가 */}
-				<MemberBodyDataAdd />
+				<MemberBodyDataAdd setIsAddClicked={setIsAddClicked}/>
 				{/* 정보 조회 */}
 				<MemberBodyDataTable />
 			</main>

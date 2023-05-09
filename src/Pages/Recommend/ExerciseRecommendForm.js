@@ -126,6 +126,7 @@ const ExerciseRecommendForm = (props) => {
 		getBodyPartList();
 	}, []);
 
+
 	//first Render시 bodyPartList에 대한 checker를 생성.
 	useEffect(() => {
 		const newArray = new Array(bodyPartList.length).fill(false);
@@ -148,6 +149,9 @@ const ExerciseRecommendForm = (props) => {
 			const isTrueInvolved = checkedBodyPartState.reduce((accumulator, currentValue) => accumulator || currentValue);
 			if (isTrueInvolved) {
 				getMachineList();
+			}
+			else {
+				setMachineList([]);
 			}
 		}
 	}, [checkedBodyPartList]);

@@ -115,7 +115,8 @@ const ExerciseRecommendForm = (props) => {
 			bodyPartKoreanName: checkedBodyPartList,
 			machineKoreanName: checkedMachineList
 		};
-		const postResponse = await recommendWorkoutPostAPI.post(`/workout`);
+		const postResponse = await recommendWorkoutPostAPI.post(`/workout`, exerciseRecommendFormat);
+		console.log(postResponse);
 	}
 
 	/**useEffect */

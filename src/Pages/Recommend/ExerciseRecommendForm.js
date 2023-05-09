@@ -3,6 +3,7 @@ import { useLocation } from "react-router";
 import LoginContext from "../../Contexts/login-context";
 import { bodyDataAPI, nonAdminBodyPartAPI, nonAdminMachineAPI, recommendWorkoutPostAPI } from "../../API/API";
 import { bodyData_data } from "../../DataTypes/data-types";
+import Card from "../../UI/Card"
 
 
 /**
@@ -15,25 +16,32 @@ const ShowBodyPartCheckbox = (props) => {
 	const handleCheckedListOnChange = props.handleCheckedListOnChange;
 
 	return (
-		<ul>
-			{bodyPartList.map((bodyPart, index) => {
-				return (
-					<li key={index}>
-						<div>
-							<input
-								type='checkbox'
-								id={`bodyPartCheckbox${index}`}
-								name={bodyPart}
-								value={bodyPart}
-								//checked={checkedBodyPartState[index]}
-								onChange={() => handleCheckedListOnChange(index, checkedBodyPartState, "bodyPart")}
-							/>
-							<label htmlFor={`bodyPartCheckbox${index}`}>{bodyPart}</label>
-						</div>
-					</li>
-				);
-			})}
-		</ul>
+		<Card>
+			<header>
+				<h2>운동 부위 선택</h2>
+			</header>
+			<section>
+				<ul>
+					{bodyPartList.map((bodyPart, index) => {
+						return (
+							<li key={index}>
+								<div>
+									<input
+										type='checkbox'
+										id={`bodyPartCheckbox${index}`}
+										name={bodyPart}
+										value={bodyPart}
+										//checked={checkedBodyPartState[index]}
+										onChange={() => handleCheckedListOnChange(index, checkedBodyPartState, "bodyPart")}
+									/>
+									<label htmlFor={`bodyPartCheckbox${index}`}>{bodyPart}</label>
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			</section>
+		</Card>
 	);
 }
 
@@ -48,25 +56,32 @@ const ShowMachineCheckbox = (props) => {
 	const handleCheckedListOnChange = props.handleCheckedListOnChange;
 
 	return (
-		<ul>
-			{machineList.map((machine, index) => {
-				return (
-					<li key={index}>
-						<div>
-							<input
-								type='checkbox'
-								id={`machineCheckbox${index}`}
-								name={machine}
-								value={machine}
-								//checked={checkedMachineState[index]}
-								onChange={() => handleCheckedListOnChange(index, checkedMachineState, "machine")}
-							/>
-							<label htmlFor={`machineCheckbox${index}`}>{machine}</label>
-						</div>
-					</li>
-				);
-			})}
-		</ul>
+		<Card>
+			<header>
+				<h2>운동 부위에 따른 기구 선택</h2>
+			</header>
+			<section>
+				<ul>
+					{machineList.map((machine, index) => {
+						return (
+							<li key={index}>
+								<div>
+									<input
+										type='checkbox'
+										id={`machineCheckbox${index}`}
+										name={machine}
+										value={machine}
+										//checked={checkedMachineState[index]}
+										onChange={() => handleCheckedListOnChange(index, checkedMachineState, "machine")}
+									/>
+									<label htmlFor={`machineCheckbox${index}`}>{machine}</label>
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			</section>
+		</Card>
 	);
 }
 

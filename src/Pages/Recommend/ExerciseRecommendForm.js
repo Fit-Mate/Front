@@ -25,7 +25,7 @@ const ShowBodyPartCheckbox = (props) => {
 								id={`checkbox${index}`}
 								name={bodyPart}
 								value={bodyPart}
-								checked={checkedBodyPartState[index]}
+								//checked={checkedBodyPartState[index]}
 								onChange={() => handleCheckedListOnChange(index, checkedBodyPartState)}
 							/>
 							<label htmlFor={`checkbox${index}`}>{bodyPart}</label>
@@ -46,6 +46,7 @@ const ShowMachineCheckbox = (props) => {
 	const machineList = props.machineList;
 	const checkedMachineState = props.checkedMachineState;
 	const handleCheckedListOnChange = props.handleCheckedListOnChange;
+	console.log(machineList);
 
 	return (
 		<ul>
@@ -58,7 +59,7 @@ const ShowMachineCheckbox = (props) => {
 								id={`checkbox${index}`}
 								name={machine}
 								value={machine}
-								checked={checkedMachineState[index]}
+								//checked={checkedMachineState[index]}
 								onChange={() => handleCheckedListOnChange(index, checkedMachineState)}
 							/>
 							<label htmlFor={`checkbox${index}`}>{machine}</label>
@@ -90,20 +91,23 @@ const ExerciseRecommendForm = (props) => {
 	const [checkedMachineList, setCheckedMachineList] = useState([]);
 
 	/**API */
-	const getRecentBodyData = async() => {
+	const getRecentBodyData = async () => {
 		const recentResponse = await bodyDataAPI.get("/recent");
 		setRecentBodyData(recentResponse.data);
 	}
 
 	const getBodyPartList = async () => {
 		const bodyPartResponse = await nonAdminBodyPartAPI.get("/all");
-		const bodyParts = bodyPartResponse.data.map((bodyPart) => bodyPart.koreanName);
+		const data = bodyPartResponse.data.bodyPartKoreanName;
+		const bodyParts = data.map((bodyPart) => bodyPart.koreanName);
 		setBodyPartList(bodyParts);
 	}
 
 	const getMachineList = async () => {
-		const machineResponse = await nonAdminMachineAPI.post("/list", checkedBodyPartList);
-		const machines = machineResponse.data;
+		const requestBody = {bodyPartKoreanName: checkedBodyPartList};
+		const machineResponse = await nonAdminMachineAPI.post("/list", requestBody);
+		const machineObjList = machineResponse.data;
+		const machines = machineObjList.map((machineObj) => machineObj.koreanName);
 		setMachineList(machines);
 	}
 
@@ -125,8 +129,10 @@ const ExerciseRecommendForm = (props) => {
 
 	//first Render시 bodyPartList에 대한 checker를 생성.
 	useEffect(() => {
+		const newArray = new Array(bodyPartList.length).fill(false);
+
 		setCheckedBodyPartState(
-			new Array(bodyPartList.length).fill(false)
+			newArray
 		)
 	}, [bodyPartList]);
 
@@ -138,9 +144,16 @@ const ExerciseRecommendForm = (props) => {
 		setCheckedBodyPartList(filteredBodyPartList);
 	}, [checkedBodyPartState]);
 
-	//getMachineList based on checkedBodyPartList
+	//getMachineList based on checkedBodyPartList. checkedBodyPartList중에 true가 있을때만 반환하기.
 	useEffect(() => {
-		getMachineList();
+		if (checkedBodyPartState.length !== 0) {
+			const isTrueInvolved = checkedBodyPartState.reduce((accumulator, currentValue) => accumulator || currentValue);
+			//console.log(checkedBodyPartState);
+			//console.log(isTrueInvolved);
+			if (isTrueInvolved) {
+				getMachineList();
+			}
+		}
 	}, [checkedBodyPartList]);
 
 	//machineList가 바뀌면 checkedMachineState를 새로 만들어줌.
@@ -151,12 +164,12 @@ const ExerciseRecommendForm = (props) => {
 	}, [machineList])
 
 	//when MachineList is Checked, request를 보내기 위해
-	//useEffect(() => {
-	//	const filteredMachinePartList = machineList.filter((machine, index) =>
-	//		checkedMachineState[index]
-	//	);
-	//	setCheckedMachineList(filteredMachinePartList);
-	//}, [checkedMachineState]);
+	useEffect(() => {
+		const filteredMachinePartList = machineList.filter((machine, index) =>
+			checkedMachineState[index]
+		);
+		setCheckedMachineList(filteredMachinePartList);
+	}, [checkedMachineState]);
 
 	// checkedArray = checekdBodyList, checkedMachineList
 	const handleCheckedListOnChange = (position, checkedArray) => {
@@ -216,11 +229,11 @@ const ExerciseRecommendForm = (props) => {
 					handleCheckedListOnChange={handleCheckedListOnChange}
 				/>
 				{/* MachineCheckbox render */}
-				{/*<ShowMachineCheckbox
+				<ShowMachineCheckbox
 					machineList={machineList}
 					checkedMachineState={checkedMachineState}
 					handleCheckedListOnChange={handleCheckedListOnChange}
-				/>*/}
+				/>
 				<button type='button' onClick={handleExercisePost}>제출</button>
 			</main>
 		</div>

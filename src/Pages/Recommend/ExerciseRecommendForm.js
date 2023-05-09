@@ -22,13 +22,13 @@ const ShowBodyPartCheckbox = (props) => {
 						<div>
 							<input
 								type='checkbox'
-								id={`checkbox${index}`}
+								id={`bodyPartCheckbox${index}`}
 								name={bodyPart}
 								value={bodyPart}
 								//checked={checkedBodyPartState[index]}
-								onChange={() => handleCheckedListOnChange(index, checkedBodyPartState)}
+								onChange={() => handleCheckedListOnChange(index, checkedBodyPartState, "bodyPart")}
 							/>
-							<label htmlFor={`checkbox${index}`}>{bodyPart}</label>
+							<label htmlFor={`bodyPartCheckbox${index}`}>{bodyPart}</label>
 						</div>
 					</li>
 				);
@@ -46,7 +46,6 @@ const ShowMachineCheckbox = (props) => {
 	const machineList = props.machineList;
 	const checkedMachineState = props.checkedMachineState;
 	const handleCheckedListOnChange = props.handleCheckedListOnChange;
-	console.log(machineList);
 
 	return (
 		<ul>
@@ -56,13 +55,13 @@ const ShowMachineCheckbox = (props) => {
 						<div>
 							<input
 								type='checkbox'
-								id={`checkbox${index}`}
+								id={`machineCheckbox${index}`}
 								name={machine}
 								value={machine}
 								//checked={checkedMachineState[index]}
-								onChange={() => handleCheckedListOnChange(index, checkedMachineState)}
+								onChange={() => handleCheckedListOnChange(index, checkedMachineState, "machine")}
 							/>
-							<label htmlFor={`checkbox${index}`}>{machine}</label>
+							<label htmlFor={`machineCheckbox${index}`}>{machine}</label>
 						</div>
 					</li>
 				);
@@ -104,7 +103,7 @@ const ExerciseRecommendForm = (props) => {
 	}
 
 	const getMachineList = async () => {
-		const requestBody = {bodyPartKoreanName: checkedBodyPartList};
+		const requestBody = { bodyPartKoreanName: checkedBodyPartList };
 		const machineResponse = await nonAdminMachineAPI.post("/list", requestBody);
 		const machineObjList = machineResponse.data;
 		const machines = machineObjList.map((machineObj) => machineObj.koreanName);
@@ -130,7 +129,6 @@ const ExerciseRecommendForm = (props) => {
 	//first Render시 bodyPartList에 대한 checker를 생성.
 	useEffect(() => {
 		const newArray = new Array(bodyPartList.length).fill(false);
-
 		setCheckedBodyPartState(
 			newArray
 		)
@@ -148,8 +146,6 @@ const ExerciseRecommendForm = (props) => {
 	useEffect(() => {
 		if (checkedBodyPartState.length !== 0) {
 			const isTrueInvolved = checkedBodyPartState.reduce((accumulator, currentValue) => accumulator || currentValue);
-			//console.log(checkedBodyPartState);
-			//console.log(isTrueInvolved);
 			if (isTrueInvolved) {
 				getMachineList();
 			}
@@ -165,18 +161,25 @@ const ExerciseRecommendForm = (props) => {
 
 	//when MachineList is Checked, request를 보내기 위해
 	useEffect(() => {
-		const filteredMachinePartList = machineList.filter((machine, index) =>
+		const filteredMachineList = machineList.filter((machine, index) =>
 			checkedMachineState[index]
 		);
-		setCheckedMachineList(filteredMachinePartList);
+		setCheckedMachineList(filteredMachineList);
 	}, [checkedMachineState]);
 
-	// checkedArray = checekdBodyList, checkedMachineList
-	const handleCheckedListOnChange = (position, checkedArray) => {
+
+	/**function */
+	// checkedArray = checekdBodyList, checkedMachineList, checkType:"bodyPart", "machine"
+	const handleCheckedListOnChange = (position, checkedArray, checkType) => {
 		const updatedCheckedState = checkedArray.map((item, index) =>
 			index === position ? !item : item
 		);
-		setCheckedBodyPartState(updatedCheckedState);
+		if (checkType === "bodyPart") {
+			setCheckedBodyPartState(updatedCheckedState);
+		}
+		else if (checkType === "machine") {
+			setCheckedMachineState(updatedCheckedState);
+		}
 	};
 
 	const handleExercisePost = (event) => {

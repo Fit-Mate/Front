@@ -5,6 +5,8 @@ import { bodyDataAPI, nonAdminBodyPartAPI, nonAdminMachineAPI, recommendWorkoutP
 import { bodyData_data } from "../../DataTypes/data-types";
 import Card from "../../UI/Card"
 
+import ExerciseRecommend from "./ExerciseRecommend";
+import RecentBodyDataModal from "./RecentBodyDataModal";
 
 /**
  * Rendering Checkbox of BodyPartList Dynamically
@@ -96,6 +98,11 @@ const ExerciseRecommendForm = (props) => {
 	/**non-state */
 
 	/**state */
+	const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+	const [workoutRecommendationId, setWorkoutRecommendationId] = useState(-1);
+
+	const [isShowRecentBodyDataClicked, setIsShowRecentBodyDataClicked] = useState(false);
+
 	const [recentBodyData, setRecentBodyData] = useState({});
 	const [bodyPartList, setBodyPartList] = useState([]);
 	const [checkedBodyPartState, setCheckedBodyPartState] = useState([]);
@@ -131,7 +138,8 @@ const ExerciseRecommendForm = (props) => {
 			machineKoreanName: checkedMachineList
 		};
 		const postResponse = await recommendWorkoutPostAPI.post(`/workout`, exerciseRecommendFormat);
-		console.log(postResponse);
+		const recId = postResponse.data.workoutRecommendationId;
+		setWorkoutRecommendationId(recId);
 	}
 
 	/**useEffect */
@@ -204,7 +212,12 @@ const ExerciseRecommendForm = (props) => {
 
 	const handleExercisePost = (event) => {
 		event.preventDefault();
+		setIsSubmitClicked(true);
 		sendExerciseRecommendForm();
+	}
+
+	const handleShowRecentBodyDataClicked = () => {
+		setIsShowRecentBodyDataClicked(true);
 	}
 
 	/**rendering function */
@@ -258,6 +271,19 @@ const ExerciseRecommendForm = (props) => {
 					handleCheckedListOnChange={handleCheckedListOnChange}
 				/>
 				<button type='button' onClick={handleExercisePost}>제출</button>
+				<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
+
+				{isShowRecentBodyDataClicked &&
+					<RecentBodyDataModal
+						recentBodyData={recentBodyData}
+						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
+					/>
+				}
+				{isSubmitClicked &&
+					<ExerciseRecommend
+						workoutRecommendationId={workoutRecommendationId}
+						setIsSubmitClicked={setIsSubmitClicked}
+					/>}
 			</main>
 		</div>
 	);

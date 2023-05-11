@@ -197,3 +197,13 @@ export const recommendWorkoutPostAPI = axios.create({
 	baseURL: '/recommendation',
 	withCredentials: true
 });
+
+export const recommendWorkoutHistoryAPI= axios.create({
+	baseURL: '/recommendation/workout/history',
+	withCredentials: true
+});
+
+export const recommendSupplementHistoryAPI= axios.create({
+	baseURL: '/recommendation/supplement/history',
+	withCredentials: true
+});

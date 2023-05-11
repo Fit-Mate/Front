@@ -60,6 +60,37 @@ export const userData_data = {
 	lowerMuscleMass: 0.0
 }
 
+export const workoutRecommendationBody_data = {
+	workoutName: "",
+	videoLink: "",
+	description: ""
+}
+
+export const workoutRecommendHistory_data = {
+	workoutRecommendationId: 0,
+	date: "2023-01-01",
+	question: "",
+	recommendationBody: []
+}
+
+export const supplementRecommendationBody_data = {
+	id: 0,
+	englishName: "",
+	koreanName: "",
+	price: 0,
+	servings: 0,
+	flavor: 0,
+	description: "",
+	koreanRecommendation: "",
+}
+
+export const supplementRecommendHistory_data = {
+	supplementRecommendationId: 0,
+	date: "2023-01-01",
+	question: "",
+	recommendationBody: supplementRecommendationBody,
+}
+
 const deepCopy = (obj) => {
 	JSON.parse(JSON.stringify(obj));
 }

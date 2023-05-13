@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "../../../UI/Card";
-import { userSupplementAPI } from "../../../API/API";
+import { userSupplementAPI, userSupplementImageAPI } from "../../../API/API";
+
+import { Buffer } from "buffer";
 
 /**
  *
@@ -50,12 +52,14 @@ const SupplementHistory = (props) => {
 	/**function */
 	const getSupplementInfo = async () => {
 		const response = await userSupplementAPI.get(`/${props.history.id}`);
-		const res = await userSupplementAPI.get(`/image/${props.history.id}`);
-		let result = (res && res.data) || [];
+		const imageRes = await userSupplementImageAPI.get(`/image/${props.history.id}`);
+		let result = (imageRes && imageRes.data) || [];
 		console.log(result);
 		setSupplementInfo(response.data);
-		setSupplementImage(result);
 
+		let base64ImageString = Buffer.from(imageRes.data, 'binary').toString('base64');
+		let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
+		setSupplementImage(srcValue);
 	}
 
 	useEffect(()=>{
@@ -67,7 +71,7 @@ const SupplementHistory = (props) => {
 			<div>
 				<div>
 					<p>image</p>
-					 <img src={`data:image/png;base64,${supplementImage}`} />
+					 <img src={supplementImage} />
 				</div>
 				<p>id: {props.history.id}</p>
 				<p>englishName: {props.history.englishName}</p>

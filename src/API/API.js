@@ -217,3 +217,9 @@ export const userSupplementAPI = axios.create({
 	baseURL: '/supplements',
 	withCredentials: true
 });
+
+export const userSupplementImageAPI= axios.create({
+	baseURL: '/supplements',
+	withCredentials: true,
+	responseType: "arraybuffer"
+});

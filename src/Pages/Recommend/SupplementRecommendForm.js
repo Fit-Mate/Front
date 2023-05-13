@@ -72,7 +72,7 @@ const SupplementRecommendForm = (props) => {
 
 	const getPurposeList = async () => {
 		const purposeResponse = await recommendAPI.get("/supplement/purposes");
-		const requestedData = purposeResponse.purpose;
+		const requestedData = purposeResponse.data.purpose;
 		setPurposeList(requestedData);
 	}
 
@@ -115,7 +115,7 @@ const SupplementRecommendForm = (props) => {
 
 			<form onSubmit={handlePurposeSubmit}>
 				<label htmlFor="budget">budget</label>
-				<input type='text' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
+				<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
 				<ShowPurposeCheckBox
 					handleCheckedListOnChange={handleCheckedListOnChange}
 					checkedPurposeList={checkedPurposeList}
@@ -123,8 +123,6 @@ const SupplementRecommendForm = (props) => {
 				/>
 				<button type='submit'>Submit</button>
 			</form>
-
-			<button onClick={handleClose}>닫기</button>
 		</Card>
 	);
 

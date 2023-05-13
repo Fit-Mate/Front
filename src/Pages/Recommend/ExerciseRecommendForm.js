@@ -138,7 +138,7 @@ const ExerciseRecommendForm = (props) => {
 			machineKoreanName: checkedMachineList
 		};
 		const postResponse = await recommendPostAPI.post(`/workout`, exerciseRecommendFormat);
-		const recId = postResponse.data.workoutRecommendationId;
+		const recId = postResponse.data;
 		setWorkoutRecommendationId(recId);
 	}
 

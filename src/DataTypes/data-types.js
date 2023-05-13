@@ -67,7 +67,7 @@ export const workoutRecommendationBody_data = {
 }
 
 export const workoutRecommendHistory_data = {
-	workoutRecommendationId: 0,
+	recommendId: 0,
 	date: "2023-01-01",
 	question: "",
 	recommendationBody: []

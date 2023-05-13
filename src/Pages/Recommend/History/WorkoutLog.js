@@ -2,15 +2,16 @@ import React from "react";
 import axios from "axios";
 
 /** datatype */
-import deepCopy, { workoutRecommendHistory_data, workoutRecommendHistory_data} from "../../../DataTypes/data-types";
+import deepCopy, { workoutRecommendHistory_data } from "../../../DataTypes/data-types";
 
 /** API */
-import { recommendWorkoutHistoryAPI, recommendWorkoutHistoryAPI } from "../../../API/API";
+import { recommendWorkoutHistoryAPI } from "../../../API/API";
 
 /** css */
-import classes from "../../../Manage/css/Manage_Workout.module.css";
+import classes from "../../../Manage/css/Mange_Table.module.css";
 
 /** Component */
+import WorkoutHistories from "./WorkoutHistories";
 
 /** UI */
 import Card, { HeaderCard } from "../../../UI/Card";
@@ -30,6 +31,7 @@ const WorkoutLog = (props) => {
 	const [recommendationHistoryBatch, setRecommendationHistoryBatch] = React.useState([]);
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
+	const [recommendHistory, setRecommendHistory] = React.useState([]);
 
 
 	/**
@@ -44,8 +46,7 @@ const WorkoutLog = (props) => {
 		const fitData = workoutHistoryBatchResponse.data.map((obj) => {
 			return {
 				...workoutRecommendHistory_data,
-				...obj,
-				recommendationBody: {...obj.recommendationBody}
+				...obj
 			}
 		});
 		setRecommendationHistoryBatch(fitData);
@@ -61,7 +62,6 @@ const WorkoutLog = (props) => {
 				<tr>
 					<th>id</th>
 					<th>date</th>
-					<th>question</th>
 					<th>상세보기</th>
 				</tr>
 			</thead>
@@ -71,12 +71,11 @@ const WorkoutLog = (props) => {
 	const makeTableBodyElements = () => {
 		const columns = recommendationHistoryBatch.map((history) => {
 			return (
-				<tr key={history.workoutRecommendationId}>
-					<td>{history.workoutRecommendationId}</td>
+				<tr key={history.recommendId}>
+					<td>{history.recommendId}</td>
 					<td>{history.date}</td>
-					<td>{history.question}</td>
 					<td>
-						<Button id={history.workoutRecommendationId} onClick={handleInquiryClicked}>상세보기</Button>
+						<Button id={history.recommendId} onClick={handleInquiryClicked}>상세보기</Button>
 					</td>
 				</tr>
 			);
@@ -100,7 +99,7 @@ const WorkoutLog = (props) => {
 		//axios로부터 단건조회API사용.
 
 		const response = await recommendWorkoutHistoryAPI.get(`${id}`);
-		const fitData = { ...workoutRecommendHistory_data, ...response.data};
+		const fitData = { ...workoutRecommendHistory_data, ...response.data };
 		setRecommendHistory(fitData);
 		setIsInquiryClicked(true);
 	}
@@ -112,7 +111,7 @@ const WorkoutLog = (props) => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
 			return;
-		const response = await bodyPartAPI.get(`/list/${page}`);
+		const response = await recommendWorkoutHistoryAPI.get(`/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (response.data.length === 0) {
 			return;
@@ -138,20 +137,24 @@ const WorkoutLog = (props) => {
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
-			{isInquiryClicked &&
-				<WorkoutHistories workoutHistoryBatch={recommendationHistoryBatch.map((history)=>{history.recommendationBody})} setIsInquiryClicked={setIsInquiryClicked}/>
-			}
-
-			<div className={classes["table-align"]}>
-				<table>
-					{makeTableHead(workoutRecommendHistory_data)}
-					{makeTableBodyElements()}
-				</table>
+			<header>
+				<h2>WorkoutRecommendationHistory</h2>
+			</header>
+			<div>
+				<div className={classes["table-align"]}>
+					<table>
+						{makeTableHead(workoutRecommendHistory_data)}
+						{makeTableBodyElements()}
+					</table>
+				</div>
+				<footer>
+					<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
+					<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
+				</footer>
+				{isInquiryClicked &&
+					<WorkoutHistories recommendHistory={recommendHistory} setIsInquiryClicked={setIsInquiryClicked} />
+				}
 			</div>
-			<footer>
-				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
-				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
-			</footer>
 		</Card>
 	);
 };

@@ -1,18 +1,25 @@
 import React from "react";
+import Card from "../../../UI/Card";
+import WorkoutHistory from "./WorkoutHistory"
 
 /**
  *
- * @param {*} props : workoutHistoryBatch setIsInquiryClicked
+ * @param {*} props : recommendHistory setIsInquiryClicked
  * @returns
  */
 const WorkoutHistories = (props) => {
 
+	console.log(props);
+
 	return (
 		<Card>
+			<header>
+			<h3>{props.recommendHistory.question}</h3>
+			</header>
 			<ul>
-				{props.workoutHistoryBatch.map((history) => {
+				{props.recommendHistory.recommends.map((recommendElement) => {
 					<li>
-						<WorkoutHistory history={history} />
+						<WorkoutHistory recommendElement={recommendElement} />
 					</li>
 				}
 				)}

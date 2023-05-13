@@ -17,6 +17,7 @@ import SignUp, {signUpAction} from "./Pages/SignUp";
 import Manage_Main from "./Manage/Manage_Main";
 import ExerciseRecommendForm from "./Pages/Recommend/ExerciseRecommendForm";
 import SupplementRecommendForm from "./Pages/Recommend/SupplementRecommendForm";
+import WorkoutLog from "./Pages/Recommend/History/WorkoutLog";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
 			<Route path="signUp" element={<SignUp />} action={signUpAction}/>
 			<Route path="exerciseRecommend" element={<ExerciseRecommendForm />} />
 			<Route path="supplementRecommend" element={<SupplementRecommendForm />} />
+			<Route path="recommendationHistory" element={<WorkoutLog />} />
 		</Route>
 	)
 );

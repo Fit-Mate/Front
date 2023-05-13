@@ -1,8 +1,8 @@
 import React from "react";
-
+import Card from "../../../UI/Card";
 /**
  *
- * @param {*} props : recommendationBody
+ * @param {*} props : recommendElement
  * @returns
  */
 const WorkoutHistory = (props) => {
@@ -10,9 +10,9 @@ const WorkoutHistory = (props) => {
 	return (
 		<Card>
 			<div>
-				<p>workoutName: ${props.recommendationBody.englishName}</p>
-				<p>videoLink: ${props.recommendationBody.koreanName}</p>
-				<p>description: ${props.recommendationBody.description}</p>
+				<p>workoutName: ${props.recommendElement.englishName}</p>
+				<p>videoLink: ${props.recommendElement.koreanName}</p>
+				<p>description: ${props.recommendElement.description}</p>
 			</div>
 		</Card>
 	);

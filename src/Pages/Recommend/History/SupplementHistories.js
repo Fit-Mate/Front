@@ -31,6 +31,7 @@ const SupplementHistories = (props) => {
 
 	return (
 		<Card>
+			<h3>Detail</h3>
 			<ul>
 				{recommendedSupplementList.map((history) => {
 					return (

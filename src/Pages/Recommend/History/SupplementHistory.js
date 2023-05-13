@@ -75,7 +75,8 @@ const SupplementHistory = (props) => {
 				<p>price: {props.history.price}</p>
 				<p>servings: {props.history.servings}</p>
 				<p>flavor: {props.history.flavor}</p>
-				<p>marketURL: {supplementInfo.marketURL}</p>
+				<p>marketURL: <a href={supplementInfo.marketURL}>URL</a></p>
+
 				<p>description: {props.history.description}</p>
 				{props.supplementType !== "BCAA" && <ShowIfNotBCAA supplementInfo={supplementInfo} />}
 				<p></p>

@@ -11,11 +11,12 @@ import { bodyDataAPI, recommendAPI } from "../../API/API";
 const SupplementRecommend = (props) => {
 
 	/**nonState */
+	let checkedPurposeList = [];
 
 	/**state */
 	const [budget, setBudget] = useState(0);
 	const [purpose, setPurpose] = useState(0);
-	const [purposeCheckedState, setPurposeCheckedState] = useState([]);
+	const [checkedPurposeState, setCheckedPurposeState] = useState([]);
 
 	const [isShowRecentBodyDataClicked, setIsShowRecentBodyDataClicked] = useState(false);
 	const [recentBodyData, setRecentBodyData] = useState({});

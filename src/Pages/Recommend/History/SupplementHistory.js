@@ -54,7 +54,6 @@ const SupplementHistory = (props) => {
 		const response = await userSupplementAPI.get(`/${props.history.id}`);
 		const imageRes = await userSupplementImageAPI.get(`/image/${props.history.id}`);
 		let result = (imageRes && imageRes.data) || [];
-		console.log(result);
 		setSupplementInfo(response.data);
 
 		let base64ImageString = Buffer.from(imageRes.data, 'binary').toString('base64');

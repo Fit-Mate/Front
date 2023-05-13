@@ -37,7 +37,7 @@ const MemberHome = (props) => {
 
 				<NavLink to="exerciseRecommend">회원 운동정보 추천 받기</NavLink>
 				<NavLink to="supplementRecommend">회원 보조제정보 추천 받기</NavLink>
-				<NavLink to="recommendationHistory">회원 정보 관리</NavLink>
+				<NavLink to="recommendationHistory">회원 추천 관리</NavLink>
 				<br />
 				<br />
 				<br />

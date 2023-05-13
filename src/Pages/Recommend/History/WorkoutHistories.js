@@ -9,18 +9,20 @@ import WorkoutHistory from "./WorkoutHistory"
  */
 const WorkoutHistories = (props) => {
 
-	console.log(props);
+	const recommends = props.recommendHistory.recommends;
 
 	return (
 		<Card>
 			<header>
-			<h3>{props.recommendHistory.question}</h3>
+				<h3>{props.recommendHistory.question}</h3>
 			</header>
 			<ul>
 				{props.recommendHistory.recommends.map((recommendElement) => {
-					<li>
-						<WorkoutHistory recommendElement={recommendElement} />
-					</li>
+					return (
+						<li key={recommendElement.workoutName}>
+							<WorkoutHistory recommendElement={recommendElement} />
+						</li>
+					);
 				}
 				)}
 			</ul>

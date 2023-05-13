@@ -7,12 +7,14 @@ import Card from "../../../UI/Card";
  */
 const WorkoutHistory = (props) => {
 
+	let videoId = props.recommendElement.videoLink.split('=')[1];
+	const videoSrc = `https://www.youtube.com/embed/${videoId}`;
 	return (
 		<Card>
 			<div>
-				<p>workoutName: ${props.recommendElement.englishName}</p>
-				<p>videoLink: ${props.recommendElement.koreanName}</p>
-				<p>description: ${props.recommendElement.description}</p>
+				<p>workoutName: {props.recommendElement.workoutName}</p>
+				<iframe src={videoSrc} title={props.recommendElement.workoutName}></iframe>
+				<p>description: {props.recommendElement.description}</p>
 			</div>
 		</Card>
 	);

@@ -197,7 +197,7 @@ export const recommendAPI= axios.create({
 	withCredentials: true
 });
 
-export const recommendWorkoutPostAPI = axios.create({
+export const recommendPostAPI = axios.create({
 	method: 'post',
 	baseURL: '/recommendation',
 	withCredentials: true

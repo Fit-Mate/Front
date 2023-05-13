@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import LoginContext from "../../Contexts/login-context";
-import { bodyDataAPI, nonAdminBodyPartAPI, nonAdminMachineAPI, recommendWorkoutPostAPI } from "../../API/API";
+import { bodyDataAPI, nonAdminBodyPartAPI, nonAdminMachineAPI, recommendPostAPI } from "../../API/API";
 import { bodyData_data } from "../../DataTypes/data-types";
 import Card from "../../UI/Card"
 
@@ -137,7 +137,7 @@ const ExerciseRecommendForm = (props) => {
 			bodyPartKoreanName: checkedBodyPartList,
 			machineKoreanName: checkedMachineList
 		};
-		const postResponse = await recommendWorkoutPostAPI.post(`/workout`, exerciseRecommendFormat);
+		const postResponse = await recommendPostAPI.post(`/workout`, exerciseRecommendFormat);
 		const recId = postResponse.data.workoutRecommendationId;
 		setWorkoutRecommendationId(recId);
 	}

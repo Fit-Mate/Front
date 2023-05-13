@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import LoginContext from "../Contexts/login-context";
 
@@ -36,11 +36,18 @@ const RootLayout = (props) => {
 
 	const loginCtx = React.useContext(LoginContext);
 
+	useEffect(() => {
+		if (localStorage.getItem("loginId") !== "") {
+			loginCtx.setIsLoggedIn(true);
+			loginCtx.setLoginId(localStorage.getItem("loginId"));
+		}
+	}, []);
+
 	return (
 		<div>
 			{/*{loginCtx.isLoggedIn || loginCtx.isAdmin ? showIfLoggedIn(loginCtx.isAdmin) : showIfNonMember()}*/}
 			{(loginCtx.isLoggedIn || loginCtx.isAdmin) ?
-				<ShowIfLoggedIn loginCtx={loginCtx}/> : <ShowIfNonMember />}
+				<ShowIfLoggedIn loginCtx={loginCtx} /> : <ShowIfNonMember />}
 			<Outlet />
 		</div>
 	);

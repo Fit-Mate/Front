@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Card from "../../UI/Card";
 import { bodyDataAPI, recommendPostAPI, recommendAPI } from "../../API/API";
 
+import RecentBodyDataModal from "./RecentBodyDataModal";
+
 
 /**
  * Rendering Checkbox of BodyPartList Dynamically
@@ -105,6 +107,11 @@ const SupplementRecommendForm = (props) => {
 		)
 	}
 
+	const handleShowRecentBodyDataClicked = () => {
+		setIsShowRecentBodyDataClicked(true);
+	}
+
+
 	/**useEffect */
 	useEffect(() => {
 		getRecentBodyData();
@@ -121,10 +128,10 @@ const SupplementRecommendForm = (props) => {
 		const checkedList = purposeList.filter((list, index) => checkedPurposeState[index]);
 		setCheckedPurposeList(checkedList);
 
-		if (checkedPurposeState[1] && checkedPurposeState[2]){
+		if (checkedPurposeState[1] && checkedPurposeState[2]) {
 			setIsBothChecked(true);
 		}
-		else{
+		else {
 			setIsBothChecked(false);
 		}
 
@@ -134,7 +141,12 @@ const SupplementRecommendForm = (props) => {
 	return (
 		<Card>
 			<p>SupplementRecommend</p>
-
+			{isShowRecentBodyDataClicked &&
+				<RecentBodyDataModal
+					recentBodyData={recentBodyData}
+					setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
+				/>
+			}
 			<form onSubmit={handlePurposeSubmit}>
 				<label htmlFor="budget">budget</label>
 				<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
@@ -147,6 +159,7 @@ const SupplementRecommendForm = (props) => {
 				{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
 				{isSubmitClicked && <p>Wait For Result...</p>}
 			</form>
+			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 		</Card>
 	);
 

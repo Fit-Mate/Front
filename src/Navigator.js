@@ -17,7 +17,6 @@ import SignUp, {signUpAction} from "./Pages/SignUp";
 import Manage_Main from "./Manage/Manage_Main";
 import ExerciseRecommendForm from "./Pages/Recommend/ExerciseRecommendForm";
 import SupplementRecommendForm from "./Pages/Recommend/SupplementRecommendForm";
-import WorkoutLog from "./Pages/Recommend/History/WorkoutLog";
 import ShowHistory from "./Pages/Recommend/History/ShowHistory";
 
 const router = createBrowserRouter(

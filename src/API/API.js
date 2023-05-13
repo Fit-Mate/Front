@@ -212,3 +212,8 @@ export const recommendSupplementHistoryAPI= axios.create({
 	baseURL: '/recommendation/supplement/history',
 	withCredentials: true
 });
+
+export const userSupplementAPI = axios.create({
+	baseURL: '/supplements',
+	withCredentials: true
+});

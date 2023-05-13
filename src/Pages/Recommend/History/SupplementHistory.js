@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "../../../UI/Card";
 
 /**
  *
@@ -10,14 +11,14 @@ const SupplementHistory = (props) => {
 	return (
 		<Card>
 			<div>
-				<p>id: ${props.recommendationBody.id}</p>
-				<p>englishName: ${props.recommendationBody.englishName}</p>
-				<p>koreanName: ${props.recommendationBody.koreanName}</p>
-				<p>price: ${props.recommendationBody.price}</p>
-				<p>servings: ${props.recommendationBody.servings}</p>
-				<p>flavor: ${props.recommendationBody.flavor}</p>
-				<p>description: ${props.recommendationBody.description}</p>
-				<p>koreanRecommendation: ${props.recommendationBody.koreanRecommendation}</p>
+				<p>id: {props.history.id}</p>
+				<p>englishName: {props.history.englishName}</p>
+				<p>koreanName: {props.history.koreanName}</p>
+				<p>price: {props.history.price}</p>
+				<p>servings: {props.history.servings}</p>
+				<p>flavor: {props.history.flavor}</p>
+				<p>description: {props.history.description}</p>
+				<p>koreanRecommendation: {props.history.koreanRecommendation}</p>
 			</div>
 		</Card>
 	);

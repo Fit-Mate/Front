@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../UI/Card";
-import { bodyDataAPI, recommendAPI } from "../../API/API";
+import { bodyDataAPI, recommendPostAPI, recommendAPI } from "../../API/API";
 
 
 /**
@@ -25,7 +25,7 @@ const ShowPurposeCheckBox = (props) => {
 										id={`purposeCheckbox${index}`}
 										name={purpose}
 										value={purpose}
-										//checked={checkedBodyPartState[index]}
+										checked={checkedPurposeState[index]}
 										onChange={() => handleCheckedListOnChange(index, checkedPurposeState, "purpose")}
 									/>
 									<label htmlFor={`purposeCheckbox${index}`}>{purpose}</label>
@@ -59,6 +59,7 @@ const SupplementRecommendForm = (props) => {
 	const [isBothChecked, setIsBothChecked] = useState(false);
 
 	const [isShowRecentBodyDataClicked, setIsShowRecentBodyDataClicked] = useState(false);
+	const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 	const [recentBodyData, setRecentBodyData] = useState({});
 
 	const handleClose = () => {
@@ -95,8 +96,13 @@ const SupplementRecommendForm = (props) => {
 			monthlyBudget: budget,
 			purpose: checkedPurposeList
 		}
-		//const response = recommendAPI.post('supplement');
-		//console.log(response);
+		//const response = recommendPostAPI.post('/supplement', recommendationForm);
+
+		setIsSubmitClicked(true);
+		setBudget(0);
+		setCheckedPurposeState(
+			new Array(checkedPurposeState.length).fill(false)
+		)
 	}
 
 	/**useEffect */
@@ -139,6 +145,7 @@ const SupplementRecommendForm = (props) => {
 				/>
 				{!isBothChecked && <button type='submit'>Submit</button>}
 				{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
+				{isSubmitClicked && <p>Wait For Result...</p>}
 			</form>
 		</Card>
 	);

@@ -2,15 +2,16 @@ import React from "react";
 import axios from "axios";
 
 /** datatype */
-import deepCopy, { supplementRecommendationBody, supplementRecommendationBody_data, supplementRecommendHistory_data} from "../../../DataTypes/data-types";
+import deepCopy, { supplementRecommendationBody, supplementRecommendationBody_data, supplementRecommendHistory_data } from "../../../DataTypes/data-types";
 
 /** API */
 import { recommendSupplementHistoryAPI, recommendWorkoutHistoryAPI } from "../../../API/API";
 
 /** css */
-import classes from "../../../Manage/css/Manage_Supplement.module.css";
+import classes from "../../../Manage/css/Mange_Table.module.css";
 
 /** Component */
+import SupplementHistories from "./SupplementHistories";
 
 /** UI */
 import Modal from "../../../UI/Modal";
@@ -30,6 +31,8 @@ const SupplementLog = (props) => {
 
 	const [recommendationHistoryBatch, setRecommendationHistoryBatch] = React.useState([]);
 	const [recommendHistoryId, setRecommendHistoryId] = React.useState(0);
+	const [recommendHistory, setRecommendHistory] = React.useState({});
+
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 
@@ -47,7 +50,7 @@ const SupplementLog = (props) => {
 			return {
 				...supplementRecommendHistory_data,
 				...obj,
-				recommendationBody: {...obj.recommendationBody}
+				recommendationBody: { ...obj.recommendationBody }
 			}
 		});
 		setRecommendationHistoryBatch(fitData);
@@ -64,7 +67,6 @@ const SupplementLog = (props) => {
 					<th>id</th>
 					<th>date</th>
 					<th>question</th>
-					<th>monthlyBudget</th>
 					<th>상세보기</th>
 				</tr>
 			</thead>
@@ -78,7 +80,6 @@ const SupplementLog = (props) => {
 					<td>{history.supplementRecommendationId}</td>
 					<td>{history.date}</td>
 					<td>{history.question}</td>
-					<td>{history.monthlyBudget}</td>
 					<td>
 						<Button id={history.supplementRecommendationId} onClick={handleInquiryClicked}>상세보기</Button>
 					</td>
@@ -103,8 +104,14 @@ const SupplementLog = (props) => {
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
 
+		/**
+		 * Response Data: data
+		 * {date, monthlyBudget, question, recommendedSupplementList(Array)
+		 * recommendSupplementList {id, description, englishName, flavor, id, koreanName, koreanRecommendation, price, servings...}
+		 *
+		 */
 		const response = await recommendSupplementHistoryAPI.get(`${id}`);
-		const fitData = { ...supplementRecommendHistory_data, ...response.data};
+		const fitData = { ...supplementRecommendHistory_data, ...response.data };
 		setRecommendHistory(fitData);
 		setIsInquiryClicked(true);
 	}
@@ -116,7 +123,7 @@ const SupplementLog = (props) => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
 			return;
-		const response = await bodyPartAPI.get(`/list/${page}`);
+		const response = await recommendSupplementHistoryAPI.get(`/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (response.data.length === 0) {
 			return;
@@ -142,20 +149,25 @@ const SupplementLog = (props) => {
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
+			<header>
+				<h2>SupplementRecommendationHistory</h2>
+			</header>
+			<div>
+				<div className={classes["table-align"]}>
+					<table>
+						{makeTableHead(supplementRecommendHistory_data)}
+						{makeTableBodyElements()}
+					</table>
+				</div>
+				<footer>
+					<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
+					<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
+				</footer>
+			</div>
 			{isInquiryClicked &&
-				<SupplementHistories supplementHistoryBatch={recommendationHistoryBatch.map((history)=>{history.recommendationBody})} setIsInquiryClicked={setIsInquiryClicked}/>
+				<SupplementHistories recommendHistory={recommendHistory} setIsInquiryClicked={setIsInquiryClicked} />
 			}
 
-			<div className={classes["table-align"]}>
-				<table>
-					{makeTableHead(supplementRecommendHistory_data)}
-					{makeTableBodyElements()}
-				</table>
-			</div>
-			<footer>
-				<Button id="prevPage" onClick={handleNavigatePage}>Prev</Button>
-				<Button id="nextPage" onClick={handleNavigatePage}>Next</Button>
-			</footer>
 		</Card>
 	);
 };

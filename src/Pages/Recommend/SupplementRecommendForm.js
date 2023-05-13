@@ -56,6 +56,7 @@ const SupplementRecommendForm = (props) => {
 	const [purposeList, setPurposeList] = useState([]);
 	const [checkedPurposeState, setCheckedPurposeState] = useState([]);
 	const [checkedPurposeList, setCheckedPurposeList] = useState([]);
+	const [isBothChecked, setIsBothChecked] = useState(false);
 
 	const [isShowRecentBodyDataClicked, setIsShowRecentBodyDataClicked] = useState(false);
 	const [recentBodyData, setRecentBodyData] = useState({});
@@ -72,7 +73,7 @@ const SupplementRecommendForm = (props) => {
 
 	const getPurposeList = async () => {
 		const purposeResponse = await recommendAPI.get("/supplement/purposes");
-		const requestedData = purposeResponse.data.purpose;
+		const requestedData = purposeResponse.data;
 		setPurposeList(requestedData);
 	}
 
@@ -92,9 +93,10 @@ const SupplementRecommendForm = (props) => {
 
 		const recommendationForm = {
 			monthlyBudget: budget,
-			purpose: purposeList
+			purpose: checkedPurposeList
 		}
-		const response = recommendAPI.post('supplement');
+		//const response = recommendAPI.post('supplement');
+		//console.log(response);
 	}
 
 	/**useEffect */
@@ -104,8 +106,22 @@ const SupplementRecommendForm = (props) => {
 	}, []);
 
 	useEffect(() => {
+		setCheckedPurposeState(
+			new Array(purposeList.length).fill(false)
+		);
+	}, [purposeList])
+
+	useEffect(() => {
 		const checkedList = purposeList.filter((list, index) => checkedPurposeState[index]);
 		setCheckedPurposeList(checkedList);
+
+		if (checkedPurposeState[1] && checkedPurposeState[2]){
+			setIsBothChecked(true);
+		}
+		else{
+			setIsBothChecked(false);
+		}
+
 	}, [checkedPurposeState])
 
 	//handleCheckedListOnChange(position, checkedarray), bodyPartList, checkedBodyPartState
@@ -118,10 +134,11 @@ const SupplementRecommendForm = (props) => {
 				<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
 				<ShowPurposeCheckBox
 					handleCheckedListOnChange={handleCheckedListOnChange}
-					checkedPurposeList={checkedPurposeList}
+					checkedPurposeState={checkedPurposeState}
 					purposeList={purposeList}
 				/>
-				<button type='submit'>Submit</button>
+				{!isBothChecked && <button type='submit'>Submit</button>}
+				{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
 			</form>
 		</Card>
 	);

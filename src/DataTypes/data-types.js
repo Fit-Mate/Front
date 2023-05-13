@@ -88,7 +88,7 @@ export const supplementRecommendHistory_data = {
 	supplementRecommendationId: 0,
 	date: "2023-01-01",
 	question: "",
-	recommendationBody: supplementRecommendationBody,
+	recommendationBody: supplementRecommendationBody_data,
 }
 
 const deepCopy = (obj) => {
@@ -96,5 +96,4 @@ const deepCopy = (obj) => {
 }
 
 export default deepCopy;
-
 

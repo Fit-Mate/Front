@@ -10,14 +10,14 @@ const SupplementHistory = (props) => {
 	return (
 		<Card>
 			<div>
-				<p>id: ${props.id}</p>
-				<p>englishName: ${props.englishName}</p>
-				<p>koreanName: ${props.koreanName}</p>
-				<p>price: ${props.price}</p>
-				<p>servings: ${props.servings}</p>
-				<p>flavor: ${props.flavor}</p>
-				<p>description: ${props.description}</p>
-				<p>koreanRecommendation: ${props.koreanRecommendation}</p>
+				<p>id: ${props.recommendationBody.id}</p>
+				<p>englishName: ${props.recommendationBody.englishName}</p>
+				<p>koreanName: ${props.recommendationBody.koreanName}</p>
+				<p>price: ${props.recommendationBody.price}</p>
+				<p>servings: ${props.recommendationBody.servings}</p>
+				<p>flavor: ${props.recommendationBody.flavor}</p>
+				<p>description: ${props.recommendationBody.description}</p>
+				<p>koreanRecommendation: ${props.recommendationBody.koreanRecommendation}</p>
 			</div>
 		</Card>
 	);

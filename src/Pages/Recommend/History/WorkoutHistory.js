@@ -10,9 +10,9 @@ const WorkoutHistory = (props) => {
 	return (
 		<Card>
 			<div>
-				<p>workoutName: ${props.englishName}</p>
-				<p>videoLink: ${props.koreanName}</p>
-				<p>description: ${props.description}</p>
+				<p>workoutName: ${props.recommendationBody.englishName}</p>
+				<p>videoLink: ${props.recommendationBody.koreanName}</p>
+				<p>description: ${props.recommendationBody.description}</p>
 			</div>
 		</Card>
 	);

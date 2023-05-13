@@ -192,6 +192,11 @@ export const nonAdminMachineAPI = axios.create({
 /**
  * RecommendationAPIs
  */
+export const recommendAPI= axios.create({
+	baseURL: '/recommendation',
+	withCredentials: true
+});
+
 export const recommendWorkoutPostAPI = axios.create({
 	method: 'post',
 	baseURL: '/recommendation',

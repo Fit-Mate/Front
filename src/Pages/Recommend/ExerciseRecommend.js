@@ -8,6 +8,8 @@ import Card from "../../UI/Card";
  */
 const ExerciseRecommend = (props) => {
 
+
+
 	const handleClose = () => {
 		props.setIsSubmitClicked(false);
 	}

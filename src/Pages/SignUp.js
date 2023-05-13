@@ -78,9 +78,9 @@ const SignUp = (props) => {
 					<div >
 						<fieldset>
 							<legend>성별</legend>
-							<input type='radio' id='male' name='sex' value="남성" />
+							<input type='radio' id='male' name='sex' defaultValue="남성" />
 							<label htmlFor="male">남성</label>
-							<input type='radio' id='female' name='sex' value="여성" />
+							<input type='radio' id='female' name='sex' defaultValue="여성" />
 							<label htmlFor="female">여성</label>
 						</fieldset>
 					</div>
@@ -98,19 +98,19 @@ const SignUp = (props) => {
 					</div>
 					<div >
 						<label htmlFor="upperBodyFat">upperBodyFat</label>
-						<input type='number' id="upperBodyFat" name="upperBodyFat" value="15" />
+						<input type='number' id="upperBodyFat" name="upperBodyFat" defaultValue="15" />
 					</div>
 					<div >
 						<label htmlFor="lowerBodyFat">lowerBodyFat</label>
-						<input type='number' id="lowerBodyFat" name="lowerBodyFat" value="15" />
+						<input type='number' id="lowerBodyFat" name="lowerBodyFat" defaultValue="15" />
 					</div>
 					<div >
 						<label htmlFor="upperMuscleMass">upperMuscleMass</label>
-						<input type='number' id="upperMuscleMass" name="upperMuscleMass" value="15" />
+						<input type='number' id="upperMuscleMass" name="upperMuscleMass" defaultValue="15" />
 					</div>
 					<div >
 						<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
-						<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" value="15"/>
+						<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" defaultValue="15"/>
 					</div>
 					<button>회원가입</button>
 					{data && data.error && <p>{data.error}</p>}

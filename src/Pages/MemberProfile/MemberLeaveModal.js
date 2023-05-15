@@ -15,27 +15,32 @@ const MemberLeaveModal = (props) => {
 
 	/**state */
 	const [isWrongPassword, setIsWrongPassword] = useState(false);
-	const [password, setPassword] = useState(false);
+	const [password, setPassword] = useState("");
 
 
 	/**API */
 	const leave = async () => {
-		const response = await userDeleteAPI.post("", {password:password});
-		if (response.data === "fail"){
-			setIsWrongPassword(false);
+		const response = await userDeleteAPI.post("", { password: password });
+		if (response.data === "fail") {
+			setIsWrongPassword(true);
 		}
 		else {
-			setIsWrongPassword(true);
+			setIsWrongPassword(false, () => {
+				props.onClick(false);
+				loginCtx.setIsLoggedIn(false);
+				loginCtx.setLoginId("");
+			});
 		}
 	}
 
-	const handleLeave = () => {
+	/**handler */
+	const handleLeave = (e) => {
+		e.preventDefault();
 		leave();
-		props.onClick(false);
-		localStorage.setItem("loginId", "");
-		loginCtx.setIsLoggedIn(false);
-		loginCtx.setLoginId("");
 	}
+
+	/**useEffect */
+
 
 	const handleClose = () => {
 		props.onClick(false);
@@ -45,7 +50,7 @@ const MemberLeaveModal = (props) => {
 		<Modal>
 			<form onSubmit={handleLeave}>
 				<label htmlFor="password">비밀번호</label>
-				<input type="password" id="password" name="password" onChange={e=>setPassword(e.target.value)}/>
+				<input type="password" id="password" name="password" onChange={e => setPassword(e.target.value)} />
 				<button type="submit">탈퇴하시겠습니까?</button>
 			</form>
 			{isWrongPassword && <p>Wrong Password</p>}

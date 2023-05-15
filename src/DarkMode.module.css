@@ -1,0 +1,27 @@
+body {
+  background: #202b38;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3 {
+  color: #fff;
+}
+
+p,
+dl {
+  color: #dbdbdb;
+}
+
+a {
+  color: #41adff;
+  text-decoration: none;
+}
+
+code {
+  color: #ffbe85;
+  background: #161f27;
+  border-radius: 6px;
+  padding: 2.5px 5px;
+}

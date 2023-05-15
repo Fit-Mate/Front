@@ -2,14 +2,14 @@ import './App.css';
 import React from 'react';
 import Navigator from './Navigator';
 import { LoginContextProvider } from './Contexts/login-context';
-
+import classes from "./DarkMode.module.css";
 
 function App() {
 
   return (
-    <div className="App">
+    <div className="App" >
       <LoginContextProvider>
-        <Navigator />
+        <Navigator className={classes}/>
       </LoginContextProvider>
     </div>
     //  <div>

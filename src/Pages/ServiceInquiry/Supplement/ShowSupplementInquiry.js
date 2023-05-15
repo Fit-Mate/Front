@@ -69,8 +69,6 @@ const ShowSupplementInquiry = (props) => {
 					<th>koreanName</th>
 					<th>price</th>
 					<th>servings</th>
-					<th>description</th>
-					<th>supplementType</th>
 					<th>조회</th>
 				</tr>
 			</thead>
@@ -85,8 +83,6 @@ const ShowSupplementInquiry = (props) => {
 					<td>{supplement.koreanName}</td>
 					<td>{supplement.price}</td>
 					<td>{supplement.servings}</td>
-					<td>{supplement.description}</td>
-					<td>{supplement.supplementType}</td>
 					<td>
 						<Button id={supplement.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>

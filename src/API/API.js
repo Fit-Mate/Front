@@ -223,3 +223,21 @@ export const userSupplementImageAPI= axios.create({
 	withCredentials: true,
 	responseType: "arraybuffer"
 });
+
+/**ServiceInquiry */
+export const userWorkoutImageAPI= axios.create({
+	baseURL: '/workouts/image',
+	withCredentials: true,
+	responseType: "arraybuffer"
+});
+
+export const userWorkoutBatchAPI= axios.create({
+	method:'post',
+	baseURL: '/workouts/search/list',
+	withCredentials: true,
+});
+
+export const userWorkoutAPI= axios.create({
+	baseURL: '/workouts',
+	withCredentials: true,
+});

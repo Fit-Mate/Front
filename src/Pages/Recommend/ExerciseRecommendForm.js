@@ -5,6 +5,8 @@ import { bodyDataAPI, nonAdminBodyPartAPI, nonAdminMachineAPI, recommendPostAPI 
 import { bodyData_data } from "../../DataTypes/data-types";
 import Card from "../../UI/Card"
 
+import { useNavigate } from "react-router-dom";
+
 import ExerciseRecommend from "./ExerciseRecommend";
 import RecentBodyDataModal from "./RecentBodyDataModal";
 
@@ -96,10 +98,13 @@ const ShowMachineCheckbox = (props) => {
 const ExerciseRecommendForm = (props) => {
 
 	/**non-state */
+	const navigate = useNavigate();
 
 	/**state */
 	const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 	const [workoutRecommendationId, setWorkoutRecommendationId] = useState(-1);
+
+	const [isNothingClicked, setIsNothingClicked] = useState(false);
 
 	const [isShowRecentBodyDataClicked, setIsShowRecentBodyDataClicked] = useState(false);
 
@@ -133,6 +138,15 @@ const ExerciseRecommendForm = (props) => {
 	}
 
 	const sendExerciseRecommendForm = async () => {
+
+		if (checkedBodyPartList.length === 0) {
+			setIsNothingClicked(true);
+			return;
+		}
+		else {
+			setIsNothingClicked(false);
+		}
+
 		const exerciseRecommendFormat = {
 			bodyPartKoreanName: checkedBodyPartList,
 			machineKoreanName: checkedMachineList
@@ -140,6 +154,7 @@ const ExerciseRecommendForm = (props) => {
 		const postResponse = await recommendPostAPI.post(`/workout`, exerciseRecommendFormat);
 		const recId = postResponse.data;
 		setWorkoutRecommendationId(recId);
+		navigate('/recommendationHistory');
 	}
 
 	/**useEffect */
@@ -257,6 +272,7 @@ const ExerciseRecommendForm = (props) => {
 	return (
 		<div>
 			<header> <h1>ExerciseRecommendForm </h1></header>
+			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 			<main>
 				{/* bodyPartCheckbox render */}
 				<ShowBodyPartCheckbox
@@ -270,8 +286,8 @@ const ExerciseRecommendForm = (props) => {
 					checkedMachineState={checkedMachineState}
 					handleCheckedListOnChange={handleCheckedListOnChange}
 				/>
+				{isNothingClicked && <p>Nothing is Set</p>}
 				<button type='button' onClick={handleExercisePost}>제출</button>
-				<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 
 				{isShowRecentBodyDataClicked &&
 					<RecentBodyDataModal

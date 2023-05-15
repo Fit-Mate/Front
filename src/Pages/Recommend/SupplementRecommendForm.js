@@ -3,6 +3,7 @@ import Card from "../../UI/Card";
 import { bodyDataAPI, recommendPostAPI, recommendAPI } from "../../API/API";
 
 import RecentBodyDataModal from "./RecentBodyDataModal";
+import { useNavigate } from "react-router-dom";
 
 
 /**
@@ -52,8 +53,13 @@ const ShowPurposeCheckBox = (props) => {
 const SupplementRecommendForm = (props) => {
 
 	/**nonState */
+	const navigate = useNavigate();
 
 	/**state */
+
+	const [isNothingClicked, setIsNothingClicked] = useState(false);
+
+
 	const [budget, setBudget] = useState(0);
 	const [purposeList, setPurposeList] = useState([]);
 	const [checkedPurposeState, setCheckedPurposeState] = useState([]);
@@ -93,6 +99,14 @@ const SupplementRecommendForm = (props) => {
 
 	const handlePurposeSubmit = (e) => {
 		e.preventDefault();
+
+		if (checkedPurposeList.length === 0) {
+			setIsNothingClicked(true);
+			return;
+		}
+		else {
+			setIsNothingClicked(false);
+		}
 
 		const recommendationForm = {
 			monthlyBudget: budget,
@@ -141,6 +155,7 @@ const SupplementRecommendForm = (props) => {
 	return (
 		<Card>
 			<p>SupplementRecommend</p>
+			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 			{isShowRecentBodyDataClicked &&
 				<RecentBodyDataModal
 					recentBodyData={recentBodyData}
@@ -157,9 +172,8 @@ const SupplementRecommendForm = (props) => {
 				/>
 				{!isBothChecked && <button type='submit'>Submit</button>}
 				{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
-				{isSubmitClicked && <p>Wait For Result...</p>}
+				{isNothingClicked && <p>Nothing Clicked</p>}
 			</form>
-			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 		</Card>
 	);
 

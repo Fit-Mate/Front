@@ -7,8 +7,8 @@ const Inquiry = (props) => {
 	return (
 		<div>
 			<p>Inquiry</p>
-			<ShowSupplementInquiry />
-			{/*<ShowWorkoutInquiry />*/}
+			{/*<ShowSupplementInquiry />*/}
+			<ShowWorkoutInquiry />
 		</div>
 
 	);

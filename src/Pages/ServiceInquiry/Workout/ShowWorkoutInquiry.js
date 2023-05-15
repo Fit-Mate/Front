@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 import deepCopy, { workout_data } from "../../../DataTypes/data-types";
-import { workoutAPI } from "../../../API/API";
+import { userWorkoutAPI, workoutAPI } from "../../../API/API";
 import classes from "../../../Manage/css/Manage_Supplement.module.css";
 
 import WorkoutInquiry from "./WorkoutInquiry";
@@ -29,6 +29,7 @@ const ShowWorkoutInquiry = (props) => {
 	const [workoutId, setWorkoutId] = React.useState('');
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
+	const [inputWorkoutSearch, setInputWorkoutSeacrh] = React.useState("");
 
 	/**
 	 * Functions
@@ -37,15 +38,21 @@ const ShowWorkoutInquiry = (props) => {
 	const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
 		if (bodyPartKoreanName.length === 0)
 			return "";
+
 		const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue) =>
 			`${accumulator}\n${currentValue}`
 			, [])
+		return bodyPartParagraph;
 	}
 
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
 	const loadWorkoutBatch = async () => {
-		const workoutResponse = await workoutAPI.get(`/list/${currentPage}`);
+		const request = {
+			searchKeyword: null,
+			bodyPartKoreanName: null
+		}
+		const workoutResponse = await userWorkoutAPI.post(`/search/list/${currentPage}`, request);
 		const fitData = workoutResponse.data.map((obj) => {
 			return {
 				...workout_data,
@@ -67,11 +74,8 @@ const ShowWorkoutInquiry = (props) => {
 					<th>englishName</th>
 					<th>koreanName</th>
 					<th>description</th>
-					<th>videoLink</th>
 					<th>bodyPartKoreanName</th>
 					<th>조회</th>
-					<th>수정</th>
-					<th>삭제</th>
 				</tr>
 			</thead>
 		);
@@ -83,9 +87,8 @@ const ShowWorkoutInquiry = (props) => {
 				<tr key={workout.id}>
 					<td>{workout.englishName}</td>
 					<td>{workout.koreanName}</td>
-					<td>{workout.description}</td>
-					<td>{workout.videoLink}</td>
-					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanNam)}</td>
+					<td>{workout.description.slice(0, 40) + "..."}</td>
+					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)}</td>
 					<td>
 						<button id={workout.id} onClick={handleInquiryClicked}>조회</button>
 					</td>
@@ -109,8 +112,8 @@ const ShowWorkoutInquiry = (props) => {
 	const handleInquiryClicked = async (event) => {
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
-		const response = await workoutAPI.get(`/${id}`);
-		const fitData = { ...workout_data, ...response.data };
+		const response = await userWorkoutAPI.get(`/${id}`);
+		const fitData = { ...workout_data, ...response.data, id:id };
 		setWorkout(fitData);
 		setIsInquiryClicked(true);
 	}
@@ -122,7 +125,7 @@ const ShowWorkoutInquiry = (props) => {
 		const page = (event.target.id === 'prevPage' ? currentPage - 1 : currentPage + 1);
 		if (page === 0)
 			return;
-		const response = await workoutAPI.get(`/list/${page}`);
+		const response = await workoutAPI.get(`/search/list/${page}`);
 		//axios로부터 return 받은 값이 NULL (읽지못함)일때, currentPage와 Batch Update 안함
 		if (response.data.length === 0) {
 			return;
@@ -131,6 +134,18 @@ const ShowWorkoutInquiry = (props) => {
 		setWorkoutBatch(response.data);
 		setCurrentPage(page);
 	}
+
+	const handleWorkoutSearch = async (event) => {
+		event.preventDefault();
+		const formData = {
+			searchKeyword: inputWorkoutSearch,
+		}
+		//axios로부터 단건조회API사용.
+		const response = await userWorkoutAPI.post(`/search/list/${currentPage}`, formData);
+		const fitData = [...response.data]
+		setWorkoutBatch(fitData);
+	}
+
 
 	/**
 	 * UseEffect When Rendering.
@@ -150,6 +165,20 @@ const ShowWorkoutInquiry = (props) => {
 					<WorkoutInquiry workout={workout} onClose={handleModalClose} />
 				</Modal>
 			}
+
+			<Card>
+				<form onSubmit={handleWorkoutSearch}>
+					<label htmlFor="searchWorkout">searchWorkout</label>
+					<input type='text'
+						id="searchWorkout"
+						name="searchWorkout"
+						value={inputWorkoutSearch}
+						onChange={e => setInputWorkoutSeacrh(e.target.value)}
+					/>
+					<button type='submit'>search</button>
+				</form>
+			</Card>
+
 			<table>
 				{makeTableHead(workout_data)}
 				{makeTableBodyElements()}

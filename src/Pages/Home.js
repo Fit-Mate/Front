@@ -32,15 +32,9 @@ const MemberHome = (props) => {
 
 			</main>
 			<footer>
-				<br />
-				<br />
-
-				<NavLink to="exerciseRecommend">회원 운동정보 추천 받기</NavLink>
-				<NavLink to="supplementRecommend">회원 보조제정보 추천 받기</NavLink>
-				<NavLink to="recommendationHistory">회원 추천 관리</NavLink>
-				<br />
-				<br />
-				<br />
+				{/*<NavLink to="exerciseRecommend">회원 운동정보 추천 받기</NavLink>*/}
+				{/*<NavLink to="supplementRecommend">회원 보조제정보 추천 받기</NavLink>*/}
+				{/*<NavLink to="recommendationHistory">회원 추천 관리</NavLink>*/}
 			</footer>
 		</div>
 	);

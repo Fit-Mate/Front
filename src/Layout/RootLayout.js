@@ -18,12 +18,12 @@ const ShowIfLoggedIn = (props) => {
 		<div>
 			<NavLink to="/" onClick={handleSignOut}>로그아웃</NavLink>
 			<NavLink to="/" >홈</NavLink>
+			<NavLink to="profile">database조회</NavLink>
 			{!loginCtx.isAdmin && <NavLink to="profile">회원 프로필 관리</NavLink>}
-
 			{!loginCtx.isAdmin && <NavLink to="/exerciseRecommend">운동추천</NavLink>}
 			{!loginCtx.isAdmin && <NavLink to="/supplementRecommend">보조제추천</NavLink>}
-			{!loginCtx.isAdmin && <NavLink to="/">체성분이력</NavLink>}
-			{!loginCtx.isAdmin && <NavLink to="/">추천이력</NavLink>}
+			{!loginCtx.isAdmin && <NavLink to="/bodyData">체성분이력</NavLink>}
+			{!loginCtx.isAdmin && <NavLink to="/recommendationHistory">추천이력</NavLink>}
 		</div>
 	);
 }

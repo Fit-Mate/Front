@@ -24,12 +24,6 @@ const ShowIfLoggedIn = (props) => {
 					<NavLink to="/" onClick={handleSignOut}>로그아웃</NavLink>
 				</li>
 				<li>
-					<NavLink to="/" >홈</NavLink>
-				</li>
-				<li>
-					<NavLink to="inquiry">database조회</NavLink>
-				</li>
-				<li>
 					{!loginCtx.isAdmin && <NavLink to="profile">회원 프로필 관리</NavLink>}
 				</li>
 				<li>
@@ -53,9 +47,13 @@ const ShowIfLoggedIn = (props) => {
 
 const ShowIfNonMember = () => {
 	return (
-		<div>
-			<NavLink to="signIn">로그인</NavLink>
-			<NavLink to="signUp">회원가입</NavLink>
+		<div className={classes.RootLayout}>
+			<li>
+				<NavLink to="signIn">로그인</NavLink>
+			</li>
+			<li>
+				<NavLink to="signUp">회원가입</NavLink>
+			</li>
 		</div>
 	);
 }
@@ -74,6 +72,14 @@ const RootLayout = (props) => {
 	return (
 		<div>
 			<header>
+				<div className={classes.RootLayout}>
+					<li>
+					<NavLink to="/" >홈</NavLink>
+				</li>
+				<li>
+					<NavLink to="inquiry">database조회</NavLink>
+				</li>
+				</div>
 				{(loginCtx.isLoggedIn || loginCtx.isAdmin) ?
 					<ShowIfLoggedIn loginCtx={loginCtx} /> : <ShowIfNonMember />}
 			</header>

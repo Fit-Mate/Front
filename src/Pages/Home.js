@@ -10,13 +10,29 @@ import classes from "./Home.module.css";
 const NonMemberHome = (props) => {
 	return (
 		<div>
+			<header className={classes['main-image']}>
+				<img src={HeaderImage} alt="Exellence in Exercising" />
+			</header>
 			<main>
+				{/**3개월간 차트 요약 */}
 				<h1>Fitmate Presents</h1>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
+				<p>a</p>
 
-				<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 			</main>
 			<footer>
-				<NavLink to="nonMemberform">비회원 운동정보 추천 받기</NavLink>
 			</footer>
 		</div>
 	);

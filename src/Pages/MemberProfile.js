@@ -23,7 +23,7 @@ const MemberProfile = (props) => {
 				<MemberInfo />
 			</main>
 			<footer>
-				<MemberBodyDataSummary />
+				{/*<MemberBodyDataSummary />*/}
 			</footer>
 		</div>
 

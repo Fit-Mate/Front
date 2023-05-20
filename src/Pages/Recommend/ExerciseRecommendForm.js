@@ -3,12 +3,13 @@ import { useLocation } from "react-router";
 import LoginContext from "../../Contexts/login-context";
 import { bodyDataAPI, nonAdminBodyPartAPI, nonAdminMachineAPI, recommendPostAPI } from "../../API/API";
 import { bodyData_data } from "../../DataTypes/data-types";
-import Card from "../../UI/Card"
 
 import { useNavigate } from "react-router-dom";
 
 import ExerciseRecommend from "./ExerciseRecommend";
 import RecentBodyDataModal from "./RecentBodyDataModal";
+import Card from "../../UI/Card";
+import classes from "./Recommend.module.css";
 
 /**
  * Rendering Checkbox of BodyPartList Dynamically
@@ -24,7 +25,7 @@ const ShowBodyPartCheckbox = (props) => {
 			<header>
 				<h2>운동 부위 선택</h2>
 			</header>
-			<section>
+			<section className={classes.RecommendCheckBox}>
 				<ul>
 					{bodyPartList.map((bodyPart, index) => {
 						return (
@@ -64,7 +65,7 @@ const ShowMachineCheckbox = (props) => {
 			<header>
 				<h2>운동 부위에 따른 기구 선택</h2>
 			</header>
-			<section>
+			<section className={classes.RecommendCheckBox}>
 				<ul>
 					{machineList.map((machine, index) => {
 						return (
@@ -270,7 +271,7 @@ const ExerciseRecommendForm = (props) => {
 
 
 	return (
-		<div>
+		<div className={classes}>
 			<header> <h1>ExerciseRecommendForm </h1></header>
 			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 			<main>

@@ -1,7 +1,5 @@
 import React from "react";
 
-import { workoutPostAPI } from "../../API/API";
-
 import classes from "../css/FormInput.module.css";
 import { workout_data} from "../../DataTypes/data-types";
 import { workoutAPI, workoutPostAPI, bodyPartAPI } from "../../API/API";
@@ -70,7 +68,7 @@ const WorkoutModify = (props) => {
 
 	const getBodyPartKoreanNameList = () => {
 		const checkedBodyPartKoreanNameList = bodyPartKoreanName.filter((bodyPart, index) => {
-			checkedBodyPart[index] === true;
+			return checkedBodyPart[index] === true;
 		});
 		return checkedBodyPartKoreanNameList;
 	}
@@ -101,7 +99,7 @@ const WorkoutModify = (props) => {
 
 	const handleBodyPartCheckBox = (position) => {
 		const updatedCheckedBodyPart = checkedBodyPart.map((item, index) => {
-			index === position ? !item : item
+			return index === position ? !item : item
 		});
 		setCheckedBodyPart(updatedCheckedBodyPart);
 	}

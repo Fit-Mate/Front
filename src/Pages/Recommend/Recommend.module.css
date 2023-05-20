@@ -1,0 +1,14 @@
+.RecommendCheckBox {
+	width:100%;
+}
+
+.RecommendCheckBox ul {
+	display:flex;
+	list-style-type: none;
+	justify-content: center;
+	flex-wrap:wrap;
+}
+
+.RecommendCheckBox ul li {
+
+}

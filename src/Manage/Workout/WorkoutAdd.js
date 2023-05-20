@@ -1,7 +1,5 @@
 import React from "react";
 
-import { workoutPostAPI } from "../../API/API";
-
 import classes from "../css/FormInput.module.css";
 import { workout_data } from "../../DataTypes/data-types";
 import { workoutAPI, workoutPostAPI, bodyPartAPI } from "../../API/API";
@@ -61,7 +59,7 @@ const WorkoutAdd = (props) => {
 	//checkbox 선택된 bodyPart들을 String으로 반환하기.
 	const getBodyPartKoreanNameList = () => {
 		const checkedBodyPartKoreanNameList = bodyPartKoreanName.filter((bodyPart, index) => {
-			checkedBodyPart[index] === true;
+			return checkedBodyPart[index] === true
 		});
 		return checkedBodyPartKoreanNameList;
 	}
@@ -69,9 +67,6 @@ const WorkoutAdd = (props) => {
 	/**
 	 * useEffect
 	 */
-	React.useEffect(() => {
-		console.log(imageFile);
-	}, [imageFile]);
 
 	//first render: bodyPartKoreanName 가져오기
 	React.useEffect(() => {
@@ -91,7 +86,7 @@ const WorkoutAdd = (props) => {
 
 	const handleBodyPartCheckBox = (position) => {
 		const updatedCheckedBodyPart = checkedBodyPart.map((item, index) => {
-			index === position ? !item : item
+			return index === position ? !item : item
 		});
 		setCheckedBodyPart(updatedCheckedBodyPart);
 	}

@@ -48,7 +48,13 @@ export const signInAction = async ({ request }) => {
 	//없다면 없다고 띄워주기.
 
 	//post요청
-	const response = await loginPostAPI.post("", submission);
+	let response;
+	if (submission.loginId === "admin"){
+		response = await loginPostAPI.post("", submission);
+	}
+	else{
+		response = await loginPostAPI.post("", submission);
+	}
 	//ok / fail check
 	const responseStatus = response.data;
 	console.log(responseStatus)

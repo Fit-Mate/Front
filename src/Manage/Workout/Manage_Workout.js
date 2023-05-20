@@ -6,9 +6,9 @@ import { workoutAPI } from "../../API/API";
 import classes from "../css/Manage_Supplement.module.css";
 
 import WorkoutInquiry from "./WorkoutInquiry";
-//import WorkoutModify from "./WorkoutModify";
-//import WorkoutDelete from "./WorkoutDelete";
-//import WorkoutAdd from "./WorkoutAdd";
+import WorkoutModify from "./WorkoutModify";
+import WorkoutDelete from "./WorkoutDelete";
+import WorkoutAdd from "./WorkoutAdd";
 
 import Modal from "../../UI/Modal";
 import Card, { HeaderCard } from "../../UI/Card";
@@ -92,7 +92,7 @@ const Manage_Workout = (props) => {
 					<td>{workout.koreanName}</td>
 					<td>{workout.description}</td>
 					<td>{workout.videoLink}</td>
-					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanNam)}</td>
+					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)}</td>
 					<td>
 						<button id={workout.id} onClick={handleInquiryClicked}>조회</button>
 					</td>
@@ -126,7 +126,7 @@ const Manage_Workout = (props) => {
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
 		const response = await workoutAPI.get(`/${id}`);
-		const fitData = { ...workout_data, ...response.data };
+		const fitData = { ...workout_data, ...response.data, id:id };
 		setWorkout(fitData);
 		setIsInquiryClicked(true);
 	}
@@ -178,30 +178,30 @@ const Manage_Workout = (props) => {
 	}, [])
 
 	/*	CHECKING workout */
-	//React.useEffect(()=>{
-	//	console.log(workout);
-	//}, [workout])
+	React.useEffect(()=>{
+		console.log(workout);
+	}, [workout])
 
 	/**
 	 * For memo
 	 */
 
-	//{isDeleteClicked &&
-	//	<Modal>
-	//		<WorkoutDelete id={workoutId} onClose={handleModalClose} />
-	//	</Modal>
-	//}
-	//{isAddClicked &&
-	//	<Modal>
-	//		<WorkoutAdd onClose={handleModalClose} />
-	//	</Modal>
-	//}
-	//{/*이미지 상단에 띄우기*/}
-	//{isModifyClicked &&
-	//	<Modal>
-	//		<WorkoutModify workout={workout} id={workoutId} onClose={handleModalClose} />
-	//	</Modal>
-	//}
+	{isDeleteClicked &&
+		<Modal>
+			<WorkoutDelete id={workoutId} onClose={handleModalClose} />
+		</Modal>
+	}
+	{isAddClicked &&
+		<Modal>
+			<WorkoutAdd onClose={handleModalClose} />
+		</Modal>
+	}
+	{/*이미지 상단에 띄우기*/}
+	{isModifyClicked &&
+		<Modal>
+			<WorkoutModify workout={workout} id={workoutId} onClose={handleModalClose} />
+		</Modal>
+	}
 
 	//이미지상단에띄우는기능..?
 	return (

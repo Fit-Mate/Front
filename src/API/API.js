@@ -61,6 +61,11 @@ export const workoutPutAPI = axios.create({
 	withCredentials: true
 });
 
+export const workoutImageAPI = axios.create({
+	baseURL: '/admin/workouts',
+	withCredentials: true,
+	responseType: "arraybuffer"
+});
 
 /**
  * Manage_Machine API
@@ -113,12 +118,17 @@ export const loginPostAPI = axios.create({
 	withCredentials: true
 });
 
-export const logoutPuuAPI= axios.create({
+export const logoutPutAPI= axios.create({
 	method: 'put',
 	baseURL: '/logout',
 	withCredentials: true
 });
 
+export const loginAdminPostAPI = axios.create({
+	method: 'post',
+	baseURL: '/admin/login',
+	withCredentials: true
+});
 
 
 /**

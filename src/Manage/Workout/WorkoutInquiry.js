@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 import { workoutImageAPI } from "../../API/API";
+import Button from "../../UI/Button";
 
 /**
  * @param {*} props : workout, handleModalClose
@@ -49,7 +50,7 @@ const WorkoutInquiry = (props) => {
 				{description}
 			</ul>
 
-			<button onClick={handleModalClose}>닫기</button>
+			<Button onClick={handleModalClose}>닫기</Button>
 		</div >
 
 	);

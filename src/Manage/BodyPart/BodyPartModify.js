@@ -62,6 +62,7 @@ const BodyPartModify = (props) => {
 		const response = await bodyPartPutAPI.put(`/${props.id}`, bPart);
 		//정보 초기화
 		initAllInputRefs();
+		props.onClose();
 	}
 
 	/**
@@ -91,7 +92,7 @@ const BodyPartModify = (props) => {
 				</div>
 				<div>
 					<Button type="button" onClick={handleModalClose}>닫기</Button>
-					<Button type="submit" onClick={handleModalClose}>수정</Button>
+					<Button type="submit" onClick={handleBodyPartSubmit}>수정</Button>
 				</div>
 			</form>
 		</div>

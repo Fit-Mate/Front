@@ -109,10 +109,6 @@ const WorkoutModify = (props) => {
 	/**
 	 * useEffect
 	 */
-	React.useEffect(() => {
-		console.log(imageFile);
-	}, [imageFile]);
-
 	//first render: bodyPartKoreanName 가져오기
 	React.useEffect(() => {
 		loadBodyPartKoreanName();
@@ -167,6 +163,7 @@ const WorkoutModify = (props) => {
 		const response = await workoutPutAPI.put(`${props.id}}`, formData);
 		//정보 초기화
 		initAllInput();
+		props.onClose();
 	}
 
 	/**

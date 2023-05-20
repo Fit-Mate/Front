@@ -78,8 +78,6 @@ export const machineAPI = axios.create({
 export const machinePostAPI = axios.create({
 	method: 'post',
 	baseURL: '/admin/machines',
-	headers: {
-	},
 	withCredentials: true
 });
 

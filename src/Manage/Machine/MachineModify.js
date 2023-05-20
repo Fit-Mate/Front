@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "../css/FormInput.module.css";
 import { machine_data} from "../../DataTypes/data-types";
-import { machineAPI, machinePostAPI, bodyPartAPI } from "../../API/API";
+import { machineAPI, machinePostAPI, bodyPartAPI, machinePutAPI } from "../../API/API";
 
 /**css */
 import Button from "../../UI/Button";
@@ -10,6 +10,41 @@ import Button from "../../UI/Button";
 /**
  * @param {*} props : onClose,
  */
+
+const BodyPartCheckBoxList = (props) => {
+	const bodyPartKoreanName = [...props.bodyPartKoreanName];
+
+	return (
+		bodyPartKoreanName.map((bodyPart, index) => {
+			return (
+				<li key={index}>
+					<input
+						type="checkbox"
+						id={bodyPart}
+						name={bodyPart}
+						value={bodyPart}
+						onChange={() => { props.handleBodyPartCheckBox(index) }}
+					/>
+					<label htmlFor={bodyPart}>{bodyPart}</label>
+				</li>
+			)
+		}));
+}
+
+const BodyPartForm = (props) => {
+	return (
+		<fieldset>
+			<legend>Select one or more BodyParts corresponding to the Workout</legend>
+			<ul>
+				<BodyPartCheckBoxList bodyPartKoreanName={props.bodyPartKoreanName} handleBodyPartCheckBox={props.handleBodyPartCheckBox} />
+			</ul>
+		</fieldset>
+	);
+}
+
+
+
+
 const MachineModify = (props) => {
 
 	/**Refs */
@@ -32,7 +67,6 @@ const MachineModify = (props) => {
 	const initAllInput = () => {
 		eNameRef.current.value = "";
 		kNameRef.current.value = "";
-		setBodyPartKoreanName([]);
 		setCheckedBodyPart([]);
 	}
 
@@ -47,7 +81,8 @@ const MachineModify = (props) => {
 	const loadBodyPartKoreanName = async () => {
 		const response = await bodyPartAPI.get("/list");
 		const bodyPartList = response.data;
-		setBodyPartKoreanName(bodyPartList);
+		setBodyPartKoreanName(bodyPartList.bodyPartKoreanName);
+		setCheckedBodyPart(new Array(bodyPartList.bodyPartKoreanName.length).fill(false));
 	}
 
 	const loadAndSetRef = async () => {
@@ -101,46 +136,16 @@ const MachineModify = (props) => {
 		};
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
-		const formData = new FormData();
-		appendFormData(formData, machineData);
 
-		for (let [key, val] of formData) {
-			console.log(`key: ${key} + val ${val}`);
-		}
-
-		const response = await machinePostAPI.post("", formData);
+		const response = await machinePutAPI.put(`${props.id}`, machineData);
 		//정보 초기화
 		initAllInput();
+		props.onClose();
 	}
 
 	/**
 	 * Return HTML VALUES
 	 */
-
-	const showBodyPartCheckbox = () => {
-		const listOfBodyPartCheckBox = () => {
-			return (
-				bodyPartKoreanName.map((bodyPart, index) => {
-					<div>
-						<input
-							type="checkbox"
-							id={bodyPart}
-							name={bodyPart}
-							value={bodyPart}
-							checked={checkedBodyPart[index]}
-							onChange={handleBodyPartCheckBox(index)}
-						 />
-						 <label htmlFor={bodyPart}>{bodyPart}</label>
-					</div>
-				}));
-		}
-		return (
-			<fieldset>
-				<legend>Select one or more BodyParts corresponding to the Machine</legend>
-				{listOfBodyPartCheckBox}
-			</fieldset>
-		);
-	}
 
 	//protien을 protein 으로 적었음..
 	return (
@@ -157,9 +162,9 @@ const MachineModify = (props) => {
 					<label htmlFor="koreanName">koreanName</label>
 					<input type="text" id="koreanName" placeholder="koreanName" ref={kNameRef}></input>
 				</div>
-				{showBodyPartCheckbox()}
+				<BodyPartForm bodyPartKoreanName={bodyPartKoreanName} handleBodyPartCheckBox={handleBodyPartCheckBox} />
 				<div>
-					<Button type="button" onCliCk={handleModalClose}>닫기</Button>
+					<Button type="button" onClick={handleModalClose}>닫기</Button>
 					<Button type="submit">추가</Button>
 				</div>
 			</form>

@@ -172,12 +172,12 @@ const Manage_Machine = (props) => {
 
 	React.useEffect(() => {
 		loadMachineBatch(1);
-	}, [])
+	}, []);
 
-	/*	CHECKING machine */
-	//React.useEffect(()=>{
-	//	console.log(machine);
-	//}, [machine])
+	React.useEffect(() => {
+		loadMachineBatch(1);
+	}, [isAddClicked, isDeleteClicked, isInquiryClicked, isModifyClicked]);
+
 
 	/**
 	 * For memo

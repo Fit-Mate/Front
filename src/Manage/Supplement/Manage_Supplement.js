@@ -175,6 +175,11 @@ const Manage_Supplement = (props) => {
 		loadSupplementBatch(1);
 	}, [])
 
+	React.useEffect(() => {
+		loadSupplementBatch(1);
+	}, [isAddClicked, isDeleteClicked, isInquiryClicked, isModifyClicked]);
+
+
 	/*	CHECKING SUPPLEMENT */
 	//React.useEffect(()=>{
 	//	console.log(supplement);

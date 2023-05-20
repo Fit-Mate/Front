@@ -70,6 +70,7 @@ const BodyPartAdd = (props) => {
 		const response = await bodyPartPostAPI.post("", bPart);
 		//정보 초기화
 		initAllInputRefs();
+		props.onClose();
 	}
 
 	/**

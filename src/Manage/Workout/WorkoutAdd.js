@@ -155,6 +155,7 @@ const WorkoutAdd = (props) => {
 		//정보 초기화
 		initAllInput();
 		setImageFile(new File([""], ""));
+		props.onClose();
 	}
 
 	/**

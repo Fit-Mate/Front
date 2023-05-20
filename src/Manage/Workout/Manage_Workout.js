@@ -179,7 +179,11 @@ const Manage_Workout = (props) => {
 	/*	CHECKING workout */
 	React.useEffect(() => {
 		console.log(workout);
-	}, [workout])
+	}, [workout]);
+
+	React.useEffect(() => {
+		loadWorkoutBatch(1);
+	}, [isAddClicked, isDeleteClicked, isInquiryClicked, isModifyClicked]);
 
 	/**
 	 * For memo

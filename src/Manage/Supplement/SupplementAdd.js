@@ -38,8 +38,8 @@ const SupplementAdd = (props) => {
 	 */
 
 	//handleSupplementAdd
+	const [imageFile, setImageFile] = React.useState(new File([""], ""));
 	const [submitSupplementType, setSubmitSupplementType] = React.useState("Protein");
-	const [imageFile, setImageFile] = React.useState(null);
 
 	/**
 	 * Functions
@@ -79,9 +79,6 @@ const SupplementAdd = (props) => {
 	/**
 	 * useEffect
 	 */
-	React.useEffect(()=>{
-		console.log(imageFile);
-	},[imageFile] );
 
 	/**
 	 * Handler
@@ -118,15 +115,10 @@ const SupplementAdd = (props) => {
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
 		const formData = new FormData();
-		{
-			const entries = Object.entries(sup);
-			for (let [key, val] of entries) {
-				formData.append(key, JSON.stringify(val));
-			}
-		}
 		formData.append("image", imageFile);
 
 		console.log(imageFile);
+		appendFormData(formData, sup);
 
 
 		for (let [key, val] of formData) {
@@ -136,7 +128,7 @@ const SupplementAdd = (props) => {
 		const response = await supplementPostAPI.post("", formData);
 		//정보 초기화
 		initAllInputRefs();
-		setImageFile(null);
+		setImageFile(new File([""]), "");
 	}
 
 	const handleSupplementDropdown = (event) => {

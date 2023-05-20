@@ -2,7 +2,7 @@ import React from "react";
 
 import classes from "../css/FormInput.module.css";
 import { workout_data } from "../../DataTypes/data-types";
-import { workoutAPI, workoutPostAPI, bodyPartAPI } from "../../API/API";
+import { workoutAPI, workoutPostAPI, bodyPartAPI, workoutPutAPI } from "../../API/API";
 
 /**css */
 import Button from "../../UI/Button";
@@ -17,9 +17,8 @@ const BodyPartCheckBoxList = (props) => {
 	return (
 		bodyPartKoreanName.map((bodyPart, index) => {
 			return (
-				<li>
+				<li key={index}>
 					<input
-						key={index}
 						type="checkbox"
 						id={bodyPart}
 						name={bodyPart}
@@ -117,7 +116,6 @@ const WorkoutModify = (props) => {
 	//first render: bodyPartKoreanName 가져오기
 	React.useEffect(() => {
 		loadBodyPartKoreanName();
-		console.log(checkedBodyPart);
 		loadAndSetRef();
 	}, []);
 
@@ -166,10 +164,9 @@ const WorkoutModify = (props) => {
 			console.log(`key: ${key} + val ${val}`);
 		}
 
-		const response = await workoutPostAPI.post("", formData);
+		const response = await workoutPutAPI.put(`${props.id}}`, formData);
 		//정보 초기화
 		initAllInput();
-		setImageFile([]);
 	}
 
 	/**
@@ -209,7 +206,7 @@ const WorkoutModify = (props) => {
 					<input type="file" id="fileUpload" onChange={handleWorkoutFile}></input>
 				</div>
 				<Button type="button" onClick={handleModalClose}>닫기</Button>
-				<Button type="submit">추가</Button>
+				<Button type="submit">수정</Button>
 			</form>
 		</div>
 	);

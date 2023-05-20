@@ -1,24 +1,39 @@
 .RootLayout {
+  width:100%;
   font-size: 20px;
-  float:left;
-  position:fixed;
 }
 
 .RootLayout ul {
+  width:100%;
   list-style-type: none;
   margin: 0;
   padding: 10px;
+  top: 0;
   overflow: hidden;
   background-color: #333;
-  position: sticky;
-  top: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.RootLayout li {
-  float: left;
+.RootLayout ul li:first-child {
+  margin-right:auto;
 }
 
-.RootLayout li a {
+.RootLayout ul li:last-child {
+  margin-right:auto;
+}
+
+#logout {
+  float:right;
+}
+
+#login {
+  float:right;
+}
+
+.RootLayout ul li a {
   color: white;
   text-align: center;
   padding: 16px 16px;

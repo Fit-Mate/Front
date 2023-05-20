@@ -11,7 +11,7 @@ export const supplement_type = {
 	flavor: "",
 
 	source: "",
-	protienPerServing: 0.0,
+	proteinPerServing: 0.0,
 	fatPerServing: 0.0,
 	carbohydratePerServing: 0.0,
 }

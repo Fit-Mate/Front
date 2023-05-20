@@ -71,10 +71,9 @@ const Manage_Supplement = (props) => {
 				<tr>
 					<th>englishName</th>
 					<th>koreanName</th>
+					<th>flavor</th>
 					<th>price</th>
 					<th>servings</th>
-					<th>description</th>
-					<th>supplementType</th>
 					<th>조회</th>
 					<th>수정</th>
 					<th>삭제</th>
@@ -89,10 +88,9 @@ const Manage_Supplement = (props) => {
 				<tr key={supplement.id}>
 					<td>{supplement.englishName}</td>
 					<td>{supplement.koreanName}</td>
+					<td>{supplement.flavor}</td>
 					<td>{supplement.price}</td>
 					<td>{supplement.servings}</td>
-					<td>{supplement.description}</td>
-					<td>{supplement.supplementType}</td>
 					<td>
 						<Button id={supplement.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>

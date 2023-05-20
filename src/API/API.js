@@ -15,13 +15,20 @@ export const supplementAPI = axios.create({
 	withCredentials: true
 });
 
+export const supplementImageAPI = axios.create({
+	baseURL: '/admin/supplements',
+	withCredentials: true,
+	responseType: "arraybuffer"
+});
+
+
 export const supplementPostAPI = axios.create({
 	method: 'post',
 	baseURL: '/admin/supplements',
 	headers: {
 		"Content-Type": "multipart/form-data",
 	},
-	withCredentials: true
+	withCredentials: true,
 });
 
 export const supplementPutAPI = axios.create({

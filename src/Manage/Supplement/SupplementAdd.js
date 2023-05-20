@@ -118,11 +118,16 @@ const SupplementAdd = (props) => {
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
 		const formData = new FormData();
+		{
+			const entries = Object.entries(sup);
+			for (let [key, val] of entries) {
+				formData.append(key, JSON.stringify(val));
+			}
+		}
 		formData.append("image", imageFile);
 
 		console.log(imageFile);
 
-		appendFormData(formData, sup);
 
 		for (let [key, val] of formData) {
 			console.log(`key: ${key} + val ${val}`);
@@ -131,7 +136,7 @@ const SupplementAdd = (props) => {
 		const response = await supplementPostAPI.post("", formData);
 		//정보 초기화
 		initAllInputRefs();
-		setImageFile([]);
+		setImageFile(null);
 	}
 
 	const handleSupplementDropdown = (event) => {
@@ -210,7 +215,7 @@ const SupplementAdd = (props) => {
 				{submitSupplementType !== 'BCAA' && showAdditionalSupplemnetInput()}
 				<div className={classes.control}>
 					<label htmlFor="fileUpload">fileUpload</label>
-					<input type="file" id="fileUpload" onChange={handleSupplementFile}></input>
+					<input type="file" multiple="multiple" id="fileUpload" onChange={handleSupplementFile}></input>
 				</div>
 				<div>
 					<Button type="button" onClick={handleModalClose}>닫기</Button>

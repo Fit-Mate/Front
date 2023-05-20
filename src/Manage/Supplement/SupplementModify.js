@@ -34,7 +34,7 @@ const SupplementModify = (props) => {
 
 	//handleSupplementAdd
 	const [submitSupplementType, setSubmitSupplementType] = React.useState(props.supplement.supplementType);
-	const [imageFile, setImageFile] = React.useState([]);
+	const [imageFile, setImageFile] = React.useState(null);
 
 	/**
 	 * Functions
@@ -88,19 +88,21 @@ const SupplementModify = (props) => {
 			flavor: flavorRef.current.value,
 			price: priceRef.current.value *= 1,
 			servings: servingsRef.current.value *= 1,
-			source: sourceRef.current !== null ? sourceRef.current: "",
-			carbohydratePerServing: carbohydratePerServingRef.current !== null ? carbohydratePerServingRef.current*= 1.0 : 1.0,
-			proteinPerServing: proteinPerServingRef.current != null ? proteinPerServingRef.current*= 1.0 : 1.0,
-			fatPerServing: fatPerServingRef.current != null ? fatPerServingRef.current*= 1.0 : 1.0,
+			source: sourceRef.current.value !== null ? sourceRef.current.value : "",
+			carbohydratePerServing: carbohydratePerServingRef.current.value !== null ? carbohydratePerServingRef.current.value *= 1.0 : 1.0,
+			proteinPerServing: proteinPerServingRef.current.value != null ? proteinPerServingRef.current.value *= 1.0 : 1.0,
+			fatPerServing: fatPerServingRef.current.value != null ? fatPerServingRef.current.value *= 1.0 : 1.0,
 		};
 
 		// https://velog.io/@shin6403/React-Form-Data-%EC%A0%84%EC%86%A1
-		const formData = new FormData();
-		formData.append("image", imageFile);
-		console.log(imageFile);
-		appendFormData(formData, sup);
+		//const formData = new FormData();
+		//formData.append("image", imageFile);
+		//console.log(imageFile);
+		//appendFormData(formData, sup);
+		const testSup = {...sup, image:imageFile}
 
-		const response = await supplementPutAPI.put(`/${props.supplement.id}`, formData);
+		//const response = await supplementPutAPI.put(`/${props.supplement.id}`, formData);
+		const responses = await supplementPutAPI.put(`/${props.supplement.id}`, testSup);
 		//정보 초기화
 		setImageFile();
 		initAllInputRefs();
@@ -140,19 +142,19 @@ const SupplementModify = (props) => {
 			<div>
 				<div className={classes.control}>
 					<label htmlFor="source">source</label>
-					<input type="text" id="source" placeholder={sourceRef.current.value} ref={sourceRef} defaultValue={sourceRef.current.value}></input>
+					<input type="text" id="source" placeholder={sourceRef.current} ref={sourceRef} defaultValue={sourceRef.current}></input>
 				</div>
 				<div className={classes.control}>
 					<label htmlFor="carbohydratePerServing">carbohydratePerServing</label>
-					<input type="number" id="carbohydratePerServing" step="0.01" placeholder="0.01" ref={carbohydratePerServingRef}></input>
+					<input type="number" id="carbohydratePerServing" step="0.01" placeholder={0.01} ref={carbohydratePerServingRef} defaultValue={carbohydratePerServingRef.current}></input>
 				</div>
 				<div className={classes.control}>
 					<label htmlFor="proteinPerServing">proteinPerServing</label>
-					<input type="number" id="proteinPerServing" step="0.01" placeholder="0.01" ref={proteinPerServingRef}></input>
+					<input type="number" id="proteinPerServing" step="0.01" placeholder={0.01} ref={proteinPerServingRef} defaultValue={proteinPerServingRef.current}></input>
 				</div>
 				<div className={classes.control}>
 					<label htmlFor="fatPerServing">fatPerServing</label>
-					<input type="number" id="fatPerServing" step="0.01" placeholder="fatPerServing" ref={fatPerServingRef}></input>
+					<input type="number" id="fatPerServing" step="0.01" placeholder={0.01} ref={fatPerServingRef} defaultValue={fatPerServingRef.current}></input>
 				</div>
 			</div>
 		);

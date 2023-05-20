@@ -18,10 +18,10 @@ const ShowIfLoggedIn = (props) => {
 	}
 
 	return (
-		<div className={classes.RootLayout}>
+		<div>
 			<ul>
 				<li>
-					<NavLink to="/" onClick={handleSignOut}>로그아웃</NavLink>
+					<NavLink id='logout' to="/" onClick={handleSignOut}>로그아웃</NavLink>
 				</li>
 				<li>
 					<NavLink to="/" >홈</NavLink>
@@ -53,16 +53,16 @@ const ShowIfLoggedIn = (props) => {
 
 const ShowIfNonMember = () => {
 	return (
-		<div className={classes.RootLayout}>
+		<div>
 			<ul>
+				<li>
+					<NavLink id='login' to="signIn">로그인</NavLink>
+				</li>
 				<li>
 					<NavLink to="/" >홈</NavLink>
 				</li>
 				<li>
 					<NavLink to="inquiry">database조회</NavLink>
-				</li>
-				<li>
-					<NavLink to="signIn">로그인</NavLink>
 				</li>
 				<li>
 					<NavLink to="signUp">회원가입</NavLink>
@@ -85,7 +85,7 @@ const RootLayout = (props) => {
 
 	return (
 		<div>
-			<header>
+			<header className={classes.RootLayout}>
 				{(loginCtx.isLoggedIn || loginCtx.isAdmin) ?
 					<ShowIfLoggedIn loginCtx={loginCtx} /> : <ShowIfNonMember />}
 			</header>

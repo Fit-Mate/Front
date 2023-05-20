@@ -21,15 +21,6 @@ const NonMemberHome = (props) => {
 				<p>a</p>
 				<p>a</p>
 				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
 
 			</main>
 			<footer>
@@ -47,14 +38,6 @@ const MemberHome = (props) => {
 			<main>
 				{/**3개월간 차트 요약 */}
 				<h1>Fitmate Presents</h1>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
-				<p>a</p>
 				<p>a</p>
 				<p>a</p>
 				<p>a</p>

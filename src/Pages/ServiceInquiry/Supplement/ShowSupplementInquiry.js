@@ -180,7 +180,7 @@ const ShowSupplementInquiry = (props) => {
 						name="supplementType"
 						onChange={e => setInputSupplementSeacrh(e.target.value)}
 					>
-						<option value={null}>nothing</option>
+						<option value={null}>all</option>
 						<option value='BCAA'>BCAA</option>
 						<option value='Protein'>Protein</option>
 						<option value='Gainer'>Gainer</option>

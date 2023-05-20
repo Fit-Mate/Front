@@ -7,7 +7,7 @@ const Inquiry = (props) => {
 	return (
 		<div>
 			<p>Inquiry</p>
-			{/*<ShowSupplementInquiry />*/}
+			<ShowSupplementInquiry />
 			<ShowWorkoutInquiry />
 		</div>
 

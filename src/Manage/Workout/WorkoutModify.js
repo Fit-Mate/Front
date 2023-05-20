@@ -12,21 +12,23 @@ import Button from "../../UI/Button";
  */
 
 const BodyPartCheckBoxList = (props) => {
+	const bodyPartKoreanName = [...props.bodyPartKoreanName];
 
-	const bodyPartKoreanName = [...props.bodyPartKoreanName]
 	return (
 		bodyPartKoreanName.map((bodyPart, index) => {
-			<li>
-				<input
-					key={index}
-					type="checkbox"
-					id={bodyPart}
-					name={bodyPart}
-					value={bodyPart}
-					onChange={props.handleBodyPartCheckBox(index)}
-				/>
-				<label htmlFor={bodyPart}>{bodyPart}</label>
-			</li>
+			return (
+				<li>
+					<input
+						key={index}
+						type="checkbox"
+						id={bodyPart}
+						name={bodyPart}
+						value={bodyPart}
+						onChange={() => { props.handleBodyPartCheckBox(index) }}
+					/>
+					<label htmlFor={bodyPart}>{bodyPart}</label>
+				</li>
+			)
 		}));
 }
 
@@ -35,7 +37,7 @@ const BodyPartForm = (props) => {
 		<fieldset>
 			<legend>Select one or more BodyParts corresponding to the Workout</legend>
 			<ul>
-				<BodyPartCheckBoxList bodyPartKoreanName={props.bodyPartKoreanName} handleBodyPartCheckBox={props.handleBodyPartCheckBox}/>
+				<BodyPartCheckBoxList bodyPartKoreanName={props.bodyPartKoreanName} handleBodyPartCheckBox={props.handleBodyPartCheckBox} />
 			</ul>
 		</fieldset>
 	);
@@ -70,11 +72,9 @@ const WorkoutModify = (props) => {
 		kNameRef.current.value = "";
 		descriptionRef.current.value = "";
 		videoLinkRef.current.value = "";
-		setBodyPartKoreanName([]);
-		setCheckedBodyPart([]);
+		setCheckedBodyPart(new Array(bodyPartKoreanName.length).fill(false));
 		setImageFile(new File[""], "");
 	}
-
 
 	const appendFormData = (formData, workoutObj) => {
 		Object.entries(workoutObj).map(([key, value]) => {
@@ -87,6 +87,7 @@ const WorkoutModify = (props) => {
 		const response = await bodyPartAPI.get("/list");
 		const bodyPartList = response.data;
 		setBodyPartKoreanName(bodyPartList.bodyPartKoreanName);
+		setCheckedBodyPart(new Array(bodyPartList.bodyPartKoreanName.length).fill(false));
 	}
 
 	const loadAndSetRef = async () => {
@@ -116,8 +117,9 @@ const WorkoutModify = (props) => {
 	//first render: bodyPartKoreanName 가져오기
 	React.useEffect(() => {
 		loadBodyPartKoreanName();
+		console.log(checkedBodyPart);
 		loadAndSetRef();
-	}, [])
+	}, []);
 
 	/**
 	 * Handler
@@ -139,6 +141,8 @@ const WorkoutModify = (props) => {
 
 	const handleWorkoutSubmit = async (event) => {
 		event.preventDefault();
+		console.log(bodyPartKoreanName);
+		console.log(checkedBodyPart)
 
 		const checkedBodyPartKoreanNameList = getBodyPartKoreanNameList();
 
@@ -197,15 +201,15 @@ const WorkoutModify = (props) => {
 					<label htmlFor="description">description</label>
 					<input type="text" id="description" placeholder="description" ref={descriptionRef}></input>
 				</div>
-				<BodyPartForm bodyPartKoreanName={bodyPartKoreanName} handleBodyPartCheckBox={handleBodyPartCheckBox}/>
+
+				<BodyPartForm bodyPartKoreanName={bodyPartKoreanName} handleBodyPartCheckBox={handleBodyPartCheckBox} />
+
 				<div className={classes.control}>
 					<label htmlFor="fileUpload">fileUpload</label>
 					<input type="file" id="fileUpload" onChange={handleWorkoutFile}></input>
 				</div>
-				<div>
-					<Button type="button" onClick={handleModalClose}>닫기</Button>
-					<Button type="submit">추가</Button>
-				</div>
+				<Button type="button" onClick={handleModalClose}>닫기</Button>
+				<Button type="submit">추가</Button>
 			</form>
 		</div>
 	);

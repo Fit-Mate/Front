@@ -171,9 +171,9 @@ const Manage_BodyPart = (props) => {
 
 
 	/*	CHECKING bodyPart */
-	//React.useEffect(()=>{
-	//	console.log(bodyPart);
-	//}, [bodyPart])
+	React.useEffect(()=>{
+		console.log(bodyPart);
+	}, [bodyPart])
 
 	//이미지상단에띄우는기능..?
 	return (

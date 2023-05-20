@@ -6,9 +6,9 @@ import { machineAPI } from "../../API/API";
 import classes from "../css/Manage_Supplement.module.css";
 
 import MachineInquiry from "./MachineInquiry";
-//import MachineModify from "./MachineModify";
-//import MachineDelete from "./MachineDelete";
-//import MachineAdd from "./MachineAdd";
+import MachineModify from "./MachineModify";
+import MachineDelete from "./MachineDelete";
+import MachineAdd from "./MachineAdd";
 
 import Modal from "../../UI/Modal";
 import Card, { HeaderCard } from "../../UI/Card";
@@ -20,7 +20,7 @@ const Manage_Machine = (props) => {
 	/**
 	 * Non State
 	 */
-	const dummy_machine_data = deepCopy(workout_data);
+	const dummy_machine_data = deepCopy(machine_data);
 	/**
 	 * State
 	 *
@@ -28,7 +28,7 @@ const Manage_Machine = (props) => {
 	 */
 
 	const [machineBatch, setMachineBatch] = React.useState([]);
-	const [machine, setMachine] = React.useState(workout_data);
+	const [machine, setMachine] = React.useState(machine_data);
 	const [machineId, setMachineId] = React.useState('');
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
@@ -46,13 +46,14 @@ const Manage_Machine = (props) => {
 			return "";
 		const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue) =>
 			`${accumulator}\n${currentValue}`
-			, [])
+			, []);
+		return bodyPartParagraph;
 	}
 
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
 	const loadMachineBatch = async () => {
-		const machineResponse = await workoutAPI.get(`/list/${currentPage}`);
+		const machineResponse = await machineAPI.get(`/list/${currentPage}`);
 		const fitData = machineResponse.data.map((obj) => {
 			return {
 				...machine_data,
@@ -83,12 +84,12 @@ const Manage_Machine = (props) => {
 	}
 
 	const makeTableBodyElements = () => {
-		const columns = machineBatch.map((workout) => {
+		const columns = machineBatch.map((machine) => {
 			return (
 				<tr key={machine.id}>
 					<td>{machine.englishName}</td>
 					<td>{machine.koreanName}</td>
-					<td>{bodyPartListToStringWithNewlines(machine.bodyPartKoreanNam)}</td>
+					<td>{bodyPartListToStringWithNewlines(machine.bodyPartKoreanName)}</td>
 					<td>
 						<Button id={machine.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>
@@ -182,31 +183,30 @@ const Manage_Machine = (props) => {
 	 * For memo
 	 */
 
-	//{isDeleteClicked &&
-	//	<Modal>
-	//		<MachineDelete id={machineId} onClose={handleModalClose} />
-	//	</Modal>
-	//}
-	//{isAddClicked &&
-	//	<Modal>
-	//		<MachineAdd onClose={handleModalClose} />
-	//	</Modal>
-	//}
-	//{/*이미지 상단에 띄우기*/}
-	//{isModifyClicked &&
-	//	<Modal>
-	//		<MachineModify machine={workout} id={workoutId} onClose={handleModalClose} />
-	//	</Modal>
-	//}
-
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
 			<HeaderCard title={props.title} />
 			{isInquiryClicked &&
 				<Modal>
-					<MachineInquiry machine={workout} onClose={handleModalClose} />
-			</Modal>
+					<MachineInquiry machine={machine} onClose={handleModalClose} />
+				</Modal>
+			}
+			{isDeleteClicked &&
+				<Modal>
+					<MachineDelete id={machineId} onClose={handleModalClose} />
+				</Modal>
+			}
+			{isAddClicked &&
+				<Modal>
+					<MachineAdd onClose={handleModalClose} />
+				</Modal>
+			}
+			{/*이미지 상단에 띄우기*/}
+			{isModifyClicked &&
+				<Modal>
+					<MachineModify machine={machine} id={machineId} onClose={handleModalClose} />
+				</Modal>
 			}
 			<table>
 				{makeTableHead(machine_data)}

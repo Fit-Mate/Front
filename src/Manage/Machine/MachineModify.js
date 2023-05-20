@@ -1,7 +1,5 @@
 import React from "react";
 
-import { machinePostAPI } from "../../API/API";
-
 import classes from "../css/FormInput.module.css";
 import { machine_data} from "../../DataTypes/data-types";
 import { machineAPI, machinePostAPI, bodyPartAPI } from "../../API/API";
@@ -62,7 +60,7 @@ const MachineModify = (props) => {
 
 	const getBodyPartKoreanNameList = () => {
 		const checkedBodyPartKoreanNameList = bodyPartKoreanName.filter((bodyPart, index) => {
-			checkedBodyPart[index] === true;
+			return checkedBodyPart[index] === true;
 		});
 		return checkedBodyPartKoreanNameList;
 	}
@@ -84,13 +82,9 @@ const MachineModify = (props) => {
 		props.onClose();
 	}
 
-	const handleMachineFile = (event) => {
-		setImageFile(event.target.files[0]);
-	}
-
 	const handleBodyPartCheckBox = (position) => {
 		const updatedCheckedBodyPart = checkedBodyPart.map((item, index) => {
-			index === position ? !item : item
+			return index === position ? !item : item
 		});
 		setCheckedBodyPart(updatedCheckedBodyPart);
 	}

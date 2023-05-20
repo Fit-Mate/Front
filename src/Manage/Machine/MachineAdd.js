@@ -55,7 +55,7 @@ const MachineAdd = (props) => {
 	//checkbox 선택된 bodyPart들을 String으로 반환하기.
 	const getBodyPartKoreanNameList = () => {
 		const checkedBodyPartKoreanNameList = bodyPartKoreanName.filter((bodyPart, index) => {
-			checkedBodyPart[index] === true;
+			return checkedBodyPart[index] === true;
 		});
 		return checkedBodyPartKoreanNameList;
 	}
@@ -78,7 +78,7 @@ const MachineAdd = (props) => {
 
 	const handleBodyPartCheckBox = (position) => {
 		const updatedCheckedBodyPart = checkedBodyPart.map((item, index) => {
-			index === position ? !item : item
+			return index === position ? !item : item
 		});
 		setCheckedBodyPart(updatedCheckedBodyPart);
 	}

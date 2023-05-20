@@ -46,7 +46,8 @@ const Manage_Workout = (props) => {
 			return "";
 		const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue) =>
 			`${accumulator}\n${currentValue}`
-			, [])
+			, []);
+		return bodyPartParagraph;
 	}
 
 	//list가 없을 경우에는...?
@@ -74,7 +75,6 @@ const Manage_Workout = (props) => {
 					<th>englishName</th>
 					<th>koreanName</th>
 					<th>description</th>
-					<th>videoLink</th>
 					<th>bodyPartKoreanName</th>
 					<th>조회</th>
 					<th>수정</th>
@@ -90,17 +90,16 @@ const Manage_Workout = (props) => {
 				<tr key={workout.id}>
 					<td>{workout.englishName}</td>
 					<td>{workout.koreanName}</td>
-					<td>{workout.description}</td>
-					<td>{workout.videoLink}</td>
+					<td>{workout.description.slice(0, 20) + "..."}</td>
 					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)}</td>
 					<td>
-						<button id={workout.id} onClick={handleInquiryClicked}>조회</button>
+						<Button id={workout.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>
 					<td>
-						<button id={workout.id} onClick={handleModifyClicked}>수정</button>
+						<Button id={workout.id} onClick={handleModifyClicked}>수정</Button >
 					</td>
 					<td>
-						<button id={workout.id} onClick={handleDeleteClicked}>삭제</button>
+						<Button id={workout.id} onClick={handleDeleteClicked}>삭제</Button >
 					</td>
 				</tr>
 			);
@@ -126,7 +125,7 @@ const Manage_Workout = (props) => {
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
 		const response = await workoutAPI.get(`/${id}`);
-		const fitData = { ...workout_data, ...response.data, id:id };
+		const fitData = { ...workout_data, ...response.data, id: id };
 		setWorkout(fitData);
 		setIsInquiryClicked(true);
 	}
@@ -178,7 +177,7 @@ const Manage_Workout = (props) => {
 	}, [])
 
 	/*	CHECKING workout */
-	React.useEffect(()=>{
+	React.useEffect(() => {
 		console.log(workout);
 	}, [workout])
 
@@ -186,22 +185,6 @@ const Manage_Workout = (props) => {
 	 * For memo
 	 */
 
-	{isDeleteClicked &&
-		<Modal>
-			<WorkoutDelete id={workoutId} onClose={handleModalClose} />
-		</Modal>
-	}
-	{isAddClicked &&
-		<Modal>
-			<WorkoutAdd onClose={handleModalClose} />
-		</Modal>
-	}
-	{/*이미지 상단에 띄우기*/}
-	{isModifyClicked &&
-		<Modal>
-			<WorkoutModify workout={workout} id={workoutId} onClose={handleModalClose} />
-		</Modal>
-	}
 
 	//이미지상단에띄우는기능..?
 	return (
@@ -210,6 +193,22 @@ const Manage_Workout = (props) => {
 			{isInquiryClicked &&
 				<Modal>
 					<WorkoutInquiry workout={workout} onClose={handleModalClose} />
+				</Modal>
+			}
+			{isDeleteClicked &&
+				<Modal>
+					<WorkoutDelete id={workoutId} onClose={handleModalClose} />
+				</Modal>
+			}
+			{isAddClicked &&
+				<Modal>
+					<WorkoutAdd onClose={handleModalClose} />
+				</Modal>
+			}
+			{/*이미지 상단에 띄우기*/}
+			{isModifyClicked &&
+				<Modal>
+					<WorkoutModify workout={workout} id={workoutId} onClose={handleModalClose} />
 				</Modal>
 			}
 			<table>

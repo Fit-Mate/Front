@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "../css/FormInput.module.css";
-import { workout_data} from "../../DataTypes/data-types";
+import { workout_data } from "../../DataTypes/data-types";
 import { workoutAPI, workoutPostAPI, bodyPartAPI } from "../../API/API";
 
 /**css */
@@ -10,6 +10,38 @@ import Button from "../../UI/Button";
 /**
  * @param {*} props : onClose,
  */
+
+const BodyPartCheckBoxList = (props) => {
+
+	const bodyPartKoreanName = [...props.bodyPartKoreanName]
+	return (
+		bodyPartKoreanName.map((bodyPart, index) => {
+			<li>
+				<input
+					key={index}
+					type="checkbox"
+					id={bodyPart}
+					name={bodyPart}
+					value={bodyPart}
+					onChange={props.handleBodyPartCheckBox(index)}
+				/>
+				<label htmlFor={bodyPart}>{bodyPart}</label>
+			</li>
+		}));
+}
+
+const BodyPartForm = (props) => {
+	return (
+		<fieldset>
+			<legend>Select one or more BodyParts corresponding to the Workout</legend>
+			<ul>
+				<BodyPartCheckBoxList bodyPartKoreanName={props.bodyPartKoreanName} handleBodyPartCheckBox={props.handleBodyPartCheckBox}/>
+			</ul>
+		</fieldset>
+	);
+}
+
+
 const WorkoutModify = (props) => {
 
 	/**Refs */
@@ -26,6 +58,7 @@ const WorkoutModify = (props) => {
 	 * State Variables
 	 */
 	const [imageFile, setImageFile] = React.useState(new File([""], ""));
+
 	const [bodyPartKoreanName, setBodyPartKoreanName] = React.useState([]);
 	const [checkedBodyPart, setCheckedBodyPart] = React.useState([]);
 
@@ -53,7 +86,7 @@ const WorkoutModify = (props) => {
 	const loadBodyPartKoreanName = async () => {
 		const response = await bodyPartAPI.get("/list");
 		const bodyPartList = response.data;
-		setBodyPartKoreanName(bodyPartList);
+		setBodyPartKoreanName(bodyPartList.bodyPartKoreanName);
 	}
 
 	const loadAndSetRef = async () => {
@@ -139,30 +172,7 @@ const WorkoutModify = (props) => {
 	 * Return HTML VALUES
 	 */
 
-	const showBodyPartCheckbox = () => {
-		const listOfBodyPartCheckBox = () => {
-			return (
-				bodyPartKoreanName.map((bodyPart, index) => {
-					<div>
-						<input
-							type="checkbox"
-							id={bodyPart}
-							name={bodyPart}
-							value={bodyPart}
-							checked={checkedBodyPart[index]}
-							onChange={handleBodyPartCheckBox(index)}
-						 />
-						 <label htmlFor={bodyPart}>{bodyPart}</label>
-					</div>
-				}));
-		}
-		return (
-			<fieldset>
-				<legend>Select one or more BodyParts corresponding to the Workout</legend>
-				{listOfBodyPartCheckBox}
-			</fieldset>
-		);
-	}
+
 
 	//protien을 protein 으로 적었음..
 	return (
@@ -187,13 +197,13 @@ const WorkoutModify = (props) => {
 					<label htmlFor="description">description</label>
 					<input type="text" id="description" placeholder="description" ref={descriptionRef}></input>
 				</div>
-				{showBodyPartCheckbox()}
+				<BodyPartForm bodyPartKoreanName={bodyPartKoreanName} handleBodyPartCheckBox={handleBodyPartCheckBox}/>
 				<div className={classes.control}>
 					<label htmlFor="fileUpload">fileUpload</label>
 					<input type="file" id="fileUpload" onChange={handleWorkoutFile}></input>
 				</div>
 				<div>
-					<Button type="button" onCliCk={handleModalClose}>닫기</Button>
+					<Button type="button" onClick={handleModalClose}>닫기</Button>
 					<Button type="submit">추가</Button>
 				</div>
 			</form>

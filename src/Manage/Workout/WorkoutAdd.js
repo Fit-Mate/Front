@@ -180,7 +180,7 @@ const WorkoutAdd = (props) => {
 					<input type="file" id="fileUpload" onChange={handleWorkoutFile}></input>
 				</div>
 				<div>
-					<Button type="button" onCliCk={handleModalClose}>닫기</Button>
+					<Button type="button" onClick={handleModalClose}>닫기</Button>
 					<Button type="submit">추가</Button>
 				</div>
 			</form>

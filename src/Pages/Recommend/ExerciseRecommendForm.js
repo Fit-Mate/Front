@@ -11,6 +11,8 @@ import RecentBodyDataModal from "./RecentBodyDataModal";
 import Card from "../../UI/Card";
 import classes from "./Recommend.module.css";
 
+import Button from "../../UI/Button";
+
 /**
  * Rendering Checkbox of BodyPartList Dynamically
  * @param {*} props : handleCheckedListOnChange(position, checkedarray), bodyPartList, checkedBodyPartState
@@ -65,12 +67,12 @@ const ShowMachineCheckbox = (props) => {
 			<header>
 				<h2>운동 부위에 따른 기구 선택</h2>
 			</header>
-			<section className={classes.RecommendCheckBox}>
+			<section className={classes.RecommendMachineCheckBox}>
 				<ul>
 					{machineList.map((machine, index) => {
 						return (
 							<li key={index}>
-								<div>
+								<div className={classes.lists}>
 									<input
 										type='checkbox'
 										id={`machineCheckbox${index}`}
@@ -273,22 +275,24 @@ const ExerciseRecommendForm = (props) => {
 	return (
 		<div className={classes}>
 			<header> <h1>ExerciseRecommendForm </h1></header>
-			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
 			<main>
+				<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
 				{/* bodyPartCheckbox render */}
-				<ShowBodyPartCheckbox
-					bodyPartList={bodyPartList}
-					checkedBodyPartState={checkedBodyPartState}
-					handleCheckedListOnChange={handleCheckedListOnChange}
-				/>
-				{/* MachineCheckbox render */}
-				<ShowMachineCheckbox
-					machineList={machineList}
-					checkedMachineState={checkedMachineState}
-					handleCheckedListOnChange={handleCheckedListOnChange}
-				/>
-				{isNothingClicked && <p>Nothing is Set</p>}
-				<button type='button' onClick={handleExercisePost}>제출</button>
+				<div className={classes.RecommendContainer}>
+					<ShowBodyPartCheckbox
+						bodyPartList={bodyPartList}
+						checkedBodyPartState={checkedBodyPartState}
+						handleCheckedListOnChange={handleCheckedListOnChange}
+					/>
+					{/* MachineCheckbox render */}
+					<ShowMachineCheckbox
+						machineList={machineList}
+						checkedMachineState={checkedMachineState}
+						handleCheckedListOnChange={handleCheckedListOnChange}
+					/>
+					{isNothingClicked && <p>Nothing is Set</p>}
+				</div>
+				<Button type='button' onClick={handleExercisePost}>제출</Button>
 
 				{isShowRecentBodyDataClicked &&
 					<RecentBodyDataModal

@@ -1,14 +1,42 @@
-.RecommendCheckBox {
-	width:100%;
-}
-
-.RecommendCheckBox ul {
+.RecommendContainer {
 	display:flex;
-	list-style-type: none;
-	justify-content: center;
-	flex-wrap:wrap;
+	flex-direction: column;
+	justify-content: space-around;
 }
 
-.RecommendCheckBox ul li {
+.RecommendContainer h1,h2,h3 {
+	color:black;
+}
 
+.RecommendCheckBox {
+	width:50%;
+	margin:auto;
+	padding:0;
+	position:relative;
+}
+
+/* Container */
+.RecommendCheckBox ul {
+	display:grid;
+	list-style-type: none;
+	grid-template-rows: 33.33% 33.33% 33.33%;
+	grid-template-columns: 33.33% [col-start] 33.33% [col-start] 33.33% [col-start];
+}
+
+.RecommendMachineCheckBox{
+	width:100%;
+	margin:auto;
+	padding:rem;
+	position:relative;
+}
+
+.RecommendMachineCheckBox ul {
+	display:grid;
+	list-style-type: none;
+	grid-template-columns: repeat(5, 20%);
+
+}
+
+.RecommendMachineCheckBox .lists {
+	margin:1rem;
 }

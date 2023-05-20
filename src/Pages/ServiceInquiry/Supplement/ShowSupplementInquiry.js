@@ -38,7 +38,7 @@ const ShowSupplementInquiry = (props) => {
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 
 	const [inputSupplementSearch, setInputSupplementSeacrh] = React.useState("");
-	const [inputSupplementType, setInputSupplementType] = React.useState(null);
+	const [inputSupplementType, setInputSupplementType] = React.useState();
 
 	/**
 	 * Functions
@@ -117,7 +117,7 @@ const ShowSupplementInquiry = (props) => {
 		event.preventDefault();
 		const formData = {
 			searchKeyword: inputSupplementSearch,
-			supplementType: inputSupplementType
+			supplementType: [inputSupplementType]
 		}
 		//axios로부터 단건조회API사용.
 		const response = await userSupplementAPI.get(`/search/list/${currentPage}`, formData);
@@ -178,7 +178,7 @@ const ShowSupplementInquiry = (props) => {
 
 					<select id="supplementType"
 						name="supplementType"
-						onChange={e => setInputSupplementSeacrh(e.target.value)}
+						onChange={e => setInputSupplementType(e.target.value)}
 					>
 						<option value={null}>all</option>
 						<option value='BCAA'>BCAA</option>

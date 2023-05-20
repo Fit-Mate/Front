@@ -2,10 +2,15 @@ body {
   background: #202b38;
 }
 
+
 h1,
 h2,
 h3 {
   color: #fff;
+}
+
+.noting h1 {
+  color:black;
 }
 
 p,

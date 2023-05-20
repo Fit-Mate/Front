@@ -5,6 +5,8 @@ import { bodyDataAPI, recommendPostAPI, recommendAPI } from "../../API/API";
 import RecentBodyDataModal from "./RecentBodyDataModal";
 import { useNavigate } from "react-router-dom";
 
+import Button from "../../UI/Button";
+
 
 /**
  * Rendering Checkbox of BodyPartList Dynamically
@@ -155,7 +157,7 @@ const SupplementRecommendForm = (props) => {
 	return (
 		<Card>
 			<p>SupplementRecommend</p>
-			<button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</button>
+			<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
 			{isShowRecentBodyDataClicked &&
 				<RecentBodyDataModal
 					recentBodyData={recentBodyData}
@@ -170,7 +172,7 @@ const SupplementRecommendForm = (props) => {
 					checkedPurposeState={checkedPurposeState}
 					purposeList={purposeList}
 				/>
-				{!isBothChecked && <button type='submit'>Submit</button>}
+				{!isBothChecked && <Button type='submit'>Submit</Button>}
 				{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
 				{isNothingClicked && <p>Nothing Clicked</p>}
 			</form>

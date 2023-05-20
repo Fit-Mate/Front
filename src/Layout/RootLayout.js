@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import LoginContext from "../Contexts/login-context";
+import "../DarkMode.module.css";
 
 /**css */
 import classes from "./RootLayout.module.css";
@@ -89,8 +90,9 @@ const RootLayout = (props) => {
 				{(loginCtx.isLoggedIn || loginCtx.isAdmin) ?
 					<ShowIfLoggedIn loginCtx={loginCtx} /> : <ShowIfNonMember />}
 			</header>
-			{/*{loginCtx.isLoggedIn || loginCtx.isAdmin ? showIfLoggedIn(loginCtx.isAdmin) : showIfNonMember()}*/}
-			<Outlet />
+			<main className={classes.RootLayoutMain}>
+				<Outlet />
+			</main>
 			<footer>
 			</footer>
 		</div>

@@ -17,7 +17,6 @@ const MemberProfile = (props) => {
 	return (
 		<div>
 			<header>
-				<p>Memberprofile</p>
 			</header>
 			<main>
 				<MemberInfo />

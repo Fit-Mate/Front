@@ -1,0 +1,49 @@
+.memberInfo {
+	color:black;
+	max-width: 600px;
+	margin:auto;
+}
+
+.infoItems {
+	display: block;
+	text-align:left;
+	border-bottom : 2px solid;
+}
+
+.infoItems > div {
+	margin-bottom: 10%;
+	margin-top: 10%;
+}
+
+.infoItems > div > p {
+	color:black;
+	font-weight:bold;
+	padding-left:10%;
+	font-size: large;
+}
+
+.infoItems > div > p > span {
+	margin-left: 10%;
+}
+
+.infoItems > div > p > span > button {
+	margin-left: 20%;
+	border-radius:10%;
+	background-color: rgb(29, 12, 78);
+	border-color:aliceblue;
+}
+
+.padding > p > span {
+	padding-left: 30px;
+}
+
+.memberInfo footer {
+	margin-top: 2rem;
+	padding-top:2rem;
+}
+
+
+/* passwordChangeModal */
+.passwordChange {
+	display:grid;
+}

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import MemberLeaveModal from "./MemberLeaveModal";
 import Card from "../../UI/Card";
 import Modal from "../../UI/Modal";
@@ -6,6 +6,10 @@ import { userAPI, userPasswordAPI, userPutAPI } from "../../API/API";
 import { userData_data } from "../../DataTypes/data-types";
 
 import Button from "../../UI/Button";
+import classes from "./MemberInfo.module.css";
+
+import { FaUser } from 'react-icons/fa'; import { TbAlphabetLatin } from 'react-icons/tb';
+import { BsGenderAmbiguous } from 'react-icons/bs'
 
 /**
  *
@@ -15,7 +19,7 @@ import Button from "../../UI/Button";
 const MemberNameChangeModal = (props) => {
 
 	const putNameChange = async () => {
-		const response = await userPutAPI.put("", {userName:props.userName});
+		const response = await userPutAPI.put("", { userName: props.userName });
 	}
 	const handleSubmit = (event) => {
 		putNameChange();
@@ -29,7 +33,7 @@ const MemberNameChangeModal = (props) => {
 				<input type='text' id='userName' name='userName' placeholder={props.userName} value={props.userName} onChange={e => props.setUserName(e.target.value)} />
 				<Button type='submit'>저장</Button>
 			</form>
-			<Button type="button" onClick={()=>{props.onClick(false)}}>닫기</Button>
+			<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
 		</Modal>
 	);
 }
@@ -78,7 +82,7 @@ const MemberPasswordChangeModal = (props) => {
 				<Button type='submit'>저장</Button>
 			</form>
 			{!canPasswordChange && <p>cannot change password</p>}
-			<Button type="button" onClick={()=>{props.onClick(false)}}>닫기</Button>
+			<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
 		</Modal>
 	);
 }
@@ -125,28 +129,33 @@ const MemberInfo = (props) => {
 	}
 
 	return (
-		<div>
+		<div className={classes.memberInfo}>
 			{isNameChangeClicked && <MemberNameChangeModal onClick={setIsNameChangeClicked} setUserName={setUserName} userName={userName} />}
 			{isPasswordChangeClicked && <MemberPasswordChangeModal onClick={setIsPasswordChangeClicked} />}
 			{isLeaveClicked && <MemberLeaveModal onClick={setIsLeaveClicked} />}
-			<Card>
+			<Card >
 				<header>
 					<h2>회원정보</h2>
 				</header>
-				<main>
+				<main className={classes.infoItems}>
 					<div>
-						id <span>{`${id}`}</span>
+						<p> <TbAlphabetLatin /> Name <span>{`${userName}`}</span>
+							<span>
+								<Button type='button' onClick={handleNameChangeClicked}>이름 수정</Button>
+							</span> </p>
 					</div>
-					<div>
-						userName <span>{`${userName}`}</span>
-						<Button type='button' onClick={handleNameChangeClicked}>이름 수정</Button>
+					<div className={classes.padding}>
+						<p> <FaUser /> id <span>{`${id}`}</span></p>
 					</div>
-					<div>
-						sex <span>{`${sex}`}</span>
+
+					<div className={classes.padding}>
+						<p> <BsGenderAmbiguous /> sex<span>{`${sex}`}</span> </p>
 					</div>
+				</main>
+				<footer>
 					<Button type='button' onClick={onLeaveClicked}>탈퇴</Button>
 					<Button type='button' onClick={handlePasswordChangeClicked}>비밀번호 변경</Button>
-				</main>
+				</footer>
 			</Card>
 		</div>
 

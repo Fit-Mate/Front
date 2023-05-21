@@ -12,6 +12,7 @@ import Button from "../../../UI/Button";
 
 import classes from "../../../Manage/css/Manage_Supplement.module.css";
 import inquiryCss from "../Inquiry.module.css";
+import { FaSearch } from "react-icons/fa";
 
 const ShowWorkoutInquiry = (props) => {
 
@@ -168,14 +169,14 @@ const ShowWorkoutInquiry = (props) => {
 
 			<Card >
 				<form onSubmit={handleWorkoutSearch} className={inquiryCss.searchCard}>
-						<label htmlFor="searchWorkout">searchWorkout</label>
-						<input type='text'
-							id="searchWorkout"
-							name="searchWorkout"
-							value={inputWorkoutSearch}
-							onChange={e => setInputWorkoutSeacrh(e.target.value)}
-						/>
-						<Button type='submit'>search</Button>
+					<label htmlFor="searchWorkout">searchWorkout</label>
+					<input type='text'
+						id="searchWorkout"
+						name="searchWorkout"
+						value={inputWorkoutSearch}
+						onChange={e => setInputWorkoutSeacrh(e.target.value)}
+					/>
+					<Button type='submit'>search <span><FaSearch /></span></Button>
 				</form>
 			</Card>
 

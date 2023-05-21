@@ -5,6 +5,8 @@ import Modal from "../../UI/Modal";
 import { userAPI, userPasswordAPI, userPutAPI } from "../../API/API";
 import { userData_data } from "../../DataTypes/data-types";
 
+import Button from "../../UI/Button";
+
 /**
  *
  * @param {*} props : cookie, setUserName, userName, onClick
@@ -25,9 +27,9 @@ const MemberNameChangeModal = (props) => {
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="userName">userName</label>
 				<input type='text' id='userName' name='userName' placeholder={props.userName} value={props.userName} onChange={e => props.setUserName(e.target.value)} />
-				<button type='submit'>저장</button>
+				<Button type='submit'>저장</Button>
 			</form>
-			<button type="button" onClick={()=>{props.onClick(false)}}>닫기</button>
+			<Button type="button" onClick={()=>{props.onClick(false)}}>닫기</Button>
 		</Modal>
 	);
 }
@@ -73,10 +75,10 @@ const MemberPasswordChangeModal = (props) => {
 					<label htmlFor="newPassword">newPassword</label>
 					<input type='password' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
 				</div>
-				<button type='submit'>저장</button>
+				<Button type='submit'>저장</Button>
 			</form>
 			{!canPasswordChange && <p>cannot change password</p>}
-			<button type="button" onClick={()=>{props.onClick(false)}}>닫기</button>
+			<Button type="button" onClick={()=>{props.onClick(false)}}>닫기</Button>
 		</Modal>
 	);
 }
@@ -137,13 +139,13 @@ const MemberInfo = (props) => {
 					</div>
 					<div>
 						userName <span>{`${userName}`}</span>
-						<button type='button' onClick={handleNameChangeClicked}>이름 수정</button>
+						<Button type='button' onClick={handleNameChangeClicked}>이름 수정</Button>
 					</div>
 					<div>
 						sex <span>{`${sex}`}</span>
 					</div>
-					<button type='button' onClick={onLeaveClicked}>탈퇴</button>
-					<button type='button' onClick={handlePasswordChangeClicked}>비밀번호 변경</button>
+					<Button type='button' onClick={onLeaveClicked}>탈퇴</Button>
+					<Button type='button' onClick={handlePasswordChangeClicked}>비밀번호 변경</Button>
 				</main>
 			</Card>
 		</div>

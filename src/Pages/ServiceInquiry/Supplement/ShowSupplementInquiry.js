@@ -9,6 +9,7 @@ import { supplementAPI, userSupplementAPI } from "../../../API/API";
 
 /**css */
 import classes from "../../../Manage/css/Manage_Supplement.module.css";
+import inquiryCSS from "../Inquiry.module.css";
 
 /**Components */
 import SupplementInquiry from "./SupplementInquiry";
@@ -17,6 +18,7 @@ import SupplementInquiry from "./SupplementInquiry";
 import Modal from "../../../UI/Modal";
 import Card, { HeaderCard } from "../../../UI/Card";
 import Button from "../../../UI/Button";
+import { FaSearch } from "react-icons/fa";
 
 
 const ShowSupplementInquiry = (props) => {
@@ -167,26 +169,27 @@ const ShowSupplementInquiry = (props) => {
 			}
 
 			<Card>
-				<form onSubmit={handleSupplementSearch}>
+				<form onSubmit={handleSupplementSearch} className={inquiryCSS.searchCard}>
 					<label htmlFor="searchSupplement">searchSupplement</label>
-					<input type='text'
-						id="searchSupplement"
-						name="searchSupplement"
-						value={inputSupplementSearch}
-						onChange={e => setInputSupplementSeacrh(e.target.value)}
-					/>
+					<div className={inquiryCSS.query}>
+						<input type='text'
+							id="searchSupplement"
+							name="searchSupplement"
+							value={inputSupplementSearch}
+							onChange={e => setInputSupplementSeacrh(e.target.value)}
+						/>
 
-					<select id="supplementType"
-						name="supplementType"
-						onChange={e => setInputSupplementType(e.target.value)}
-					>
-						<option value={null}>all</option>
-						<option value='BCAA'>BCAA</option>
-						<option value='Protein'>Protein</option>
-						<option value='Gainer'>Gainer</option>
-					</select>
-
-					<Button type='submit'>search</Button>
+						<select id="supplementType"
+							name="supplementType"
+							onChange={e => setInputSupplementType(e.target.value)}
+						>
+							<option value={null}>all</option>
+							<option value='BCAA'>BCAA</option>
+							<option value='Protein'>Protein</option>
+							<option value='Gainer'>Gainer</option>
+						</select>
+					</div>
+					<Button type='submit'>search <span><FaSearch /></span></Button>
 				</form>
 			</Card>
 

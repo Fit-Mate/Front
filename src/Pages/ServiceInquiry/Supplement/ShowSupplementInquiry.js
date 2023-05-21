@@ -119,7 +119,7 @@ const ShowSupplementInquiry = (props) => {
 		event.preventDefault();
 		const formData = {
 			searchKeyword: inputSupplementSearch,
-			supplementType: inputSupplementType === null ? null : [inputSupplementType]
+			supplementType: (inputSupplementType === null || inputSupplementType === "all") ? null : [inputSupplementType]
 		}
 		//axios로부터 단건조회API사용.
 		const response = await userSupplementAPI.post(`/search/list/${currentPage}`, formData);

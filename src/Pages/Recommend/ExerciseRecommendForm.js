@@ -274,7 +274,7 @@ const ExerciseRecommendForm = (props) => {
 
 	return (
 		<div className={classes.Recommend}>
-			<header> <h1>ExerciseRecommendForm </h1></header>
+			<header> </header>
 			<main>
 				<div className={classes.RecentBodyData}>
 					<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>

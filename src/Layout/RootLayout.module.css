@@ -1,10 +1,10 @@
 .RootLayout {
-  width:100%;
+  width: 100%;
   font-size: 20px;
 }
 
 .RootLayout ul {
-  width:100%;
+  width: 100%;
   list-style-type: none;
   margin: 0;
   padding: 10px;
@@ -18,19 +18,19 @@
 }
 
 .RootLayout ul li:first-child {
-  margin-right:auto;
+  margin-right: auto;
 }
 
 .RootLayout ul li:last-child {
-  margin-right:auto;
+  margin-right: auto;
 }
 
 #logout {
-  float:right;
+  float: right;
 }
 
 #login {
-  float:right;
+  float: right;
 }
 
 .RootLayout ul li a {
@@ -52,4 +52,31 @@
 
 .RootLayoutMain {
   margin-top: 5rem;
+}
+
+.RootLayoutFooter {
+  display: flex;
+  position: fixed;
+  flex-flow: row wrap;
+  font-weight: bold;
+  font-family: sans-serif;
+  background-color: gray;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1px;
+  text-align: center;
+  height: 2%;
+  justify-content: center;
+}
+
+.RootLayoutFooter a {
+  color: black;
+  margin-right:30px;
+}
+
+.RootLayoutFooter .child1 {
+}
+
+.RootLayoutFooter .child2 {
 }

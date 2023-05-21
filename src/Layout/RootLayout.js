@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import LoginContext from "../Contexts/login-context";
+import { FaGithub } from "react-icons/fa"
 import "../DarkMode.module.css";
 
 /**css */
@@ -93,7 +94,14 @@ const RootLayout = (props) => {
 			<main className={classes.RootLayoutMain}>
 				<Outlet />
 			</main>
-			<footer>
+			<footer className={classes.RootLayoutFooter}>
+				<div className={classes.child1}>
+					<FaGithub />
+					<a href="https://github.com/Fit-Mate">Github</a>
+				</div>
+				<div className={classes.child2}>
+					Copyright <span>	&#169; </span> Fitmate 2023 Konkuk University Capstone.
+				</div>
 			</footer>
 		</div>
 	);

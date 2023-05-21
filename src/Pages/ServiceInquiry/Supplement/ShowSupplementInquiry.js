@@ -40,7 +40,7 @@ const ShowSupplementInquiry = (props) => {
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 
 	const [inputSupplementSearch, setInputSupplementSeacrh] = React.useState("");
-	const [inputSupplementType, setInputSupplementType] = React.useState();
+	const [inputSupplementType, setInputSupplementType] = React.useState(null);
 
 	/**
 	 * Functions
@@ -49,7 +49,7 @@ const ShowSupplementInquiry = (props) => {
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
 	const loadSupplementBatch = async () => {
-		const supplementResponse = await supplementAPI.get(`/list/${currentPage}`);
+		const supplementResponse = await userSupplementAPI.get(`/list/${currentPage}`);
 		const fitData = supplementResponse.data.map((obj) => {
 			return {
 				...supplement_type,
@@ -119,10 +119,13 @@ const ShowSupplementInquiry = (props) => {
 		event.preventDefault();
 		const formData = {
 			searchKeyword: inputSupplementSearch,
-			supplementType: [inputSupplementType]
+			supplementType: inputSupplementType === null ? null : [inputSupplementType]
 		}
 		//axios로부터 단건조회API사용.
-		const response = await userSupplementAPI.get(`/search/list/${currentPage}`, formData);
+		const response = await userSupplementAPI.get(`/search/list/${currentPage}`);
+
+
+
 		const fitData = { ...supplement_type, ...response.data };
 		setSupplement(fitData);
 	}

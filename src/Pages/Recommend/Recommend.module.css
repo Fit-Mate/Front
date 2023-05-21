@@ -8,6 +8,10 @@
 	justify-content: space-around;
 }
 
+.RecommendContainer > div{
+	margin-top:20px;
+}
+
 .RecommendContainer h1,h2,h3 {
 	color:black;
 }
@@ -43,4 +47,32 @@
 
 .RecommendMachineCheckBox .lists {
 	margin:1rem;
+}
+
+
+.RecentBodyData button {
+	margin-bottom:30px;
+	background-color:  #fcfafa;
+	color:black;
+	font-weight:bold;
+	border-radius:5px;
+	width:30%;
+	height:70px;
+}
+
+.RecentBodyData button:hover {
+	background-color: #f0d78c;
+}
+
+.Submit button {
+	margin-top:30px;
+	background-color:  #fcfafa;
+	color:black;
+	font-weight:bold;
+	border-radius:5px;
+	width:20%;
+	height:70px;
+}
+.Submit button:hover {
+	background-color: #f0d78c;
 }

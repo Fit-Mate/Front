@@ -276,23 +276,31 @@ const ExerciseRecommendForm = (props) => {
 		<div className={classes.Recommend}>
 			<header> <h1>ExerciseRecommendForm </h1></header>
 			<main>
-				<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
+				<div className={classes.RecentBodyData}>
+					<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
+				</div>
 				{/* bodyPartCheckbox render */}
 				<div className={classes.RecommendContainer}>
-					<ShowBodyPartCheckbox
-						bodyPartList={bodyPartList}
-						checkedBodyPartState={checkedBodyPartState}
-						handleCheckedListOnChange={handleCheckedListOnChange}
-					/>
+					<div>
+						<ShowBodyPartCheckbox
+							bodyPartList={bodyPartList}
+							checkedBodyPartState={checkedBodyPartState}
+							handleCheckedListOnChange={handleCheckedListOnChange}
+						/>
+					</div>
 					{/* MachineCheckbox render */}
-					<ShowMachineCheckbox
-						machineList={machineList}
-						checkedMachineState={checkedMachineState}
-						handleCheckedListOnChange={handleCheckedListOnChange}
-					/>
+					<div>
+						<ShowMachineCheckbox
+							machineList={machineList}
+							checkedMachineState={checkedMachineState}
+							handleCheckedListOnChange={handleCheckedListOnChange}
+						/>
+					</div>
 					{isNothingClicked && <p>Nothing is Set</p>}
 				</div>
-				<Button type='button' onClick={handleExercisePost}>제출</Button>
+				<div className={classes.Submit}>
+					<Button type='button' onClick={handleExercisePost}>제출</Button>
+				</div>
 
 				{isShowRecentBodyDataClicked &&
 					<RecentBodyDataModal

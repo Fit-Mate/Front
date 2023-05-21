@@ -1,6 +1,33 @@
 import React from "react";
 import Modal from "../../UI/Modal";
 
+import Button from "../../UI/Button";
+import classes from "./RecentBodyData.module.css";
+
+
+const ShowTable = (props) => {
+
+	delete props.recentBodyData.bodyDataId;
+	const entries = Object.entries(props.recentBodyData);
+
+	return (
+		<div>
+			<table className={classes.BodyDataTable}>
+				{
+					entries.map(([key, val], index) => {
+						return (
+							<tr key={index}>
+								<td className={`${classes.key} ${key}`}>{key}</td>
+								<td className={`${classes.val} ${val}`}>{val}</td>
+							</tr>
+						);
+					})
+				}
+			</table>
+		</div>
+	);
+}
+
 /**
  *
  * @param {*} props :recentBodyData, setIsShowRecentBodyDataClicked
@@ -14,31 +41,11 @@ const RecentBodyDataModal = (props) => {
 			<header>
 				<h2>RecentBodyDataModal</h2>
 			</header>
-			<section>
-				<div>
-					{`Date: ${recentBodyData.date}`}
-				</div>
-				<div>
-					{`height: ${recentBodyData.height}`}
-				</div>
-				<div>
-					{`weight: ${recentBodyData.weight}`}
-				</div>
-				<div>
-					{`upperBodyFat: ${recentBodyData.upperBodyFat}`}
-				</div>
-				<div>
-					{`lowerBodyFat: ${recentBodyData.lowerBodyFat}`}
-				</div>
-				<div>
-					{`upperMuscleMass: ${recentBodyData.upperMuscleMass}`}
-				</div>
-				<div>
-					{`lowerMuscleMass: ${recentBodyData.lowerMuscleMass}`}
-				</div>
-			</section>
+			<main>
+				<ShowTable recentBodyData={recentBodyData} />
+			</main>
 			<footer>
-				<button onClick={e => props.setIsShowRecentBodyDataClicked(false)}>닫기</button>
+				<Button onClick={e => props.setIsShowRecentBodyDataClicked(false)}>닫기</Button>
 			</footer>
 		</Modal>
 	);

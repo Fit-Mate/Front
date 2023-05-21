@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import Card from "../../UI/Card";
 import { bodyDataPostAPI } from "../../API/API";
+import Button from "../../UI/Button";
+import Card from "../../UI/Card";
 
+import classes from "./MemberBodyDataSummary.module.css";
 /**
  *
  * @param {*} props : setIsAddClicked={setIsAddClicked}
@@ -65,35 +67,40 @@ const MemberBodyDataAdd = (props) => {
 			</header>
 			<main>
 				<form onSubmit={handleBodyDataAdd}>
-					<div>
+					<div className={classes.date}>
 						<label htmlFor="date">Date</label>
+						<br />
 						<input type="date" id="date" name="date" value={bodyDataDate} onChange={e => setBodyDataDate(e.target.value)} />
 					</div>
-					<div>
-						<label htmlFor="height">Height</label>
-						<input type="number" id="height" name="height" value={bodyDataHeight} onChange={e => setBodyDataHeight(e.target.value)} />
+					<div className={classes.container}>
+						<div>
+							<label htmlFor="height">Height</label>
+							<input type="number" id="height" name="height" value={bodyDataHeight} onChange={e => setBodyDataHeight(e.target.value)} />
+						</div>
+						<div>
+							<label htmlFor="weight">weight</label>
+							<input type="number" id="weight" name="weight" value={bodyDataWeight} onChange={e => setBodyDataWeight(e.target.value)} />
+						</div>
+						<div>
+							<label htmlFor="upperBodyFat">upperBodyFat</label>
+							<input type="number" id="upperBodyFat" name="upperBodyFat" value={bodyDataUpperBodyFat} onChange={e => setBodyDataUpperBodyFat(e.target.value)} />
+						</div>
+						<div>
+							<label htmlFor="lowerBodyFat">lowerBodyFat</label>
+							<input type="number" id="lowerBodyFat" name="lowerBodyFat" value={bodyDataLowerBodyFat} onChange={e => setBodyDataLowerBodyFat(e.target.value)} />
+						</div>
+						<div>
+							<label htmlFor="upperMuscleMass">upperMuscleMass</label>
+							<input type="number" id="upperMuscleMass" name="upperMuscleMass" value={bodyDataUpperMuscleMass} onChange={e => setBodyDataUpperMuscleMass(e.target.value)} />
+						</div>
+						<div>
+							<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
+							<input type="number" id="lowerMuscleMass" name="lowerMuscleMass" value={bodyDataLowerMuscleMass} onChange={e => setBodyDataLowerMuscleMass(e.target.value)} />
+						</div>
 					</div>
-					<div>
-						<label htmlFor="weight">weight</label>
-						<input type="number" id="weight" name="weight" value={bodyDataWeight} onChange={e => setBodyDataWeight(e.target.value)} />
+					<div className={classes.bodyDataAdd}>
+						<Button type='submit'>추가</Button>
 					</div>
-					<div>
-						<label htmlFor="upperBodyFat">upperBodyFat</label>
-						<input type="number" id="upperBodyFat" name="upperBodyFat" value={bodyDataUpperBodyFat} onChange={e => setBodyDataUpperBodyFat(e.target.value)} />
-					</div>
-					<div>
-						<label htmlFor="lowerBodyFat">lowerBodyFat</label>
-						<input type="number" id="lowerBodyFat" name="lowerBodyFat" value={bodyDataLowerBodyFat} onChange={e => setBodyDataLowerBodyFat(e.target.value)} />
-					</div>
-					<div>
-						<label htmlFor="upperMuscleMass">upperMuscleMass</label>
-						<input type="number" id="upperMuscleMass" name="upperMuscleMass" value={bodyDataUpperMuscleMass} onChange={e => setBodyDataUpperMuscleMass(e.target.value)} />
-					</div>
-					<div>
-						<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
-						<input type="number" id="lowerMuscleMass" name="lowerMuscleMass" value={bodyDataLowerMuscleMass} onChange={e => setBodyDataLowerMuscleMass(e.target.value)} />
-					</div>
-					<button type='submit'>추가</button>
 				</form>
 			</main>
 		</Card>

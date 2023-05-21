@@ -2,8 +2,12 @@ import React from "react";
 import Card from "../../UI/Card";
 import { bodyDataAPI } from "../../API/API";
 import { Line } from "react-chartjs-2";
-import {Chart as ChartJS} from "chart.js/auto";
+import { Chart as ChartJS } from "chart.js/auto";
 import MemberBodyDataManage from "./MemberBodyDataManage";
+
+import classes from "./MemberBodyDataSummary.module.css"
+
+import Button from "../../UI/Button";
 
 const MemberBodyDataSummary = (props) => {
 
@@ -105,25 +109,31 @@ const MemberBodyDataSummary = (props) => {
 
 
 	return (
-		<Card>
-			<header>
-				<h2>MemberBodyDataSummary</h2>
-				<select onChange={e => setSelectedBodyDataType(e.target.value)}>
-					<option value="weight">weight</option>
-					<option value="upperBodyFat">upperBodyFat</option>
-					<option value="lowerBodyFat">lowerBodyFat</option>
-					<option value="upperMuscleMass">upperMuscleMass</option>
-					<option value="lowerMuscleMass">lowerMuscleMass</option>
-				</select>
-			</header>
-			<main>
-				<Line data={chartArgs} />
-			</main>
-			<footer>
-				<button type='button' onClick={e=>setIsShowBodyDataManage(true)}>체성분 관리</button>
-				{isShowBodyDataManage && <MemberBodyDataManage onClick={setIsShowBodyDataManage}/>}
-			</footer>
-		</Card>
+		<div className={classes.card}>
+			<div>
+				<Card>
+					<header>
+						<h2>MemberBodyDataSummary</h2>
+						<select onChange={e => setSelectedBodyDataType(e.target.value)}>
+							<option value="weight">weight</option>
+							<option value="upperBodyFat">upperBodyFat</option>
+							<option value="lowerBodyFat">lowerBodyFat</option>
+							<option value="upperMuscleMass">upperMuscleMass</option>
+							<option value="lowerMuscleMass">lowerMuscleMass</option>
+						</select>
+					</header>
+					<main className={classes.chart}>
+						<Line data={chartArgs} />
+					</main>
+					<footer>
+						<Button type='button' onClick={e => setIsShowBodyDataManage(true)}>체성분 관리</Button>
+					</footer>
+				</Card>
+			</div>
+			<div>
+				{isShowBodyDataManage && <MemberBodyDataManage onClick={setIsShowBodyDataManage} />}
+			</div>
+		</div>
 	);
 
 };

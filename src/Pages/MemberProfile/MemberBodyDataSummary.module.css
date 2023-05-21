@@ -1,0 +1,52 @@
+.chart {
+	margin:0 auto;
+}
+
+.card {
+	width:50%;
+	height:50%;
+	margin: 0 auto;
+}
+
+.addSummary > main >div{
+	margin-top: 3rem;
+}
+
+.date {
+	margin-bottom: 3rem;
+	align-content: left;
+}
+
+.date label {
+	font-size:larger;
+	font-weight:bold;
+}
+.date input {
+	font-weight: bold;
+	height:2rem;
+}
+
+.container {
+}
+
+.container div {
+	display:flex;
+	justify-content:space-between;
+	margin-bottom:20px;
+}
+
+.container div > label {
+	font-size: large;
+	font-weight:bolder;
+}
+
+.container div > input{
+	margin-right: 20%;
+	height: 1.4rem;
+	border-radius: 4px;
+}
+
+
+.bodyDataAdd button{
+
+}

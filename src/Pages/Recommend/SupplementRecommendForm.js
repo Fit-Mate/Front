@@ -167,20 +167,22 @@ const SupplementRecommendForm = (props) => {
 						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
 					/>
 				}
-				<Card>
-					<form onSubmit={handlePurposeSubmit} className={classes.Recommend}>
-						<label htmlFor="budget">budget</label>
-						<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
-						<ShowPurposeCheckBox
-							handleCheckedListOnChange={handleCheckedListOnChange}
-							checkedPurposeState={checkedPurposeState}
-							purposeList={purposeList}
-						/>
-						{!isBothChecked && <Button type='submit'>Submit</Button>}
-						{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
-						{isNothingClicked && <p>Nothing Clicked</p>}
-					</form>
-				</Card>
+				<div className={classes.card}>
+					<Card>
+						<form onSubmit={handlePurposeSubmit} className={classes.Recommend}>
+							<label htmlFor="budget">budget</label>
+							<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
+							<ShowPurposeCheckBox
+								handleCheckedListOnChange={handleCheckedListOnChange}
+								checkedPurposeState={checkedPurposeState}
+								purposeList={purposeList}
+							/>
+							{!isBothChecked && <Button type='submit'>Submit</Button>}
+							{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
+							{isNothingClicked && <p>Nothing Clicked</p>}
+						</form>
+					</Card>
+				</div>
 			</main>
 			<footer>
 

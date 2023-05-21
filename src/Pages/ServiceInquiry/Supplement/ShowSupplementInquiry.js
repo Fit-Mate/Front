@@ -122,12 +122,12 @@ const ShowSupplementInquiry = (props) => {
 			supplementType: inputSupplementType === null ? null : [inputSupplementType]
 		}
 		//axios로부터 단건조회API사용.
-		const response = await userSupplementAPI.get(`/search/list/${currentPage}`);
+		const response = await userSupplementAPI.post(`/search/list/${currentPage}`, formData);
 
 
 
-		const fitData = { ...supplement_type, ...response.data };
-		setSupplement(fitData);
+		const fitData = [ ...response.data ];
+		setSupplementBatch(fitData);
 	}
 
 	/**

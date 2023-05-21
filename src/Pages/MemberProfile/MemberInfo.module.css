@@ -47,3 +47,12 @@
 .passwordChange {
 	display:grid;
 }
+
+
+/* Footer Button */
+.footerButton button{
+	background-color:  rgb(29, 12, 78);;
+	border-radius: 4px;
+	font-weight: bolder;
+	height:3rem;
+}

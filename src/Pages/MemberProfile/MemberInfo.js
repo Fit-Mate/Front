@@ -152,7 +152,7 @@ const MemberInfo = (props) => {
 						<p> <BsGenderAmbiguous /> sex<span>{`${sex}`}</span> </p>
 					</div>
 				</main>
-				<footer>
+				<footer className={classes.footerButton}>
 					<Button type='button' onClick={onLeaveClicked}>탈퇴</Button>
 					<Button type='button' onClick={handlePasswordChangeClicked}>비밀번호 변경</Button>
 				</footer>

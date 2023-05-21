@@ -3,7 +3,6 @@ import axios from "axios";
 
 import deepCopy, { workout_data } from "../../../DataTypes/data-types";
 import { userWorkoutAPI, workoutAPI } from "../../../API/API";
-import classes from "../../../Manage/css/Manage_Supplement.module.css";
 
 import WorkoutInquiry from "./WorkoutInquiry";
 
@@ -11,6 +10,8 @@ import Modal from "../../../UI/Modal";
 import Card, { HeaderCard } from "../../../UI/Card";
 import Button from "../../../UI/Button";
 
+import classes from "../../../Manage/css/Manage_Supplement.module.css";
+import inquiryCss from "../Inquiry.module.css";
 
 const ShowWorkoutInquiry = (props) => {
 
@@ -113,7 +114,7 @@ const ShowWorkoutInquiry = (props) => {
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
 		const response = await userWorkoutAPI.get(`/${id}`);
-		const fitData = { ...workout_data, ...response.data, id:id };
+		const fitData = { ...workout_data, ...response.data, id: id };
 		setWorkout(fitData);
 		setIsInquiryClicked(true);
 	}
@@ -159,23 +160,22 @@ const ShowWorkoutInquiry = (props) => {
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
-			<HeaderCard title={props.title} />
 			{isInquiryClicked &&
 				<Modal>
 					<WorkoutInquiry workout={workout} onClose={handleModalClose} />
 				</Modal>
 			}
 
-			<Card>
-				<form onSubmit={handleWorkoutSearch}>
-					<label htmlFor="searchWorkout">searchWorkout</label>
-					<input type='text'
-						id="searchWorkout"
-						name="searchWorkout"
-						value={inputWorkoutSearch}
-						onChange={e => setInputWorkoutSeacrh(e.target.value)}
-					/>
-					<Button type='submit'>search</Button>
+			<Card >
+				<form onSubmit={handleWorkoutSearch} className={inquiryCss.searchCard}>
+						<label htmlFor="searchWorkout">searchWorkout</label>
+						<input type='text'
+							id="searchWorkout"
+							name="searchWorkout"
+							value={inputWorkoutSearch}
+							onChange={e => setInputWorkoutSeacrh(e.target.value)}
+						/>
+						<Button type='submit'>search</Button>
 				</form>
 			</Card>
 

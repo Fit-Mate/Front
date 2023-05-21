@@ -11,19 +11,20 @@ const Inquiry = (props) => {
 
 
 	return (
-		<div>
+		<div className={classes.inquiryBody}>
 			<div className={classes.inquiryButtons}>
 				<Button onClick={e => setIsSomethingClicked("Supplement")}>Supplement 조희</Button>
 				<Button onClick={e => setIsSomethingClicked("Workout")}>Workout 조희</Button>
 			</div>
-			{
-				isSomethingClicked === "Supplement" &&
-				<ShowSupplementInquiry />
-			}
-			{
-				isSomethingClicked === "Workout" &&
-				<ShowWorkoutInquiry />
-			}
+				{
+					isSomethingClicked === "Supplement" &&
+					<ShowSupplementInquiry />
+				}
+				{
+					isSomethingClicked === "Workout" &&
+					<ShowWorkoutInquiry />
+				}
+
 		</div>
 
 	);

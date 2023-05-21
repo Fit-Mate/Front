@@ -14,6 +14,8 @@ import classes from "../../../Manage/css/Manage_Supplement.module.css";
 import inquiryCss from "../Inquiry.module.css";
 import { FaSearch } from "react-icons/fa";
 
+
+
 const ShowWorkoutInquiry = (props) => {
 
 	/**

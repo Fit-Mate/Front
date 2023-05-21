@@ -1,10 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { userWorkoutImageAPI } from "../../../API/API";
 import { Buffer } from "buffer";
+import Button from "../../../UI/Button";
+
+import classes from "../Inquiry.module.css";
 
 /**
  * @param {*} props : workout, handleModalClose
  */
+
+const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
+	if (bodyPartKoreanName.length === 0)
+		return "";
+
+	const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue) =>
+		`${accumulator}\n${currentValue}`
+		, [])
+	return bodyPartParagraph;
+}
+
+const ElementTable = (props) => {
+	const bodyPartList = bodyPartListToStringWithNewlines(props.entries[4][1]);
+	const entries = [props.entries[0], props.entries[1], props.entries[3], [props.entries[4][0], bodyPartList]];
+
+	return (
+		<table className={classes.Table}>
+			{entries.map((keyval, index) => {
+				const [key, val] = keyval;
+				return (
+					<tr key={index}>
+						<td className={classes.key}>{key}</td>
+						<td>{val}</td>
+					</tr>
+				)
+			})}
+		</table>
+	);
+}
+
 const WorkoutInquiry = (props) => {
 	const [workoutImage, setWorkoutImage] = useState(null);
 
@@ -42,16 +75,22 @@ const WorkoutInquiry = (props) => {
 
 	return (
 		<div>
-			<p>image</p>
-			<img width="100" height="100" src={workoutImage} />
-			<div>
-				<iframe src={videoSrc} title={props.workout.koreanName}></iframe>
-			</div>
-			<ul>
-				{description}
-			</ul>
-
-			<button onClick={handleModalClose}>닫기</button>
+			<header className={classes.inquiryModalHeader}>
+				<div>
+					<h2>{workout.koreanName}</h2>
+				</div>
+			</header>
+			<main>
+				<div className={classes.imageContainer}>
+					<p>image</p>
+					<img src={workoutImage} />
+				</div>
+				<div className={classes.videoContainer}>
+					<iframe src={videoSrc} title={props.workout.koreanName}></iframe>
+				</div>
+				<ElementTable entries={entries} />
+				<Button onClick={handleModalClose}>닫기</Button>
+			</main>
 		</div >
 
 	);

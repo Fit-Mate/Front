@@ -7,7 +7,7 @@
 }
 
 .searchCard {
-	width:100%;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
@@ -16,70 +16,80 @@
 
 
 .searchCard label {
-	font-weight:bold;
-	font-size:large;
+	font-weight: bold;
+	font-size: large;
 }
 
 .query {
-	width:100%;
-	display:flex;
+	width: 100%;
+	display: flex;
 	flex-direction: row;
-	flex-wrap:wrap;
+	flex-wrap: wrap;
 	justify-content: center;
 }
 
 .searchCard input {
-	width:25%;
-	height:1.7rem;
+	width: 25%;
+	height: 1.7rem;
 	align-self: center;
-	margin-bottom:1rem;
-	margin-top:1rem;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
 	margin-right: 10px;
 	margin-left: 3%;
 }
 
 .searchCard select {
-	width:5rem;
+	width: 5rem;
 	align-self: center;
-	margin-bottom:1rem;
+	margin-bottom: 1rem;
 }
 
 .searchCard button {
-	font-weight:bold;
+	font-weight: bold;
 	font-size: 1.2rem;
-	border-radius:0%;
+	border-radius: 0%;
 	align-self: center;
 
 }
 
 .Table {
-	font-size:20px;
+	font-size: 20px;
 	background-color: #f9ecec;
-	width:70%;
+	width: 70%;
 }
 
 .Table .key {
 	font-weight: bold;
 	font-style: italic;
-	width:20%;
+	width: 20%;
 }
 
 .Table .val {
-	width:80%;
+	width: 80%;
 }
 
 .inquiryModalHeader {
 	text-align: center;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
 
 .imageContainer {
-	text-align:center;
-	margin:0 auto;
+	text-align: center;
+	margin: 0 auto;
 }
 
 .imageContainer img {
-	width:500px;
-	height:500px;
+	width: 500px;
+	height: 500px;
+}
+
+.videoContainer {
+	text-align:center;
+	height:600px;
+}
+
+.videoContainer iframe {
+	height:100%;
+	width:70%;
 }

@@ -73,7 +73,6 @@ const SupplementInquiry = (props) => {
 				</ul>
 
 				<Button onClick={handleModalClose}>닫기</Button>
-
 			</main>
 		</div >
 

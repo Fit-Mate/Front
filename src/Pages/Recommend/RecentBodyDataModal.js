@@ -38,7 +38,7 @@ const RecentBodyDataModal = (props) => {
 
 	return (
 		<Modal>
-			<header>
+			<header className={classes.RecentBodyDataModal}>
 				<h2>RecentBodyDataModal</h2>
 			</header>
 			<main>

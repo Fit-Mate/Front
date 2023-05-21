@@ -6,6 +6,8 @@ import RecentBodyDataModal from "./RecentBodyDataModal";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../../UI/Button";
+import bodyDataCss from "./RecentBodyData.module.css";
+import classes from "./Recommend.module.css";
 
 
 /**
@@ -18,29 +20,27 @@ const ShowPurposeCheckBox = (props) => {
 	const handleCheckedListOnChange = props.handleCheckedListOnChange;
 
 	return (
-		<Card>
-			<section>
-				<ul>
-					{purposeList.map((purpose, index) => {
-						return (
-							<li key={index}>
-								<div>
-									<input
-										type='checkbox'
-										id={`purposeCheckbox${index}`}
-										name={purpose}
-										value={purpose}
-										checked={checkedPurposeState[index]}
-										onChange={() => handleCheckedListOnChange(index, checkedPurposeState, "purpose")}
-									/>
-									<label htmlFor={`purposeCheckbox${index}`}>{purpose}</label>
-								</div>
-							</li>
-						);
-					})}
-				</ul>
-			</section>
-		</Card>
+		<section className={classes.formCheckBox}>
+			<ul>
+				{purposeList.map((purpose, index) => {
+					return (
+						<li key={index}>
+							<div>
+								<input
+									type='checkbox'
+									id={`purposeCheckbox${index}`}
+									name={purpose}
+									value={purpose}
+									checked={checkedPurposeState[index]}
+									onChange={() => handleCheckedListOnChange(index, checkedPurposeState, "purpose")}
+								/>
+								<label htmlFor={`purposeCheckbox${index}`}>{purpose}</label>
+							</div>
+						</li>
+					);
+				})}
+			</ul>
+		</section>
 	);
 }
 
@@ -155,28 +155,37 @@ const SupplementRecommendForm = (props) => {
 
 	//handleCheckedListOnChange(position, checkedarray), bodyPartList, checkedBodyPartState
 	return (
-		<Card>
-			<p>SupplementRecommend</p>
-			<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
-			{isShowRecentBodyDataClicked &&
-				<RecentBodyDataModal
-					recentBodyData={recentBodyData}
-					setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
-				/>
-			}
-			<form onSubmit={handlePurposeSubmit}>
-				<label htmlFor="budget">budget</label>
-				<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
-				<ShowPurposeCheckBox
-					handleCheckedListOnChange={handleCheckedListOnChange}
-					checkedPurposeState={checkedPurposeState}
-					purposeList={purposeList}
-				/>
-				{!isBothChecked && <Button type='submit'>Submit</Button>}
-				{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
-				{isNothingClicked && <p>Nothing Clicked</p>}
-			</form>
-		</Card>
+		<div>
+			<header>
+				<h2>Supplement Recommend</h2>
+			</header>
+			<main className={classes.RecentBodyData}>
+				<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
+				{isShowRecentBodyDataClicked &&
+					<RecentBodyDataModal
+						recentBodyData={recentBodyData}
+						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
+					/>
+				}
+				<Card>
+					<form onSubmit={handlePurposeSubmit} className={classes.Recommend}>
+						<label htmlFor="budget">budget</label>
+						<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
+						<ShowPurposeCheckBox
+							handleCheckedListOnChange={handleCheckedListOnChange}
+							checkedPurposeState={checkedPurposeState}
+							purposeList={purposeList}
+						/>
+						{!isBothChecked && <Button type='submit'>Submit</Button>}
+						{isBothChecked && <p>Cannot Select Both Of checkbox</p>}
+						{isNothingClicked && <p>Nothing Clicked</p>}
+					</form>
+				</Card>
+			</main>
+			<footer>
+
+			</footer>
+		</div>
 	);
 
 };

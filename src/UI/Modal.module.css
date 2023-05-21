@@ -14,6 +14,7 @@
   top: 15vh;
   left: 5%;
   width: 90%;
+  max-height:700px;
   background-color: white;
   padding: 2rem;
   border-radius: 14px;
@@ -30,13 +31,7 @@ li {
   margin-bottom: 8px;
 }
 
-@media (min-width: 768px) {
-  .modal {
-    width: 40rem;
-    left: calc(50% - 20rem);
-    overflow:auto;
-  }
-}
+
 
 @keyframes slide-down {
   from {

@@ -109,7 +109,7 @@ const ShowSupplementInquiry = (props) => {
 		event.preventDefault();
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
-		const response = await supplementAPI.get(`/${id}`);
+		const response = await userSupplementAPI.get(`/${id}`);
 		const fitData = { ...supplement_type, ...response.data };
 		setSupplement(fitData);
 		setIsInquiryClicked(true);

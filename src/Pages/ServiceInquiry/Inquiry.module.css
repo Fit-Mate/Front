@@ -51,3 +51,35 @@
 	align-self: center;
 
 }
+
+.Table {
+	font-size:20px;
+	background-color: #f9ecec;
+	width:70%;
+}
+
+.Table .key {
+	font-weight: bold;
+	font-style: italic;
+	width:20%;
+}
+
+.Table .val {
+	width:80%;
+}
+
+.inquiryModalHeader {
+	text-align: center;
+	margin:0 auto;
+}
+
+
+.imageContainer {
+	text-align:center;
+	margin:0 auto;
+}
+
+.imageContainer img {
+	width:500px;
+	height:500px;
+}

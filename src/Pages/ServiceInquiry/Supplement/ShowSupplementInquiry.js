@@ -186,7 +186,7 @@ const ShowSupplementInquiry = (props) => {
 						<option value='Gainer'>Gainer</option>
 					</select>
 
-					<button type='submit'>search</button>
+					<Button type='submit'>search</Button>
 				</form>
 			</Card>
 

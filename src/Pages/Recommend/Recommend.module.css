@@ -1,3 +1,7 @@
+.Recommend {
+	margin-bottom:2rem;
+}
+
 .RecommendContainer {
 	display:flex;
 	flex-direction: column;

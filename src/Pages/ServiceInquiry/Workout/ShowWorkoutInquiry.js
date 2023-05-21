@@ -90,7 +90,7 @@ const ShowWorkoutInquiry = (props) => {
 					<td>{workout.description.slice(0, 40) + "..."}</td>
 					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)}</td>
 					<td>
-						<button id={workout.id} onClick={handleInquiryClicked}>조회</button>
+						<Button id={workout.id} onClick={handleInquiryClicked}>조회</Button>
 					</td>
 				</tr>
 			);
@@ -175,7 +175,7 @@ const ShowWorkoutInquiry = (props) => {
 						value={inputWorkoutSearch}
 						onChange={e => setInputWorkoutSeacrh(e.target.value)}
 					/>
-					<button type='submit'>search</button>
+					<Button type='submit'>search</Button>
 				</form>
 			</Card>
 

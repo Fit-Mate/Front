@@ -3,6 +3,9 @@ import { userAPI, userDeleteAPI } from "../../API/API";
 import Modal from "../../UI/Modal";
 import LoginContext from "../../Contexts/login-context";
 
+import Button from "../../UI/Button";
+import profileCss from "./ProfileModal.module.css";
+
 /**
  *
  * @param {*} props : cookie, onClick
@@ -48,13 +51,17 @@ const MemberLeaveModal = (props) => {
 
 	return (
 		<Modal>
-			<form onSubmit={handleLeave}>
-				<label htmlFor="password">비밀번호</label>
-				<input type="password" id="password" name="password" onChange={e => setPassword(e.target.value)} />
-				<button type="submit">탈퇴하시겠습니까?</button>
+			<form onSubmit={handleLeave} className={`${profileCss.nameChange} ${profileCss.deleteUser}`}>
+				<div>
+					<label htmlFor="password">비밀번호</label>
+					<input type="password" id="password" name="password" onChange={e => setPassword(e.target.value)} />
+				</div>
+				<div>
+					<Button type="submit">탈퇴하시겠습니까?</Button>
+					<Button type="button" onClick={handleClose}>닫기</Button>
+				</div>
 			</form>
 			{isWrongPassword && <p>Wrong Password</p>}
-			<button type="button" onClick={handleClose}>닫기</button>
 		</Modal>
 	);
 

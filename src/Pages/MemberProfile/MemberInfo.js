@@ -7,6 +7,7 @@ import { userData_data } from "../../DataTypes/data-types";
 
 import Button from "../../UI/Button";
 import classes from "./MemberInfo.module.css";
+import profileCss from "./ProfileModal.module.css";
 
 import { FaUser } from 'react-icons/fa'; import { TbAlphabetLatin } from 'react-icons/tb';
 import { BsGenderAmbiguous } from 'react-icons/bs'
@@ -28,12 +29,16 @@ const MemberNameChangeModal = (props) => {
 
 	return (
 		<Modal>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="userName">userName</label>
-				<input type='text' id='userName' name='userName' placeholder={props.userName} value={props.userName} onChange={e => props.setUserName(e.target.value)} />
-				<Button type='submit'>저장</Button>
+			<form onSubmit={handleSubmit} className={profileCss.nameChange}>
+				<div>
+					<label htmlFor="userName">userName</label>
+					<input type='text' id='userName' name='userName' placeholder={props.userName} value={props.userName} onChange={e => props.setUserName(e.target.value)} />
+				</div>
+				<div>
+					<Button type='submit'>저장</Button>
+					<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
+				</div>
 			</form>
-			<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
 		</Modal>
 	);
 }
@@ -70,7 +75,7 @@ const MemberPasswordChangeModal = (props) => {
 
 	return (
 		<Modal>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className={profileCss.passwordChange}>
 				<div>
 					<label htmlFor="oldPassword">oldPassword</label>
 					<input type='password' id='oldPassword' name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
@@ -80,9 +85,9 @@ const MemberPasswordChangeModal = (props) => {
 					<input type='password' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
 				</div>
 				<Button type='submit'>저장</Button>
+				<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
 			</form>
 			{!canPasswordChange && <p>cannot change password</p>}
-			<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
 		</Modal>
 	);
 }

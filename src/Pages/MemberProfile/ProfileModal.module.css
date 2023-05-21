@@ -1,0 +1,47 @@
+/* nameChange */
+.nameChange, .passwordChange {
+	display:block;
+}
+
+.nameChange, .passwordChange > div {
+	margin:40px;
+}
+
+.nameChange, .passwordChange input {
+	height:30px;
+	width: 40%;
+}
+
+.nameChange, .passwordChange label {
+	font-weight : bold;
+	padding: 10px;
+	margin-right: 10px;
+	font-size:large;
+}
+
+.nameChangeContainer {
+}
+
+.nameChange, .passwordChange button {
+	border-radius: 0;
+}
+
+
+/* deleteUser */
+
+.deleteUser button{
+	background-color: #f06868;
+}
+
+.deleteUser button:hover {
+	background-color: red;
+}
+
+
+
+
+/* passwordChange */
+.passwordChange {
+
+
+}

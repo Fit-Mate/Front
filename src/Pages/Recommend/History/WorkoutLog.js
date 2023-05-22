@@ -9,6 +9,7 @@ import { recommendWorkoutHistoryAPI } from "../../../API/API";
 
 /** css */
 import classes from "../../../Manage/css/Mange_Table.module.css";
+import historyCss from "./ShowHistory.module.css";
 
 /** Component */
 import WorkoutHistories from "./WorkoutHistories";
@@ -60,9 +61,8 @@ const WorkoutLog = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>id</th>
-					<th>date</th>
-					<th>상세보기</th>
+					<th className={historyCss.key}>date</th>
+					<th className={historyCss.val}>상세보기</th>
 				</tr>
 			</thead>
 		);
@@ -72,9 +72,8 @@ const WorkoutLog = (props) => {
 		const columns = recommendationHistoryBatch.map((history) => {
 			return (
 				<tr key={history.recommendId}>
-					<td>{history.recommendId}</td>
-					<td>{history.date}</td>
-					<td>
+					<td className={historyCss.key}>{history.date}</td>
+					<td className={historyCss.val}>
 						<Button id={history.recommendId} onClick={handleInquiryClicked}>상세보기</Button>
 					</td>
 				</tr>
@@ -142,7 +141,7 @@ const WorkoutLog = (props) => {
 			</header>
 			<div>
 				<div className={classes["table-align"]}>
-					<table>
+					<table className={historyCss.LogTable}>
 						{makeTableHead(workoutRecommendHistory_data)}
 						{makeTableBodyElements()}
 					</table>

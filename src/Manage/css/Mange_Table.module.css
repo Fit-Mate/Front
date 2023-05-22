@@ -1,4 +1,6 @@
 .table {
 	justify-content: center;
 	text-align: center;
+	word-break: break-all;
+	height:auto;
 }

@@ -1,0 +1,23 @@
+.ShowHistory {
+	width:70%;
+	height:100%;
+	margin: 0 auto;
+}
+
+.LogTable {
+	text-align: center;
+}
+
+.LogTable .key {
+	width:300px;
+}
+
+.LogTable .val {
+	width:500px;
+}
+
+.LogTable button {
+	font-weight: bold;
+	border-radius: 0;
+	margin-left:5%;
+}

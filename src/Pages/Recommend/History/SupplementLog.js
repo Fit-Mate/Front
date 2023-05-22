@@ -9,6 +9,7 @@ import { recommendSupplementHistoryAPI, recommendWorkoutHistoryAPI } from "../..
 
 /** css */
 import classes from "../../../Manage/css/Mange_Table.module.css";
+import historyCss from "./ShowHistory.module.css";
 
 /** Component */
 import SupplementHistories from "./SupplementHistories";
@@ -17,6 +18,8 @@ import SupplementHistories from "./SupplementHistories";
 import Modal from "../../../UI/Modal";
 import Card, { HeaderCard } from "../../../UI/Card";
 import Button from "../../../UI/Button"
+
+
 
 const SupplementLog = (props) => {
 
@@ -64,10 +67,8 @@ const SupplementLog = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>id</th>
-					<th>date</th>
-					<th>question</th>
-					<th>상세보기</th>
+					<th className={historyCss.key}>date</th>
+					<th className={historyCss.val}>상세보기</th>
 				</tr>
 			</thead>
 		);
@@ -77,10 +78,8 @@ const SupplementLog = (props) => {
 		const columns = recommendationHistoryBatch.map((history) => {
 			return (
 				<tr key={history.supplementRecommendationId}>
-					<td>{history.supplementRecommendationId}</td>
-					<td>{history.date}</td>
-					<td>{history.question}</td>
-					<td>
+					<td className={historyCss.key}>{history.date}</td>
+					<td className={historyCss.val}>
 						<Button id={history.supplementRecommendationId} onClick={handleInquiryClicked}>상세보기</Button>
 					</td>
 				</tr>
@@ -154,7 +153,7 @@ const SupplementLog = (props) => {
 			</header>
 			<div>
 				<div className={classes["table-align"]}>
-					<table>
+					<table className={historyCss.LogTable}>
 						{makeTableHead(supplementRecommendHistory_data)}
 						{makeTableBodyElements()}
 					</table>

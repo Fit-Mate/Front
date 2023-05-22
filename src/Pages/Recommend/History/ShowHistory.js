@@ -2,11 +2,12 @@ import React from "react";
 import WorkoutLog from "./WorkoutLog";
 import SupplementLog from "./SupplementLog";
 
+import classes from "./ShowHistory.module.css";
+
 const ShowHistory = (props) => {
 	return (
-		<div>
+		<div className={classes.ShowHistory}>
 			<header>
-				<p>ShowHistory</p>
 			</header>
 			<WorkoutLog />
 			<SupplementLog />

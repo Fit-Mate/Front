@@ -1,5 +1,5 @@
 import React from "react";
-import "./CustomTable.module.css";
+import classes from "./CustomTable.module.css";
 
 export const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
 	if (bodyPartKoreanName.length === 0)
@@ -27,8 +27,6 @@ export const ElementTable = (props) => {
 		</table>
 	);
 }
-
-import React from "react";
 
 const CustomTable = (props) => {
 	return (

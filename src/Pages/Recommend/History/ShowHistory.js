@@ -9,8 +9,14 @@ const ShowHistory = (props) => {
 		<div className={classes.ShowHistory}>
 			<header>
 			</header>
-			<WorkoutLog />
-			<SupplementLog />
+			<main>
+				<div className={classes.ShowHistoryContent}>
+					<WorkoutLog />
+				</div>
+				<div className={classes.ShowHistoryContent}>
+					<SupplementLog />
+				</div>
+			</main>
 		</div>
 	);
 

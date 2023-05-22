@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Card from "../../../UI/Card";
 import { userSupplementAPI, userSupplementImageAPI } from "../../../API/API";
+import classes from "./Histories.module.css";
 
 import { Buffer } from "buffer";
+
+import CustomTable from "../../../UI/CustomTable";
 
 /**
  *
@@ -67,18 +70,24 @@ const SupplementHistory = (props) => {
 
 	return (
 		<Card>
-			<div>
+			<div className={classes.CardContent}>
 				<div>
 					<p>image</p>
 					 <img src={supplementImage} />
 				</div>
+
+				{/*<div>
+					{console.log(props.history)}
+					{supplementInfo!==null && <CustomTable supplementInfo/>}
+				</div>*/}
+
 				<p>id: {props.history.id}</p>
 				<p>englishName: {props.history.englishName}</p>
 				<p>koreanName: {props.history.koreanName}</p>
 				<p>price: {props.history.price}</p>
 				<p>servings: {props.history.servings}</p>
 				<p>flavor: {props.history.flavor}</p>
-				<p>marketURL: <a href={supplementInfo.marketURL}>URL</a></p>
+				<p>marketURL: <a href={props.history.marketURL}>URL</a></p>
 
 				<p>description: {props.history.description}</p>
 				{props.supplementType !== "BCAA" && <ShowIfNotBCAA supplementInfo={supplementInfo} />}

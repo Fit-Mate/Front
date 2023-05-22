@@ -4,6 +4,10 @@
 	margin: 0 auto;
 }
 
+.ShowHistoryContent {
+	margin-bottom:4rem;
+}
+
 .LogTable {
 	text-align: center;
 }

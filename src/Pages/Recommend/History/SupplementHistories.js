@@ -1,6 +1,9 @@
 import React from "react";
 import Card from "../../../UI/Card";
+import classes from "./Histories.module.css";
 import SupplementHistory from "./SupplementHistory";
+import Modal from "../../../UI/Modal";
+import Button from "../../../UI/Button";
 
 /**
  *
@@ -30,20 +33,25 @@ const SupplementHistories = (props) => {
 	const recommendedSupplementList = recommendHistory.recommendedSupplementList;
 
 	return (
-		<Card>
-			<h3>Detail</h3>
-			<ul>
-				{recommendedSupplementList.map((history) => {
-					return (
-					<li key={history.id}>
-						<SupplementHistory history={history} />
-					</li>
-					);
-				}
-				)}
-			</ul>
-			<button type='button' onClick={e => props.setIsInquiryClicked(false)}>닫기</button>
-		</Card>
+
+		<div className={classes.ModalContainer}>
+			<Modal>
+				<div className={classes.Histories}>
+					<h3>Detail</h3>
+					<ul>
+						{recommendedSupplementList.map((history) => {
+							return (
+								<li key={history.id} className={classes.CardContainer}>
+									<SupplementHistory history={history} />
+								</li>
+							);
+						}
+						)}
+					</ul>
+					<Button type='button' onClick={e => props.setIsInquiryClicked(false)}>닫기</Button>
+				</div>
+			</Modal>
+		</div >
 	);
 
 };

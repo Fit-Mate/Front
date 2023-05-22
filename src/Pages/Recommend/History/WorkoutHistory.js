@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../../UI/Card";
+import classes from "./Histories.module.css";
 /**
  *
  * @param {*} props : recommendElement
@@ -11,10 +12,13 @@ const WorkoutHistory = (props) => {
 	const videoSrc = `https://www.youtube.com/embed/${videoId}`;
 	return (
 		<Card>
-			<div>
-				<p>workoutName: {props.recommendElement.workoutName}</p>
+			<div className={classes.CardContent}>
+				<h3>{props.recommendElement.workoutName}</h3>
 				<iframe src={videoSrc} title={props.recommendElement.workoutName}></iframe>
-				<p>description: {props.recommendElement.description}</p>
+				<p>description</p>
+				<div className={classes.description}>
+					{props.recommendElement.description}
+				</div>
 			</div>
 		</Card>
 	);

@@ -1,0 +1,56 @@
+.Histories {
+	text-align: center;
+	color: black;
+}
+
+.Histories p,
+d1 {
+	text-align: center;
+	color: black;
+}
+
+.Histories li {
+	list-style: none;
+}
+
+
+
+
+.CardContainer {
+	margin: 0 auto;
+	width: 1000px;
+	margin-top: 20px;
+}
+
+.ModalContainer {
+	margin: 0 auto;
+	width: 40%;
+}
+
+.CardContent {}
+
+.CardContent h1,
+h2,
+h3 {
+	margin-bottom: 3rem;
+}
+
+.CardContent img {}
+
+.CardContent iframe {
+	width: 720px;
+	height: 480px;
+}
+
+.CardContent p {
+	border-top: thin dotted black;
+	border-top-width: 2px;
+	margin-top: 3rem;
+	;
+	padding-top: 3rem;
+	font-weight: bold;
+}
+
+.CardContent .description {
+	margin-bottom: 3rem;
+}

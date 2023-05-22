@@ -6,6 +6,7 @@ import classes from "./Histories.module.css";
 import { Buffer } from "buffer";
 
 import CustomTable from "../../../UI/CustomTable";
+import { BsFillArrowDownSquareFill } from 'react-icons/bs';
 
 /**
  *
@@ -50,6 +51,7 @@ String flavor */
 const SupplementHistory = (props) => {
 
 	const [supplementInfo, setSupplementInfo] = useState({});
+	const [distilledInfo, setDistilledInfo] = useState({});
 	const [supplementImage, setSupplementImage] = useState(null);
 
 	/**function */
@@ -64,24 +66,32 @@ const SupplementHistory = (props) => {
 		setSupplementImage(srcValue);
 	}
 
-	useEffect(()=>{
+	useEffect(() => {
 		getSupplementInfo();
-	},[])
+	}, [])
+
+	useEffect(()=>{
+		delete distilledInfo.id;
+		delete distilledInfo.marketURL;
+		setDistilledInfo(supplementInfo);
+	}, [supplementInfo]);
 
 	return (
 		<Card>
 			<div className={classes.CardContent}>
 				<div>
-					<p>image</p>
-					 <img src={supplementImage} />
+					<p><BsFillArrowDownSquareFill />Click to go to transaction page<BsFillArrowDownSquareFill /></p>
+					<a href={`${supplementInfo.marketURL}`}>
+						<img src={supplementImage} />
+					</a>
 				</div>
 
-				{/*<div>
+				<div>
 					{console.log(props.history)}
-					{supplementInfo!==null && <CustomTable supplementInfo/>}
-				</div>*/}
+					{supplementInfo !== null && supplementInfo !== true && <CustomTable object={distilledInfo} />}
+				</div>
 
-				<p>id: {props.history.id}</p>
+				{/*<p>id: {props.history.id}</p>
 				<p>englishName: {props.history.englishName}</p>
 				<p>koreanName: {props.history.koreanName}</p>
 				<p>price: {props.history.price}</p>
@@ -90,9 +100,11 @@ const SupplementHistory = (props) => {
 				<p>marketURL: <a href={props.history.marketURL}>URL</a></p>
 
 				<p>description: {props.history.description}</p>
-				{props.supplementType !== "BCAA" && <ShowIfNotBCAA supplementInfo={supplementInfo} />}
-				<p></p>
-				<p>koreanRecommendation: {props.history.koreanRecommendation}</p>
+				{props.supplementType !== "BCAA" && <ShowIfNotBCAA supplementInfo={supplementInfo} />}*/}
+				<div>
+					<h3 className={classes.descriptionBorder}>KoreanRecommendation</h3>
+					<p>{props.history.koreanRecommendation}</p>
+				</div>
 			</div>
 		</Card>
 	);

@@ -274,10 +274,16 @@ const ExerciseRecommendForm = (props) => {
 
 	return (
 		<div className={classes.Recommend}>
-			<header> </header>
+			<header>
+				<div className={classes.card}>
+					<RecentBodyDataModal
+						recentBodyData={recentBodyData}
+						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
+					/>
+				</div>
+			</header>
 			<main>
 				<div className={classes.RecentBodyData}>
-					<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
 				</div>
 				{/* bodyPartCheckbox render */}
 				<div className={classes.RecommendContainer}>
@@ -302,12 +308,6 @@ const ExerciseRecommendForm = (props) => {
 					<Button type='button' onClick={handleExercisePost}>제출</Button>
 				</div>
 
-				{isShowRecentBodyDataClicked &&
-					<RecentBodyDataModal
-						recentBodyData={recentBodyData}
-						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
-					/>
-				}
 				{isSubmitClicked &&
 					<ExerciseRecommend
 						workoutRecommendationId={workoutRecommendationId}

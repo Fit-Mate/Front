@@ -4,6 +4,8 @@ import Modal from "../../UI/Modal";
 import Button from "../../UI/Button";
 import classes from "./RecentBodyData.module.css";
 
+import Card from "../../UI/Card";
+
 
 const ShowTable = (props) => {
 
@@ -37,7 +39,7 @@ const RecentBodyDataModal = (props) => {
 	const recentBodyData = props.recentBodyData;
 
 	return (
-		<Modal>
+		<Card>
 			<header className={classes.RecentBodyDataModal}>
 				<h2>RecentBodyDataModal</h2>
 			</header>
@@ -45,9 +47,8 @@ const RecentBodyDataModal = (props) => {
 				<ShowTable recentBodyData={recentBodyData} />
 			</main>
 			<footer>
-				<Button onClick={e => props.setIsShowRecentBodyDataClicked(false)}>닫기</Button>
 			</footer>
-		</Modal>
+		</Card>
 	);
 
 };

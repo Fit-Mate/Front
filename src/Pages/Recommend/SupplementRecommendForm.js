@@ -157,21 +157,19 @@ const SupplementRecommendForm = (props) => {
 	return (
 		<div>
 			<header>
-				<h2>Supplement Recommend</h2>
 			</header>
 			<main className={classes.RecentBodyData}>
-				<Button type='button' onClick={handleShowRecentBodyDataClicked}>최근 인바디 정보 확인</Button>
-				{isShowRecentBodyDataClicked &&
+				<div className={classes.card}>
 					<RecentBodyDataModal
 						recentBodyData={recentBodyData}
 						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
 					/>
-				}
+				</div>
 				<div className={classes.card}>
 					<Card>
 						<form onSubmit={handlePurposeSubmit} className={classes.Recommend}>
 							<label htmlFor="budget">budget</label>
-							<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} />
+							<input type='number' id="budget" value={budget} onChange={e => setBudget(e.target.value)} /> {`\t	\u20A9`}
 							<ShowPurposeCheckBox
 								handleCheckedListOnChange={handleCheckedListOnChange}
 								checkedPurposeState={checkedPurposeState}

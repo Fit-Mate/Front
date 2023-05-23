@@ -133,12 +133,16 @@
 }
 
 .showtable .koreanName {
-	width: 300px;
+	width: 250px;
 	font-weight:bold;
 }
 
 .showtable .other {
-	width: 100px;
+	width: 150px;
+}
+
+.showtable .description {
+	width: 300px;
 }
 
 .showtable even {

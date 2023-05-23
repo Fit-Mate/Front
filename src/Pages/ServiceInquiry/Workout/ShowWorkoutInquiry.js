@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
+import { Buffer } from "buffer";
 
 import deepCopy, { workout_data } from "../../../DataTypes/data-types";
-import { userWorkoutAPI, workoutAPI } from "../../../API/API";
+import { userWorkoutAPI, userWorkoutImageAPI, workoutAPI } from "../../../API/API";
 
 import WorkoutInquiry from "./WorkoutInquiry";
 
@@ -10,7 +11,6 @@ import Modal from "../../../UI/Modal";
 import Card, { HeaderCard } from "../../../UI/Card";
 import Button from "../../../UI/Button";
 
-import classes from "../../../Manage/css/Manage_Supplement.module.css";
 import inquiryCss from "../Inquiry.module.css";
 import { FaSearch } from "react-icons/fa";
 
@@ -31,6 +31,7 @@ const ShowWorkoutInquiry = (props) => {
 	const [workoutBatch, setWorkoutBatch] = React.useState([]);
 	const [workout, setWorkout] = React.useState(workout_data);
 	const [workoutId, setWorkoutId] = React.useState('');
+	const [workoutImageBatch, setWorkoutImageBatch] = React.useState({});
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 	const [inputWorkoutSearch, setInputWorkoutSeacrh] = React.useState("");
@@ -66,6 +67,24 @@ const ShowWorkoutInquiry = (props) => {
 		setWorkoutBatch(fitData);
 	}
 
+	const getWorkoutInfo = async () => {
+		if (workoutBatch.length === 0)
+			return;
+		//key만 딱 뽑아서
+		const idBatch = workoutBatch.map((workout) => workout.id);
+		let images = [];
+		for (let id of idBatch) {
+			const imageRes = await userWorkoutImageAPI.get(`/${id}`);
+			let result = (imageRes && imageRes.data) || [];
+			let base64ImageString = Buffer.from(result, 'binary').toString('base64');
+			let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
+			images.push(srcValue);
+		}
+		setWorkoutImageBatch(images);
+	}
+
+
+
 	/**
 	 * Rendering Function
 	 */
@@ -75,27 +94,29 @@ const ShowWorkoutInquiry = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>englishName</th>
+					<th>image</th>
 					<th>koreanName</th>
 					<th>description</th>
 					<th>bodyPartKoreanName</th>
-					<th>조회</th>
 				</tr>
 			</thead>
 		);
 	}
 
 	const makeTableBodyElements = () => {
-		const columns = workoutBatch.map((workout) => {
+		const columns = workoutBatch.map((workout, index) => {
 			return (
 				<tr key={workout.id}>
-					<td>{workout.englishName}</td>
-					<td>{workout.koreanName}</td>
-					<td>{workout.description.slice(0, 40) + "..."}</td>
-					<td>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)}</td>
-					<td>
-						<Button id={workout.id} onClick={handleInquiryClicked}>조회</Button>
+					<td className={inquiryCss.img}>
+						<img src={workoutImageBatch[index]}></img>
 					</td>
+					<td className={inquiryCss.koreanName}>
+						<a href="https://" id={workout.id} onClick={handleInquiryClicked}>
+							{workout.koreanName}
+						</a>
+					</td>
+					<td className={inquiryCss.description}>{workout.description.slice(0, 40) + "..."}</td>
+					<td className={inquiryCss.other}>{bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)}</td>
 				</tr>
 			);
 		});
@@ -114,6 +135,7 @@ const ShowWorkoutInquiry = (props) => {
 	}
 
 	const handleInquiryClicked = async (event) => {
+		event.preventDefault();
 		const id = event.target.id;
 		//axios로부터 단건조회API사용.
 		const response = await userWorkoutAPI.get(`/${id}`);
@@ -160,6 +182,10 @@ const ShowWorkoutInquiry = (props) => {
 		loadWorkoutBatch(1);
 	}, [])
 
+	React.useEffect(() => {
+		getWorkoutInfo();
+	}, [workoutBatch])
+
 	//이미지상단에띄우는기능..?
 	return (
 		<Card>
@@ -182,7 +208,7 @@ const ShowWorkoutInquiry = (props) => {
 				</form>
 			</Card>
 
-			<table>
+			<table className={inquiryCss.showtable}>
 				{makeTableHead(workout_data)}
 				{makeTableBodyElements()}
 			</table>

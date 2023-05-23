@@ -114,7 +114,7 @@ const SupplementRecommendForm = (props) => {
 			monthlyBudget: budget,
 			purpose: checkedPurposeList
 		}
-		//const response = recommendPostAPI.post('/supplement', recommendationForm);
+		const response = recommendPostAPI.post('/supplement', recommendationForm);
 
 		setIsSubmitClicked(true);
 		setBudget(0);

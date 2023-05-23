@@ -66,7 +66,7 @@ const SupplementInquiry = (props) => {
 			<main>
 				<div className={classes.imageContainer}>
 					<p>image</p>
-					<img width="100" height="100" src={supplementImage} />
+					<img src={supplementImage} />
 				</div>
 				<ul>
 					<ElementTable entries={entries} />

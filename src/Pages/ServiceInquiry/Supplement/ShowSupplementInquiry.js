@@ -1,14 +1,14 @@
 import React from "react";
 import axios from "axios";
+import { Buffer } from "buffer";
 
 /** data structure */
 import deepCopy, { supplement_type } from "../../../DataTypes/data-types";
 
 /**API */
-import { supplementAPI, userSupplementAPI } from "../../../API/API";
+import { supplementAPI, userSupplementAPI, userSupplementImageAPI } from "../../../API/API";
 
 /**css */
-import classes from "../../../Manage/css/Manage_Supplement.module.css";
 import inquiryCSS from "../Inquiry.module.css";
 
 /**Components */
@@ -36,6 +36,7 @@ const ShowSupplementInquiry = (props) => {
 	const [supplementBatch, setSupplementBatch] = React.useState([]);
 	const [supplement, setSupplement] = React.useState(supplement_type);
 	const [supplementId, setSupplementId] = React.useState('');
+	const [supplementImageBatch, setSupplementImageBatch] = React.useState({});
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 
@@ -59,6 +60,22 @@ const ShowSupplementInquiry = (props) => {
 		setSupplementBatch(fitData);
 	}
 
+	const getSupplementInfo = async () => {
+
+		//key만 딱 뽑아서
+		const idBatch = supplementBatch.map((supplement) => supplement.id);
+		let images = [];
+		for (let id of idBatch) {
+			const imageRes = await userSupplementImageAPI.get(`/image/${id}`);
+			let result = (imageRes && imageRes.data) || [];
+			let base64ImageString = Buffer.from(result, 'binary').toString('base64');
+			let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
+			images.push(srcValue);
+		}
+		setSupplementImageBatch(images);
+	}
+
+
 	/**
 	 * Rendering Function
 	 */
@@ -67,27 +84,31 @@ const ShowSupplementInquiry = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>englishName</th>
+					<th>image</th>
 					<th>koreanName</th>
+					<th>supplementType</th>
 					<th>price</th>
 					<th>servings</th>
-					<th>조회</th>
 				</tr>
 			</thead>
 		);
 	}
 
 	const makeTableBodyElements = () => {
-		const columns = supplementBatch.map((supplement) => {
+		const columns = supplementBatch.map((supplement, index) => {
 			return (
 				<tr key={supplement.id}>
-					<td>{supplement.englishName}</td>
-					<td>{supplement.koreanName}</td>
-					<td>{supplement.price}</td>
-					<td>{supplement.servings}</td>
-					<td>
-						<Button id={supplement.id} onClick={handleInquiryClicked}>조회</Button>
+					<td className={inquiryCSS.img}>
+						<img src={supplementImageBatch[index]} />
 					</td>
+					<td className={inquiryCSS.koreanName}>
+						<a href="https://" id={supplement.id} onClick={handleInquiryClicked}>
+							{supplement.koreanName}
+						</a>
+					</td>
+					<td className={inquiryCSS.other}>{supplement.supplementType}</td>
+					<td className={inquiryCSS.other}>{supplement.price}{`\t\u20A9`}</td>
+					<td className={inquiryCSS.other}>{supplement.servings}{`\tmg`}</td>
 				</tr>
 			);
 		});
@@ -126,7 +147,7 @@ const ShowSupplementInquiry = (props) => {
 
 
 
-		const fitData = [ ...response.data ];
+		const fitData = [...response.data];
 		setSupplementBatch(fitData);
 	}
 
@@ -155,7 +176,12 @@ const ShowSupplementInquiry = (props) => {
 
 	React.useEffect(() => {
 		loadSupplementBatch(1);
-	}, [])
+	}, []);
+
+	React.useEffect(() => {
+		getSupplementInfo();
+	}, [supplementBatch]);
+
 
 	/*	CHECKING SUPPLEMENT */
 	//React.useEffect(()=>{
@@ -196,7 +222,7 @@ const ShowSupplementInquiry = (props) => {
 				</form>
 			</Card>
 
-			<table>
+			<table className={inquiryCSS.showtable}>
 				{makeTableHead(supplement_type)}
 				{makeTableBodyElements()}
 			</table>

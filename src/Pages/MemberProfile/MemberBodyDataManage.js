@@ -3,6 +3,7 @@ import MemberBodyDataAdd from "./MemberBodyDataAdd";
 import MemberBodyDataTable from "./MemberBodyDataTable";
 
 import classes from "./MemberBodyDataSummary.module.css";
+import Button from "../../UI/Button";
 
 /**
  *
@@ -27,8 +28,10 @@ const MemberBodyDataManage = (props) => {
 					<MemberBodyDataTable />
 				</div>
 			</main>
-			<footer>
-				<button type='button' onClick={e => props.onClick(false)}>닫기</button>
+			<footer >
+				<div className={classes.footer}>
+					<Button type='button' onClick={e => props.onClick(false)}>닫기</Button>
+				</div>
 			</footer>
 		</div>
 

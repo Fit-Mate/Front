@@ -29,16 +29,22 @@ const MemberNameChangeModal = (props) => {
 
 	return (
 		<Modal>
-			<form onSubmit={handleSubmit} className={profileCss.nameChange}>
-				<div>
-					<label htmlFor="userName">userName</label>
-					<input type='text' id='userName' name='userName' placeholder={props.userName} value={props.userName} onChange={e => props.setUserName(e.target.value)} />
-				</div>
-				<div>
-					<Button type='submit'>저장</Button>
-					<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
-				</div>
-			</form>
+			<div className={profileCss.modalContent}>
+				<form onSubmit={handleSubmit} className={profileCss.nameChange}>
+					<div>
+						<div className={profileCss.nameChangeLabel}>
+							<label htmlFor="userName">userName</label>
+						</div>
+						<div className={profileCss.nameChangeInput}>
+							<input type='text' id='userName' name='userName' placeholder={props.userName} value={props.userName} onChange={e => props.setUserName(e.target.value)} />
+						</div>
+					</div>
+					<div>
+						<Button type='submit'>저장</Button>
+						<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
+					</div>
+				</form>
+			</div>
 		</Modal>
 	);
 }
@@ -75,19 +81,21 @@ const MemberPasswordChangeModal = (props) => {
 
 	return (
 		<Modal>
-			<form onSubmit={handleSubmit} className={profileCss.passwordChange}>
-				<div>
-					<label htmlFor="oldPassword">oldPassword</label>
-					<input type='password' id='oldPassword' name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
-				</div>
-				<div>
-					<label htmlFor="newPassword">newPassword</label>
-					<input type='password' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
-				</div>
-				<Button type='submit'>저장</Button>
-				<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
-			</form>
-			{!canPasswordChange && <p>cannot change password</p>}
+			<div className={profileCss.modalContent}>
+				<form onSubmit={handleSubmit} className={profileCss.passwordChange}>
+					<div>
+						<label htmlFor="oldPassword">oldPassword</label>
+						<input type='password' id='oldPassword' name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
+					</div>
+					<div>
+						<label htmlFor="newPassword">newPassword</label>
+						<input type='password' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
+					</div>
+					<Button type='submit'>저장</Button>
+					<Button type="button" onClick={() => { props.onClick(false) }}>닫기</Button>
+				</form>
+				{!canPasswordChange && <p>cannot change password</p>}
+			</div>
 		</Modal>
 	);
 }

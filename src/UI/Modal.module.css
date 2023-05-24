@@ -11,10 +11,15 @@
 .modal {
   overflow: auto;
   position: fixed;
-  top: 15vh;
-  left: 5%;
+  /*top: 15vh;*/
+  /*left: 5%;*/
+  margin:0 auto;
+  left:0;
+  right:0;
   width: 90%;
   max-height:700px;
+  max-width:70%;
+
   background-color: white;
   padding: 2rem;
   border-radius: 14px;

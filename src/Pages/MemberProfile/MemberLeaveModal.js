@@ -51,17 +51,21 @@ const MemberLeaveModal = (props) => {
 
 	return (
 		<Modal>
-			<form onSubmit={handleLeave} className={`${profileCss.nameChange} ${profileCss.deleteUser}`}>
-				<div>
-					<label htmlFor="password">비밀번호</label>
-					<input type="password" id="password" name="password" onChange={e => setPassword(e.target.value)} />
-				</div>
-				<div>
-					<Button type="submit">탈퇴하시겠습니까?</Button>
-					<Button type="button" onClick={handleClose}>닫기</Button>
-				</div>
-			</form>
-			{isWrongPassword && <p>Wrong Password</p>}
+			<div className={profileCss.modalContent}>
+				<form onSubmit={handleLeave} className={`${profileCss.nameChange} ${profileCss.deleteUser}`}>
+					<div>
+						<label htmlFor="password">비밀번호</label>
+					</div>
+					<div>
+						<input type="password" id="password" name="password" onChange={e => setPassword(e.target.value)} />
+					</div>
+					<div className={profileCss.modalButton}>
+						<Button type="submit">탈퇴</Button>
+						<Button type="button" onClick={handleClose}>닫기</Button>
+					</div>
+				</form>
+				{isWrongPassword && <p>Wrong Password</p>}
+			</div>
 		</Modal>
 	);
 

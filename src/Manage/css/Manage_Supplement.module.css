@@ -7,6 +7,10 @@ table{
   margin: 20px 10px;
   margin-left: auto;
   margin-right: auto;
+
+  text-overflow: ellipsis;
+  overflow:hidden;
+  word-wrap: break-word;
 }
 table thead th {
   width: 150px;
@@ -16,15 +20,25 @@ table thead th {
   color: #fff;
   background: #000000;
   margin: 20px 10px;
+
+    text-overflow: ellipsis;
+  overflow:hidden;
+  word-wrap: break-word;
 }
 table tbody th {
   width: 150px;
   padding: 10px;
+    text-overflow: ellipsis;
+  overflow:hidden;
+  word-wrap: break-word;
 }
 table td {
   width: 350px;
   padding: 10px;
   vertical-align: top;
+    text-overflow: ellipsis;
+  overflow:hidden;
+  word-wrap: break-word;
 }
 table td img {
   width:100px;

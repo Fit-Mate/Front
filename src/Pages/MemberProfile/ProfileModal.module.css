@@ -1,3 +1,28 @@
+
+.modalContent{
+	left:0;
+	right:0;
+	margin-left:34%;
+	min-height:200px;
+
+}
+
+.modalContent label {
+	margin-bottom:2rem;
+}
+
+.modalContent input {
+	width:200px;
+}
+
+.modalContent button {
+}
+
+.modalButton {
+	margin-top:1rem;
+}
+
+
 /* nameChange */
 .nameChange, .passwordChange {
 	display:block;
@@ -27,18 +52,28 @@
 }
 
 
+.nameChangeInput {
+	margin-bottom:2rem;
+	width:3rem;
+	height:2rem;
+}
+
+.nameChangeLabel {
+	margin-bottom:2rem;
+}
+
+
+
+
 /* deleteUser */
 
 .deleteUser button{
-	background-color: #f06868;
+	border-radius: 0;
 }
 
 .deleteUser button:hover {
-	background-color: red;
+	background-color: #c82121;
 }
-
-
-
 
 /* passwordChange */
 .passwordChange {

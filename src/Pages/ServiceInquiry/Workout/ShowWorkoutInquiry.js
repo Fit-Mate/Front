@@ -68,18 +68,35 @@ const ShowWorkoutInquiry = (props) => {
 	}
 
 	const getWorkoutInfo = async () => {
+
+
 		if (workoutBatch.length === 0)
 			return;
 		//key만 딱 뽑아서
 		const idBatch = workoutBatch.map((workout) => workout.id);
+
 		let images = [];
+		let promises = [];
+
 		for (let id of idBatch) {
-			const imageRes = await userWorkoutImageAPI.get(`/${id}`);
+			promises.push(userWorkoutImageAPI.get(`/${id}`));
+		}
+
+		let responses = await Promise.all(promises);
+		for (let response of responses) {
+			const imageRes = response;
 			let result = (imageRes && imageRes.data) || [];
 			let base64ImageString = Buffer.from(result, 'binary').toString('base64');
 			let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
 			images.push(srcValue);
 		}
+		//for (let id of idBatch) {
+		//	const imageRes = await userWorkoutImageAPI.get(`/${id}`);
+		//	let result = (imageRes && imageRes.data) || [];
+		//	let base64ImageString = Buffer.from(result, 'binary').toString('base64');
+		//	let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
+		//	images.push(srcValue);
+		//}
 		setWorkoutImageBatch(images);
 	}
 

@@ -65,13 +65,29 @@ const ShowSupplementInquiry = (props) => {
 		//key만 딱 뽑아서
 		const idBatch = supplementBatch.map((supplement) => supplement.id);
 		let images = [];
+		let promises = [];
+
 		for (let id of idBatch) {
-			const imageRes = await userSupplementImageAPI.get(`/image/${id}`);
+			promises.push(userSupplementImageAPI.get(`/image/${id}`));
+		}
+
+		let responses = await Promise.all(promises);
+		for (let response of responses) {
+			const imageRes = response;
 			let result = (imageRes && imageRes.data) || [];
 			let base64ImageString = Buffer.from(result, 'binary').toString('base64');
 			let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
 			images.push(srcValue);
 		}
+
+
+		//for (let id of idBatch) {
+		//	const imageRes = await userSupplementImageAPI.get(`/image/${id}`);
+		//	let result = (imageRes && imageRes.data) || [];
+		//	let base64ImageString = Buffer.from(result, 'binary').toString('base64');
+		//	let srcValue = `data:${imageRes.headers["Content-Type"]};base64,${base64ImageString}`;
+		//	images.push(srcValue);
+		//}
 		setSupplementImageBatch(images);
 	}
 

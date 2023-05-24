@@ -39,6 +39,17 @@ const WorkoutLog = (props) => {
 	 * Functions
 	 */
 
+	const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
+		if (bodyPartKoreanName.length === 0)
+			return "";
+
+		const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue, index) =>
+			`${accumulator}\n${currentValue} ` + (index === bodyPartKoreanName.length - 1 ? "" : ", ")
+			, [])
+		return bodyPartParagraph;
+	}
+
+
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
 	const loadRecommendationHistoryBatch = async () => {
@@ -62,6 +73,7 @@ const WorkoutLog = (props) => {
 			<thead>
 				<tr>
 					<th className={historyCss.key}>date</th>
+					<th className={historyCss.val}>workouts</th>
 					<th className={historyCss.val}>상세보기</th>
 				</tr>
 			</thead>
@@ -70,9 +82,16 @@ const WorkoutLog = (props) => {
 
 	const makeTableBodyElements = () => {
 		const columns = recommendationHistoryBatch.map((history) => {
+
+			const workoutArr = history.workouts;
+			const arr = workoutArr.map((obj) => obj.workoutName);
+
 			return (
 				<tr key={history.recommendId}>
 					<td className={historyCss.key}>{history.date}</td>
+					<td className={historyCss.val}>
+						{bodyPartListToStringWithNewlines(arr)}
+					</td>
 					<td className={historyCss.val}>
 						<Button id={history.recommendId} onClick={handleInquiryClicked}>상세보기</Button>
 					</td>

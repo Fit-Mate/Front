@@ -44,6 +44,16 @@ const SupplementLog = (props) => {
 	 * Functions
 	 */
 
+	const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
+		if (bodyPartKoreanName.length === 0)
+			return "";
+
+		const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue, index) =>
+			`${accumulator}\n${currentValue} `
+			, [])
+		return bodyPartParagraph;
+	}
+
 	//list가 없을 경우에는...?
 	//value가 없다면 default value로 초기화
 	const loadRecommendationHistoryBatch = async () => {
@@ -68,6 +78,7 @@ const SupplementLog = (props) => {
 			<thead>
 				<tr>
 					<th className={historyCss.key}>date</th>
+					<th className={historyCss.val}>koreanName</th>
 					<th className={historyCss.val}>상세보기</th>
 				</tr>
 			</thead>
@@ -75,10 +86,21 @@ const SupplementLog = (props) => {
 	}
 
 	const makeTableBodyElements = () => {
+
+
 		const columns = recommendationHistoryBatch.map((history) => {
+
+			const suppArr = history.supplementKoreanName;
+
+
 			return (
 				<tr key={history.supplementRecommendationId}>
 					<td className={historyCss.key}>{history.date}</td>
+					<td className={historyCss.val}>
+						{(suppArr.map((supp)=>{return (
+							<p><span className={historyCss.span}>{supp}</span></p>
+						)}))}
+					</td>
 					<td className={historyCss.val}>
 						<Button id={history.supplementRecommendationId} onClick={handleInquiryClicked}>상세보기</Button>
 					</td>

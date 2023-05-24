@@ -121,6 +121,7 @@ const SupplementRecommendForm = (props) => {
 		setCheckedPurposeState(
 			new Array(checkedPurposeState.length).fill(false)
 		)
+		navigate('/recommendationHistory');
 	}
 
 	const handleShowRecentBodyDataClicked = () => {

@@ -1,36 +1,48 @@
 import React from "react";
-import Modal from "../UI/Modal";
+import Modal2 from "../UI/Modal2";
 import { Form, redirect, NavLink, useActionData } from "react-router-dom";
 import { loginPostAPI } from "../API/API";
+
+import Button from "../UI/Button";
+
+import classes from "./SignIn.module.css"
 
 const SignIn = (props) => {
 
 	const data = useActionData();
 	return (
-		<Modal>
+		<Modal2>
 			<header>
 				<h1>로그인</h1>
 			</header>
-			<main>
+			<main className={classes.signIn}>
 				<Form method="post" action="/signIn">
-					<label>
-						<span>ID : </span>
-						<input type='text' name='id' required />
-					</label>
-					<label>
-						<span>PassWord: </span>
-						<input type='password' name='password' required />
-					</label>
-					<button>로그인</button>
+					<div className={classes.signInContent}>
+						<label>
+							<span className={classes.key}>ID  </span>
+							<div className={classes.valContainer}>
+								<input type='text' name='id' required />
+							</div>
+						</label>
+					</div>
+					<div className={classes.signInContent}>
+						<label>
+							<span className={classes.key}>PassWord </span>
+							<div className={classes.valContainer}>
+								<input type='password' name='password' required />
+							</div>
+						</label>
+					</div>
+					<Button>로그인</Button>
 
 					{data && data.error && <p>{data.error}</p>}
 				</Form>
 			</main>
-			<footer>
+			<footer className={classes.navLink}>
 				<NavLink to="/">취소하고 홈으로 돌아가기</NavLink>
 				{/* 취소 / 로그인 */}
 			</footer>
-		</ Modal>
+		</ Modal2>
 	);
 };
 
@@ -49,10 +61,10 @@ export const signInAction = async ({ request }) => {
 
 	//post요청
 	let response;
-	if (submission.loginId === "admin"){
+	if (submission.loginId === "admin") {
 		response = await loginPostAPI.post("", submission);
 	}
-	else{
+	else {
 		response = await loginPostAPI.post("", submission);
 	}
 	//ok / fail check

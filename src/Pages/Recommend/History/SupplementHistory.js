@@ -81,7 +81,7 @@ const SupplementHistory = (props) => {
 			<div className={classes.CardContent}>
 				<div>
 					<p><BsFillArrowDownSquareFill />Click to go to transaction page<BsFillArrowDownSquareFill /></p>
-					<a href={`${supplementInfo.marketURL}`}>
+					<a href={`${supplementInfo.marketURL}`} target="_blank">
 						<img src={supplementImage} />
 					</a>
 				</div>

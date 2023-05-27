@@ -21,8 +21,12 @@
   margin-right: auto;
 }
 
-.RootLayout ul li:last-child {
-  margin-right: auto;
+.RootLayout ul div {
+  margin-left:auto;
+  display:flex;
+}
+
+.RootLayout ul li:last-child, li:nth-last-child(2) {
 }
 
 #logout {
@@ -46,6 +50,11 @@
 
 .RootLayout .active {
   background-color: #4CAF50;
+}
+
+.logoImage {
+  width:100px;
+  height:40px;
 }
 
 

@@ -33,7 +33,7 @@ const SignIn = (props) => {
 							</div>
 						</label>
 					</div>
-					<Button>로그인</Button>
+					<button>로그인</button>
 
 					{data && data.error && <p>{data.error}</p>}
 				</Form>

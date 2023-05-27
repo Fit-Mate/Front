@@ -117,7 +117,7 @@ const SignUp = (props) => {
 								<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
 								<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" defaultValue="15" />
 							</div>
-							<Button>회원가입</Button>
+							<button>회원가입</button>
 							{data && data.error && <p>{data.error}</p>}
 						</Form>
 					</main>

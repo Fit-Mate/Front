@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Buffer } from "buffer";
 
 import deepCopy, { workout_data } from "../../../DataTypes/data-types";
-import { userWorkoutAPI, userWorkoutImageAPI, workoutAPI } from "../../../API/API";
+import { userWorkoutAPI, userWorkoutImageAPI, workoutAPI, userBodyPartAPI } from "../../../API/API";
 
 import WorkoutInquiry from "./WorkoutInquiry";
 
@@ -35,6 +35,9 @@ const ShowWorkoutInquiry = (props) => {
 	const [currentPage, setCurrentPage] = React.useState(1);
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 	const [inputWorkoutSearch, setInputWorkoutSeacrh] = React.useState("");
+
+	const [bodyPart, setBodypart]=useState([]);
+	const [selectedBodyPart, setSelectedBodyPart] = useState("all")
 
 	/**
 	 * Functions
@@ -98,6 +101,12 @@ const ShowWorkoutInquiry = (props) => {
 		//	images.push(srcValue);
 		//}
 		setWorkoutImageBatch(images);
+	}
+
+	const getBodyPartInfo = async () => {
+		const response = await userBodyPartAPI.get();
+		setBodypart(response.data.bodyPartKoreanName);
+		console.log(bodyPart);
 	}
 
 
@@ -182,6 +191,8 @@ const ShowWorkoutInquiry = (props) => {
 		event.preventDefault();
 		const formData = {
 			searchKeyword: inputWorkoutSearch,
+			bodyPartKoreanName: selectedBodyPart === "all" ? null : [selectedBodyPart],
+
 		}
 		//axios로부터 단건조회API사용.
 		const response = await userWorkoutAPI.post(`/search/list/${currentPage}`, formData);
@@ -197,6 +208,7 @@ const ShowWorkoutInquiry = (props) => {
 
 	React.useEffect(() => {
 		loadWorkoutBatch(1);
+		getBodyPartInfo();
 	}, [])
 
 	React.useEffect(() => {
@@ -221,6 +233,14 @@ const ShowWorkoutInquiry = (props) => {
 						value={inputWorkoutSearch}
 						onChange={e => setInputWorkoutSeacrh(e.target.value)}
 					/>
+					<select onChange={e => setSelectedBodyPart(e.target.value)}>
+						<option key={0} value={"all"}>all</option>
+						{bodyPart.map((bPart, index)=> {
+							return (
+								<option key={index} value={bPart.koreanName}>{bPart.koreanName}</option>
+							)
+						})}
+					</select>
 					<Button type='submit'>search <span><FaSearch /></span></Button>
 				</form>
 			</Card>

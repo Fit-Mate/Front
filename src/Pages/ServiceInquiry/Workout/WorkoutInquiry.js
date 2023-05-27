@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { userWorkoutImageAPI } from "../../../API/API";
+import { userWorkoutImageAPI, userBodyPartAPI} from "../../../API/API";
 import { Buffer } from "buffer";
 import Button from "../../../UI/Button";
 
@@ -40,6 +40,7 @@ const ElementTable = (props) => {
 
 const WorkoutInquiry = (props) => {
 	const [workoutImage, setWorkoutImage] = useState(null);
+	const [bodyPart, setBodypart] = useState([]);
 
 	const workout = { ...props.workout };
 	const entries = Object.entries(workout).filter(([key, value]) => (value !== 0 && value !== null));

@@ -256,3 +256,9 @@ export const userWorkoutAPI= axios.create({
 	baseURL: '/workouts',
 	withCredentials: true,
 });
+
+
+export const userBodyPartAPI = axios.create({
+	baseURL: '/bodyParts/all',
+	withCredentials: true
+});

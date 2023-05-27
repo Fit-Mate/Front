@@ -36,7 +36,7 @@ const ShowIfLoggedIn = (props) => {
 					{!loginCtx.isAdmin && <NavLink to="/bodyData">체성분이력</NavLink>}
 				</li>
 				<li>
-					{!loginCtx.isAdmin && <NavLink to="/Recommend">보조제/운동추천</NavLink>}
+					{!loginCtx.isAdmin && <NavLink to="/Recommend">운동/보조제 추천</NavLink>}
 				</li>
 				<li>
 					{!loginCtx.isAdmin && <NavLink to="/recommendationHistory">추천이력</NavLink>}

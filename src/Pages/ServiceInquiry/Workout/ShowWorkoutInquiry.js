@@ -226,7 +226,7 @@ const ShowWorkoutInquiry = (props) => {
 
 			<Card >
 				<form onSubmit={handleWorkoutSearch} className={inquiryCss.searchCard}>
-					<label htmlFor="searchWorkout">searchWorkout</label>
+					<label htmlFor="searchWorkout">운동 검색</label>
 					<input type='text'
 						id="searchWorkout"
 						name="searchWorkout"

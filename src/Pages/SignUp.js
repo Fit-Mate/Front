@@ -96,11 +96,11 @@ const SignUp = (props) => {
 					</div>*/}
 							<div >
 								<label htmlFor="height">height</label>
-								<input type='number' id="height" name="height" placeholder="" />
+								<input type='number' id="height" name="height" placeholder="" defaultValue="60" />
 							</div>
 							<div >
 								<label htmlFor="weight">weight</label>
-								<input type='number' id="weight" name="weight" placeholder="" />
+								<input type='number' id="weight" name="weight" placeholder="" defaultValue="60"/>
 							</div>
 							<div >
 								<label htmlFor="upperBodyFat">upperBodyFat</label>
@@ -119,7 +119,7 @@ const SignUp = (props) => {
 								<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" defaultValue="15" />
 							</div>
 							<button className={but.button}>회원가입</button>
-							{data && data.error && <p>{data.error}</p>}
+							{data && data.error && <p className={classes.error}>{data.error}</p>}
 						</Form>
 					</main>
 					<footer className={classes.navLink}>
@@ -137,10 +137,10 @@ export const signUpAction = async ({ request }) => {
 	console.log(data);
 
 	const submission = {
-		userName: data.get('userName'),
-		loginId: data.get('loginId'),
-		password: data.get('password'),
-		sex: data.get('sex'),
+		userName: data.get('userName') === "" ? "a" : data.get('userName'),
+		loginId: data.get('loginId') === "" ? "a" : data.get('loginId'),
+		password: data.get('password')  === "" ? "a" : data.get('password'),
+		sex: data.get('sex') === null ? "남성" : data.get('sex'),
 		date: new Date(),
 		height: data.get('height'),
 		weight: data.get('weight'),

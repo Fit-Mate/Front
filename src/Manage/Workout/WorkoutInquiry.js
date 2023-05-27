@@ -2,15 +2,32 @@ import React, { useEffect, useState } from "react";
 import { Buffer } from "buffer";
 import { workoutImageAPI } from "../../API/API";
 import Button from "../../UI/Button";
+import CustomTable from "../../UI/CustomTable";
+
+import classes from "../css/Manage.module.css";
 
 /**
  * @param {*} props : workout, handleModalClose
  */
+
+
+const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
+	if (bodyPartKoreanName.length === 0)
+		return "";
+
+	const bodyPartParagraph = bodyPartKoreanName.reduce((accumulator, currentValue) =>
+		`${accumulator}\n${currentValue}`
+		, [])
+	return bodyPartParagraph;
+}
+
+
 const WorkoutInquiry = (props) => {
 
 
 	const workout = { ...props.workout };
 	const entries = Object.entries(workout).filter(([key, value]) => (value !== 0 && value !== null));
+	const {image, ...work} = {...workout, bodyPartKoreanName:bodyPartListToStringWithNewlines(workout.bodyPartKoreanName)};
 
 	const [workoutImage, setWorkoutImage] = useState(null);
 
@@ -42,12 +59,12 @@ const WorkoutInquiry = (props) => {
 
 	return (
 		<div>
-			<div>
+			<div className={classes.imageContainer}>
 				<p>image</p>
 				<img src={workoutImage} />
 			</div>
 			<ul>
-				{description}
+				<CustomTable object={work}></CustomTable>
 			</ul>
 
 			<Button onClick={handleModalClose}>닫기</Button>

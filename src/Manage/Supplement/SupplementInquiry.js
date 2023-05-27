@@ -4,6 +4,10 @@ import Button from "../../UI/Button";
 
 import { supplementImageAPI } from "../../API/API";
 import { Buffer } from "buffer";
+import CustomTable from "../../UI/CustomTable";
+
+import classes from "../css/Manage.module.css";
+
 
 /**
  * @param {*} props : supplement, handleModalClose
@@ -42,12 +46,12 @@ const SupplementInquiry = (props) => {
 
 	return (
 		<div>
-			<div>
+			<div className={classes.imageContainer}>
 				<p>image</p>
 				<img src={supplementImage} />
 			</div>
 			<ul>
-				{description}
+				<CustomTable object={supplement}/>
 			</ul>
 
 			<Button onClick={handleModalClose}>닫기</Button>

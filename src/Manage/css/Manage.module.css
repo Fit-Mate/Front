@@ -1,0 +1,9 @@
+.imageContainer {
+	text-align: center;
+	margin: 0 auto;
+}
+
+.imageContainer img {
+	width: 500px;
+	height: 500px;
+}

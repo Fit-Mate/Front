@@ -2,6 +2,7 @@ import React from "react";
 
 /** UI */
 import Button from "../../UI/Button";
+import CustomTable from "../../UI/CustomTable";
 
 /**
  * @param {*} props : bodyPart, handleModalClose
@@ -25,7 +26,7 @@ const bodyPartInquiry = (props) => {
 	return (
 		<div>
 			<ul>
-				{description}
+				<CustomTable object={bodyPart}/>
 			</ul>
 
 			<Button onClick={handleModalClose}>닫기</Button>

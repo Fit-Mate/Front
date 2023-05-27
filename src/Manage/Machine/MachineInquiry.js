@@ -1,4 +1,5 @@
 import React from "react";
+import CustomTable from "../../UI/CustomTable";
 
 /**
  * @param {*} props : machine, handleModalClose
@@ -22,7 +23,7 @@ const MachineInquiry = (props) => {
 	return (
 		<div>
 			<ul>
-				{description}
+				<CustomTable object={machine}/>
 			</ul>
 
 			<button onClick={handleModalClose}>닫기</button>

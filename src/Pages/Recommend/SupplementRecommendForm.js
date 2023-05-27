@@ -160,12 +160,12 @@ const SupplementRecommendForm = (props) => {
 			<header>
 			</header>
 			<main className={classes.RecentBodyData}>
-				<div className={classes.card}>
+				{/*<div className={classes.card}>
 					<RecentBodyDataModal
 						recentBodyData={recentBodyData}
 						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
 					/>
-				</div>
+				</div>*/}
 				<div className={classes.card}>
 					<Card>
 						<form onSubmit={handlePurposeSubmit} className={classes.Recommend}>

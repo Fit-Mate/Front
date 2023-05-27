@@ -275,12 +275,12 @@ const ExerciseRecommendForm = (props) => {
 	return (
 		<div className={classes.Recommend}>
 			<header>
-				<div className={classes.card}>
+				{/*<div className={classes.card}>
 					<RecentBodyDataModal
 						recentBodyData={recentBodyData}
 						setIsShowRecentBodyDataClicked={setIsShowRecentBodyDataClicked}
 					/>
-				</div>
+				</div>*/}
 			</header>
 			<main>
 				<div className={classes.RecentBodyData}>

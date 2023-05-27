@@ -96,11 +96,11 @@ const SignUp = (props) => {
 					</div>*/}
 							<div >
 								<label htmlFor="height">height</label>
-								<input type='number' id="height" name="height" placeholder="height" />
+								<input type='number' id="height" name="height" placeholder="" />
 							</div>
 							<div >
 								<label htmlFor="weight">weight</label>
-								<input type='number' id="weight" name="weight" placeholder="weight" />
+								<input type='number' id="weight" name="weight" placeholder="" />
 							</div>
 							<div >
 								<label htmlFor="upperBodyFat">upperBodyFat</label>

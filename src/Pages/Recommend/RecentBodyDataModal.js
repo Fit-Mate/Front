@@ -41,7 +41,7 @@ const RecentBodyDataModal = (props) => {
 	return (
 		<Card>
 			<header className={classes.RecentBodyDataModal}>
-				<h2>RecentBodyDataModal</h2>
+				<h2>최근 운동 이력</h2>
 			</header>
 			<main>
 				<ShowTable recentBodyData={recentBodyData} />

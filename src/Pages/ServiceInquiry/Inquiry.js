@@ -13,8 +13,8 @@ const Inquiry = (props) => {
 	return (
 		<div className={classes.inquiryBody}>
 			<div className={classes.inquiryButtons}>
-				<Button onClick={e => setIsSomethingClicked("Supplement")}>Supplement 조희</Button>
-				<Button onClick={e => setIsSomethingClicked("Workout")}>Workout 조희</Button>
+				<Button onClick={e => setIsSomethingClicked("Supplement")}>보조제 검색</Button>
+				<Button onClick={e => setIsSomethingClicked("Workout")}>운동 검색</Button>
 			</div>
 				{
 					isSomethingClicked === "Supplement" &&

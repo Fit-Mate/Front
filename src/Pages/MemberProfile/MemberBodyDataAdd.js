@@ -68,33 +68,33 @@ const MemberBodyDataAdd = (props) => {
 			<main>
 				<form onSubmit={handleBodyDataAdd}>
 					<div className={classes.date}>
-						<label htmlFor="date">Date</label>
+						<label htmlFor="date">날짜</label>
 						<br />
 						<input type="date" id="date" name="date" value={bodyDataDate} onChange={e => setBodyDataDate(e.target.value)} />
 					</div>
 					<div className={classes.container}>
 						<div>
-							<label htmlFor="height">Height (cm)</label>
+							<label htmlFor="height">키 (cm)</label>
 							<input type="number" id="height" name="height" value={bodyDataHeight} onChange={e => setBodyDataHeight(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="weight">weight (kg)</label>
+							<label htmlFor="weight">몸무게 (kg)</label>
 							<input type="number" id="weight" name="weight" value={bodyDataWeight} onChange={e => setBodyDataWeight(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="upperBodyFat">upperBodyFat (g/cm^3)</label>
+							<label htmlFor="upperBodyFat">상체 체지방(g/cm^3)</label>
 							<input type="number" id="upperBodyFat" name="upperBodyFat" value={bodyDataUpperBodyFat} onChange={e => setBodyDataUpperBodyFat(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="lowerBodyFat">lowerBodyFat (g/cm^3)</label>
+							<label htmlFor="lowerBodyFat">하체 체지방 (g/cm^3)</label>
 							<input type="number" id="lowerBodyFat" name="lowerBodyFat" value={bodyDataLowerBodyFat} onChange={e => setBodyDataLowerBodyFat(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="upperMuscleMass">upperMuscleMass (g/cm^3)</label>
+							<label htmlFor="upperMuscleMass">상체 근육량 (g/cm^3)</label>
 							<input type="number" id="upperMuscleMass" name="upperMuscleMass" value={bodyDataUpperMuscleMass} onChange={e => setBodyDataUpperMuscleMass(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="lowerMuscleMass">lowerMuscleMass (g/cm^3)</label>
+							<label htmlFor="lowerMuscleMass">하체 근육량 (g/cm^3)</label>
 							<input type="number" id="lowerMuscleMass" name="lowerMuscleMass" value={bodyDataLowerMuscleMass} onChange={e => setBodyDataLowerMuscleMass(e.target.value)} />
 						</div>
 					</div>

@@ -84,11 +84,11 @@ const MemberPasswordChangeModal = (props) => {
 			<div className={profileCss.modalContent}>
 				<form onSubmit={handleSubmit} className={profileCss.passwordChange}>
 					<div>
-						<label htmlFor="oldPassword">oldPassword</label>
+						<label htmlFor="oldPassword">이전 비밀번호</label>
 						<input type='password' id='oldPassword' name='oldPassword' value={oldPassword} onChange={e => setOldPassword(e.target.value)} />
 					</div>
 					<div>
-						<label htmlFor="newPassword">newPassword</label>
+						<label htmlFor="newPassword">새로운 비밀번호</label>
 						<input type='password' id='newPassword' name='newPassword' value={newPassword} onChange={e => setNewPassword(e.target.value)} />
 					</div>
 					<Button type='submit'>저장</Button>

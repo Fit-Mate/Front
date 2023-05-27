@@ -100,10 +100,10 @@ const ShowSupplementInquiry = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>image</th>
-					<th>koreanName</th>
-					<th>supplementType</th>
-					<th>price</th>
+					<th>이미지</th>
+					<th>이름</th>
+					<th>보조제 타입</th>
+					<th>가격</th>
 					<th>servings</th>
 				</tr>
 			</thead>
@@ -215,7 +215,7 @@ const ShowSupplementInquiry = (props) => {
 
 			<Card>
 				<form onSubmit={handleSupplementSearch} className={inquiryCSS.searchCard}>
-					<label htmlFor="searchSupplement">searchSupplement</label>
+					<label htmlFor="searchSupplement">보조제 검색</label>
 					<div className={inquiryCSS.query}>
 						<input type='text'
 							id="searchSupplement"

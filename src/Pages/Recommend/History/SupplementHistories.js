@@ -37,7 +37,7 @@ const SupplementHistories = (props) => {
 		<div className={classes.ModalContainer}>
 			<Modal>
 				<div className={classes.Histories}>
-					<h3>Detail</h3>
+					<h3>상세 정보</h3>
 					<ul>
 						{recommendedSupplementList.map((history) => {
 							return (

@@ -77,8 +77,8 @@ const SupplementLog = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th className={historyCss.key}>date</th>
-					<th className={historyCss.val}>koreanName</th>
+					<th className={historyCss.key}>날짜</th>
+					<th className={historyCss.val}>이름</th>
 					<th className={historyCss.val}>상세보기</th>
 				</tr>
 			</thead>
@@ -171,7 +171,7 @@ const SupplementLog = (props) => {
 	return (
 		<Card>
 			<header>
-				<h2>SupplementRecommendationHistory</h2>
+				<h2>보조제 추천 이력</h2>
 			</header>
 			<div>
 				<div className={classes["table-align"]}>

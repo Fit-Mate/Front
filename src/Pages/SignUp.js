@@ -4,6 +4,7 @@ import { loginPostAPI, userIdVerifyAPI, userPostAPI } from "../API/API";
 import Modal2 from "../UI/Modal2";
 import Button from "../UI/Button";
 import classes from "./SignUp.module.css";
+import but from "../UI/Button.module.css"
 
 /**
  * SignUp에서 하는 기능
@@ -70,15 +71,15 @@ const SignUp = (props) => {
 					</label>*/}
 							<div >
 								<label htmlFor="userName">userName</label>
-								<input type='text' id="userName" name="userName" placeholder="userName" />
+								<input type='text' id="userName" name="userName" placeholder="3자리 이상 10자리 이하" />
 							</div>
 							<div >
 								<label htmlFor="loginId">loginId</label>
-								<input type='text' id="loginId" name="loginId" placeholder="loginId" />
+								<input type='text' id="loginId" name="loginId" placeholder="8자리 이상 20자리 이하" />
 							</div>
 							<div >
 								<label htmlFor="password">password</label>
-								<input type='password' id="password" name="password" placeholder="password" />
+								<input type='password' id="password" name="password" placeholder="8자리 이상" />
 							</div>
 							<div >
 								<fieldset>
@@ -117,7 +118,7 @@ const SignUp = (props) => {
 								<label htmlFor="lowerMuscleMass">lowerMuscleMass</label>
 								<input type='number' id="lowerMuscleMass" name="lowerMuscleMass" defaultValue="15" />
 							</div>
-							<button>회원가입</button>
+							<button className={but.button}>회원가입</button>
 							{data && data.error && <p>{data.error}</p>}
 						</Form>
 					</main>

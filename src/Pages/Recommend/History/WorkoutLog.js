@@ -72,8 +72,8 @@ const WorkoutLog = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th className={historyCss.key}>date</th>
-					<th className={historyCss.val}>workouts</th>
+					<th className={historyCss.key}>날짜</th>
+					<th className={historyCss.val}>추천 운동목록</th>
 					<th className={historyCss.val}>상세보기</th>
 				</tr>
 			</thead>
@@ -156,7 +156,7 @@ const WorkoutLog = (props) => {
 	return (
 		<Card>
 			<header>
-				<h2>WorkoutRecommendationHistory</h2>
+				<h2>운동 추천 이력</h2>
 			</header>
 			<div>
 				<div className={classes["table-align"]}>

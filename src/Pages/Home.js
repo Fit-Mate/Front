@@ -16,10 +16,7 @@ const NonMemberHome = (props) => {
 			<main>
 				{/**3개월간 차트 요약 */}
 				<h1>Fitmate Presents</h1>
-				<p>프로필 관리</p>
-				<p>운동 조회, 보조제 조회</p>
-				<p>운동 추천, 보조제 추천</p>
-				<p>Inbody 이력 관리</p>
+				<h2 className={classes.h2}>오늘의 운동</h2>
 			</main>
 			<footer>
 			</footer>
@@ -35,10 +32,7 @@ const MemberHome = (props) => {
 			</header>
 			<main>
 				<h1>Fitmate Presents</h1>
-				<p>프로필 관리</p>
-				<p>운동 조회, 보조제 조회</p>
-				<p>운동 추천, 보조제 추천</p>
-				<p>Inbody 이력 관리</p>
+				<h2 className={classes.h2}>오늘의 운동</h2>
 			</main>
 			<footer>
 			</footer>

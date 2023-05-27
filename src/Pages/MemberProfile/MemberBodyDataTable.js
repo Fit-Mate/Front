@@ -61,13 +61,13 @@ const MemberBodyDataTable = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>date</th>
-					<th>height</th>
-					<th>weight</th>
-					<th>upperBodyFat</th>
-					<th>lowerBodyFat</th>
-					<th>upperMuscleMass</th>
-					<th>lowerMuscleMass</th>
+					<th>날짜</th>
+					<th>키</th>
+					<th>몸무게</th>
+					<th>상체 체지방</th>
+					<th>하체 체지방</th>
+					<th>상체 근육량</th>
+					<th>하체 근육량</th>
 					<th>삭제</th>
 				</tr>
 			</thead>

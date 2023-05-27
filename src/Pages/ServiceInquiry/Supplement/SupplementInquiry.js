@@ -65,7 +65,7 @@ const SupplementInquiry = (props) => {
 			</header>
 			<main>
 				<div className={classes.imageContainer}>
-					<p>image</p>
+					<p>이미지</p>
 					<img src={supplementImage} />
 				</div>
 				<ul>

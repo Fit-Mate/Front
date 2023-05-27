@@ -111,10 +111,10 @@ const ShowWorkoutInquiry = (props) => {
 		return (
 			<thead>
 				<tr>
-					<th>image</th>
-					<th>koreanName</th>
-					<th>description</th>
-					<th>bodyPartKoreanName</th>
+					<th>이미지</th>
+					<th>이름</th>
+					<th>설명</th>
+					<th>운동 부위</th>
 				</tr>
 			</thead>
 		);

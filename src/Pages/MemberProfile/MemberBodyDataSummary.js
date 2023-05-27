@@ -113,13 +113,13 @@ const MemberBodyDataSummary = (props) => {
 			<div>
 				<Card>
 					<header>
-						<h2>MemberBodyDataSummary</h2>
+						<h2>체성분 이력</h2>
 						<select onChange={e => setSelectedBodyDataType(e.target.value)}>
-							<option value="weight">weight</option>
-							<option value="upperBodyFat">upperBodyFat</option>
-							<option value="lowerBodyFat">lowerBodyFat</option>
-							<option value="upperMuscleMass">upperMuscleMass</option>
-							<option value="lowerMuscleMass">lowerMuscleMass</option>
+							<option value="weight">몸무게</option>
+							<option value="upperBodyFat">상체 체지방</option>
+							<option value="lowerBodyFat">하체 체지방</option>
+							<option value="upperMuscleMass">상체 근육량</option>
+							<option value="lowerMuscleMass">하체 근육량</option>
 						</select>
 					</header>
 					<main className={classes.chart}>

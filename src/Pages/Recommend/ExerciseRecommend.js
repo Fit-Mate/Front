@@ -14,7 +14,7 @@ const ExerciseRecommend = (props) => {
 
 	return (
 		<Card>
-			<p>ExerciseRecommend</p>
+			<p>운동 추천</p>
 
 			<button onClick={handleClose}>닫기</button>
 		</Card>

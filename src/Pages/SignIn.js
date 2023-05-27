@@ -4,6 +4,7 @@ import { Form, redirect, NavLink, useActionData } from "react-router-dom";
 import { loginPostAPI } from "../API/API";
 
 import Button from "../UI/Button";
+import but from "../UI/Button.module.css"
 
 import classes from "./SignIn.module.css"
 
@@ -33,7 +34,7 @@ const SignIn = (props) => {
 							</div>
 						</label>
 					</div>
-					<button>로그인</button>
+					<button className={but.button}>로그인</button>
 
 					{data && data.error && <p>{data.error}</p>}
 				</Form>

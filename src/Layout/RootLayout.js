@@ -29,7 +29,7 @@ const ShowIfLoggedIn = (props) => {
 					<NavLink to="/" >홈</NavLink>
 				</li>
 				<li>
-					<NavLink to="inquiry">database조회</NavLink>
+					<NavLink to="inquiry">운동/보조제 검색</NavLink>
 				</li>
 				<li>
 					{!loginCtx.isAdmin && <NavLink to="profile">회원 프로필 관리</NavLink>}
@@ -64,7 +64,7 @@ const ShowIfNonMember = () => {
 					<NavLink to="/" >홈</NavLink>
 				</li>
 				<li>
-					<NavLink to="inquiry">database조회</NavLink>
+					<NavLink to="inquiry">운동/보조제 검색</NavLink>
 				</li>
 				<li>
 					<NavLink to="signUp">회원가입</NavLink>

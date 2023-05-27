@@ -15,7 +15,7 @@ const WorkoutHistory = (props) => {
 			<div className={classes.CardContent}>
 				<h3>{props.recommendElement.workoutName}</h3>
 				<iframe src={videoSrc} title={props.recommendElement.workoutName}></iframe>
-				<p className={classes.descriptionBorder}>상세 정보</p>
+				<p className={classes.descriptionBorder}>상세 추천 이력</p>
 				<div className={classes.description}>
 					{props.recommendElement.description}
 				</div>

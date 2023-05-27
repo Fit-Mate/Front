@@ -102,7 +102,7 @@ const SupplementHistory = (props) => {
 				<p>description: {props.history.description}</p>
 				{props.supplementType !== "BCAA" && <ShowIfNotBCAA supplementInfo={supplementInfo} />}*/}
 				<div>
-					<h3 className={classes.descriptionBorder}>KoreanRecommendation</h3>
+					<h3 className={classes.descriptionBorder}>상세 추천 이력</h3>
 					<p>{props.history.koreanRecommendation}</p>
 				</div>
 			</div>

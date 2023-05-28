@@ -124,7 +124,7 @@ const ShowSupplementInquiry = (props) => {
 					</td>
 					<td className={inquiryCSS.other}>{supplement.supplementType}</td>
 					<td className={inquiryCSS.other}>{supplement.price}{`\t\u20A9`}</td>
-					<td className={inquiryCSS.other}>{supplement.servings}{`\tmg`}</td>
+					<td className={inquiryCSS.other}>{supplement.servings}{`\t`}</td>
 				</tr>
 			);
 		});

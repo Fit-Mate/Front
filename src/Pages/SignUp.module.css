@@ -4,7 +4,7 @@
 
 .form {
 	width:200px;
-	margin-left: 300px;
+	margin-left: 30%;
 }
 
 .form input{
@@ -12,14 +12,14 @@
 }
 
 .form button {
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
 }
 
 .navLink a {
 	font-size:large;
 	font-weight:bold;
 	padding: 1rem;
-	background-color:  #4f005f;
+	background-color: black;
 	color:white;
 	border-radius:20px;
 	text-decoration:none ;

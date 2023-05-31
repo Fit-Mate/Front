@@ -1,6 +1,7 @@
 .RootLayout {
   width: 100%;
   font-size: 20px;
+  margin-bottom:5%;
 }
 
 .RootLayout ul {
@@ -15,6 +16,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .RootLayout ul li:first-child {
@@ -27,6 +29,12 @@
 }
 
 .RootLayout ul li:last-child, li:nth-last-child(2) {
+}
+
+
+.RootLayoutRight {
+  /*margin-right:3%;*/
+  padding-right:2.5%;
 }
 
 #logout {

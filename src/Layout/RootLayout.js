@@ -33,15 +33,15 @@ const ShowIfLoggedIn = (props) => {
 					<NavLink to="inquiry">운동/보조제 검색</NavLink>
 				</li>
 				<li>
-					{!loginCtx.isAdmin && <NavLink to="/bodyData">체성분이력</NavLink>}
+					{!loginCtx.isAdmin && <NavLink to="/bodyData">체성분 기록</NavLink>}
 				</li>
 				<li>
 					{!loginCtx.isAdmin && <NavLink to="/Recommend">운동/보조제 추천</NavLink>}
 				</li>
 				<li>
-					{!loginCtx.isAdmin && <NavLink to="/recommendationHistory">추천이력</NavLink>}
+					{!loginCtx.isAdmin && <NavLink to="/recommendationHistory">추천 기록</NavLink>}
 				</li>
-				<div>
+				<div className={classes.RootLayoutRight}>
 					<div>
 						<li>
 							{!loginCtx.isAdmin && <NavLink to="profile">회원 프로필 관리</NavLink>}
@@ -52,7 +52,6 @@ const ShowIfLoggedIn = (props) => {
 							<NavLink id='logout' to="/" onClick={handleSignOut}>로그아웃</NavLink>
 						</li>
 					</div>
-
 				</div>
 
 			</ul>
@@ -74,7 +73,7 @@ const ShowIfNonMember = () => {
 				<li>
 					<NavLink to="inquiry">운동/보조제 검색</NavLink>
 				</li>
-				<div>
+				<div className={classes.RootLayoutRight}>
 					<li>
 						<NavLink to="signUp">회원가입</NavLink>
 					</li>
@@ -113,7 +112,7 @@ const RootLayout = (props) => {
 					<a href="https://github.com/Fit-Mate">Github</a>
 				</div>
 				<div className={classes.child2}>
-					Copyright <span>	&#169; </span> Fitmate 2023 Konkuk University Capstone.
+					Copyright <span>	&#169; </span> Fitmate. 2023 Konkuk University.
 				</div>
 			</footer>
 		</div>

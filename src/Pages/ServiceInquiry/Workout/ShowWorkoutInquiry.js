@@ -36,7 +36,7 @@ const ShowWorkoutInquiry = (props) => {
 	const [isInquiryClicked, setIsInquiryClicked] = React.useState(false);
 	const [inputWorkoutSearch, setInputWorkoutSeacrh] = React.useState("");
 
-	const [bodyPart, setBodypart]=useState([]);
+	const [bodyPart, setBodypart] = useState([]);
 	const [selectedBodyPart, setSelectedBodyPart] = useState("all")
 
 	/**
@@ -227,20 +227,22 @@ const ShowWorkoutInquiry = (props) => {
 			<Card >
 				<form onSubmit={handleWorkoutSearch} className={inquiryCss.searchCard}>
 					<label htmlFor="searchWorkout">운동 검색</label>
-					<input type='text'
-						id="searchWorkout"
-						name="searchWorkout"
-						value={inputWorkoutSearch}
-						onChange={e => setInputWorkoutSeacrh(e.target.value)}
-					/>
-					<select onChange={e => setSelectedBodyPart(e.target.value)}>
-						<option key={0} value={"all"}>all</option>
-						{bodyPart.map((bPart, index)=> {
-							return (
-								<option key={index} value={bPart.koreanName}>{bPart.koreanName}</option>
-							)
-						})}
-					</select>
+					<div className={inquiryCss.query}>
+						<input type='text'
+							id="searchWorkout"
+							name="searchWorkout"
+							value={inputWorkoutSearch}
+							onChange={e => setInputWorkoutSeacrh(e.target.value)}
+						/>
+						<select onChange={e => setSelectedBodyPart(e.target.value)}>
+							<option key={0} value={"all"}>all</option>
+							{bodyPart.map((bPart, index) => {
+								return (
+									<option key={index} value={bPart.koreanName}>{bPart.koreanName}</option>
+								)
+							})}
+						</select>
+					</div>
 					<Button type='submit'>search <span><FaSearch /></span></Button>
 				</form>
 			</Card>

@@ -32,18 +32,20 @@ const RecommendForm = (props) => {
 						recentBodyData={recentBodyData}
 					/>
 				</div>
-				<div >
+				<div>
 					<Button onClick={e => setIsSomethingClicked("Supplement")}>보조제 추천받기</Button>
 					<Button onClick={e => setIsSomethingClicked("Workout")}>운동 추천받기</Button>
 				</div>
-				{
-					isSomethingClicked === "Supplement" &&
-					<SupplementRecommendForm />
-				}
-				{
-					isSomethingClicked === "Workout" &&
-					<ExerciseRecommendForm />
-				}
+				<div className={classes.RecommendModule}>
+					{
+						isSomethingClicked === "Supplement" &&
+						<SupplementRecommendForm />
+					}
+					{
+						isSomethingClicked === "Workout" &&
+						<ExerciseRecommendForm />
+					}
+				</div>
 
 			</div>
 		</div>

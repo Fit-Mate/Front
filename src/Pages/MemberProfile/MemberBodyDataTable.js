@@ -79,12 +79,12 @@ const MemberBodyDataTable = (props) => {
 			return (
 				<tr key={bodyData.bodyDataId}>
 					<td>{bodyData.date}</td>
-					<td>{bodyData.height}</td>
-					<td>{bodyData.weight}</td>
-					<td>{bodyData.upperBodyFat}</td>
-					<td>{bodyData.lowerBodyFat}</td>
-					<td>{bodyData.upperMuscleMass}</td>
-					<td>{bodyData.lowerMuscleMass}</td>
+					<td>{bodyData.height} cm</td>
+					<td>{bodyData.weight} kg</td>
+					<td>{bodyData.upperBodyFat} %</td>
+					<td>{bodyData.lowerBodyFat} %</td>
+					<td>{bodyData.upperMuscleMass} %</td>
+					<td>{bodyData.lowerMuscleMass} %</td>
 					<td>
 						<Button id={bodyData.bodyDataId} onClick={handleDeleteClicked}>삭제</Button>
 					</td>

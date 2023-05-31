@@ -82,19 +82,19 @@ const MemberBodyDataAdd = (props) => {
 							<input type="number" id="weight" name="weight" value={bodyDataWeight} onChange={e => setBodyDataWeight(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="upperBodyFat">상체 체지방(g/cm^3)</label>
+							<label htmlFor="upperBodyFat">상체 체지방 (%)</label>
 							<input type="number" id="upperBodyFat" name="upperBodyFat" value={bodyDataUpperBodyFat} onChange={e => setBodyDataUpperBodyFat(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="lowerBodyFat">하체 체지방 (g/cm^3)</label>
+							<label htmlFor="lowerBodyFat">하체 체지방 (%)</label>
 							<input type="number" id="lowerBodyFat" name="lowerBodyFat" value={bodyDataLowerBodyFat} onChange={e => setBodyDataLowerBodyFat(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="upperMuscleMass">상체 근육량 (g/cm^3)</label>
+							<label htmlFor="upperMuscleMass">상체 근육량 (%)</label>
 							<input type="number" id="upperMuscleMass" name="upperMuscleMass" value={bodyDataUpperMuscleMass} onChange={e => setBodyDataUpperMuscleMass(e.target.value)} />
 						</div>
 						<div>
-							<label htmlFor="lowerMuscleMass">하체 근육량 (g/cm^3)</label>
+							<label htmlFor="lowerMuscleMass">하체 근육량 (%)</label>
 							<input type="number" id="lowerMuscleMass" name="lowerMuscleMass" value={bodyDataLowerMuscleMass} onChange={e => setBodyDataLowerMuscleMass(e.target.value)} />
 						</div>
 					</div>

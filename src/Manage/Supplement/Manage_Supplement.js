@@ -89,7 +89,7 @@ const Manage_Supplement = (props) => {
 					<td>{supplement.englishName}</td>
 					<td>{supplement.koreanName}</td>
 					<td>{supplement.flavor}</td>
-					<td>{supplement.price}</td>
+					<td>{supplement.price} {"￦"}</td>
 					<td>{supplement.servings}</td>
 					<td>
 						<Button id={supplement.id} onClick={handleInquiryClicked}>조회</Button>

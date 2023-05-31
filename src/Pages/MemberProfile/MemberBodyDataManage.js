@@ -16,7 +16,7 @@ const MemberBodyDataManage = (props) => {
 	return (
 		<div className={classes.addSummary}>
 			<header>
-				<h2>체성분 이력 관리</h2>
+				<h2>체성분 기록 관리</h2>
 			</header>
 			<main>
 				{/* 정보 추가 */}

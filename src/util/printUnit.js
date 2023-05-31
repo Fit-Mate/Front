@@ -11,7 +11,7 @@ export const printUnit = (str) => {
 		case "height" :
 			return ("cm");
 		case "weight" :
-			return ("cm");
+			return ("kg");
 		case "upperBodyFat" :
 		case "lowerBodyFat" :
 		case "upperMuscleMass" :

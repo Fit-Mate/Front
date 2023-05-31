@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./CustomTable.module.css";
+import { printUnit } from "../util/printUnit";
 
 export const bodyPartListToStringWithNewlines = (bodyPartKoreanName) => {
 	if (bodyPartKoreanName.length === 0)
@@ -19,8 +20,8 @@ export const ElementTable = (props) => {
 			{entries.map( ([key,val], index) => {
 				return (
 					<tr key={index}>
-						<td className={classes.key}>{key}</td>
-						<td>{val}</td>
+						<td className={classes.key}>{key} </td>
+						<td>{val} {printUnit(key)}</td>
 					</tr>
 				)
 			})}

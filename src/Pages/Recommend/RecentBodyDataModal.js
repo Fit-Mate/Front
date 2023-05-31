@@ -5,6 +5,7 @@ import Button from "../../UI/Button";
 import classes from "./RecentBodyData.module.css";
 
 import Card from "../../UI/Card";
+import { printUnit } from "../../util/printUnit";
 
 
 const ShowTable = (props) => {
@@ -20,7 +21,7 @@ const ShowTable = (props) => {
 						return (
 							<tr key={index}>
 								<td className={`${classes.key} ${key}`}>{key}</td>
-								<td className={`${classes.val} ${val}`}>{val}</td>
+								<td className={`${classes.val} ${val}`}>{val}	{printUnit(key)}</td>
 							</tr>
 						);
 					})
